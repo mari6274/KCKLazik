@@ -26,3 +26,13 @@
 *.exe
 *.out
 *.app
+
+
+
+
+
+*.cbp
+*.depend
+*.layout
+bin/
+obj/
