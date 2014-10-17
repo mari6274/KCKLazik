@@ -1,14 +1,17 @@
 CC=g++
-CFLAGS=-Iinclude -Isrc
-LFLAGS=-Lsrc -lsfml-graphics -l-sfml-window -lsfml-system
-OBJS=obj/Game.o obj/SFMLPhysics.o
+CFLAGS=-Wall -g -Iinclude -std=c++11
+LFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
+OBJS=obj/main.o obj/Game.o obj/SFMLPhysics.o
 
 program: $(OBJS)
-	$(CC) $(CFLAGS) $(LFLAGS) main.cpp $(OBJS) -o program 
+	$(CC) $(OBJS) -o program $(LFLAGS)  
+
+obj/main.o: main.cpp
+	$(CC) $(CFLAGS) -c main.cpp -o obj/main.o
 	
 obj/Game.o: src/Game.cpp
-	$(CC) $(CFLAGS) $(LFLAGS) src/Game.cpp -o obj/Game.o
+	$(CC) $(CFLAGS) -c src/Game.cpp -o obj/Game.o
 	
 obj/SFMLPhysics.o: src/SFMLPhysics.cpp
-	$(CC) $(CFLAGS) $(LFLAGS) src/SFMLPhysics.cpp -o obj/SFMLPhysics.o
+	$(CC) $(CFLAGS) -c src/SFMLPhysics.cpp -o obj/SFMLPhysics.o
 	
