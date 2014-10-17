@@ -7,8 +7,8 @@ Projekt na KCK
 
 **Wykorzystujemy SFML 2.1**
 
-**Komendy przywidziane:**
--idź do <nazwa obiektu>
--idź do <nazwa obiektu> i wykop
--wykop
--ustaw sie po <nazwa kierunku> <nazwa obiektu>
+**Komendy przewidziane:**
+* idź do <nazwa obiektu>
+* idź do <nazwa obiektu> i wykop
+* wykop
+* ustaw sie po <nazwa kierunku> <nazwa obiektu>
