@@ -42,7 +42,6 @@ class Game
 
         void loadTextures();
         void generateRandPosObjects(sf::Texture &, int, std::vector<Object*> &);
-        void createMiniMapRect();
 };
 
 class TaskManager {

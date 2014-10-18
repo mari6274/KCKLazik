@@ -16,8 +16,6 @@ void Game::start()
 
     window.create(sf::VideoMode(WINDOWX+200, WINDOWY), "sfmlview");
 
-    //createMiniMapRect();
-
     view.setSize(WINDOWX, WINDOWY);
     view.setCenter(1500,1000);
     view.setViewport(sf::FloatRect(0, 0, 0.8f, 1));
@@ -48,9 +46,6 @@ void Game::start()
                 window.close();
                 exit(0);
             }
-//            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-//                view.setCenter(view.getCenter().x+sf::Mouse::getPosition(window).x-400, view.getCenter().y+sf::Mouse::getPosition(window).y-300) ;
-//            }
 
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) taskManager->goLeft();
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) taskManager->goRight();
@@ -62,7 +57,7 @@ void Game::start()
         window.draw(sMap);
         for (Object * t : caves) { window.draw(*t); }
         for (Object * t : trees) { window.draw(*t); }
-        //miniMapRect.setPosition(view.getCenter().x+window.getSize().x/5, view.getCenter().y+window.getSize().y/4);
+
         window.draw(miniMapRect);
 
         window.draw(cookie);
@@ -85,13 +80,6 @@ void Game::loadTextures() {
     if (!cave.loadFromFile("img/cave.png")) { exit(0); }
 }
 
-void Game::createMiniMapRect() {
-    miniMapRect.setSize(sf::Vector2f(202,152));
-    miniMapRect.setFillColor(sf::Color::Black);
-    miniMapRect.setOutlineThickness(2);
-    miniMapRect.setOutlineColor(sf::Color::Red);
-}
-#include <random>
 void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Object*> & v) {
     for (int i = 0; i<n; ++i) {
         Object * o = new Object(texture);
