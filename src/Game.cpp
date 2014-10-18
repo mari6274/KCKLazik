@@ -1,7 +1,5 @@
 #include "Game.h"
 #include "SFMLPhysics.h"
-using namespace std;
-#include <iostream>
 
 Game::Game()
 {
@@ -37,7 +35,9 @@ void Game::start()
     cookie.setOrigin(cookie.getGlobalBounds().width/2, cookie.getGlobalBounds().height/2);
     cookie.setPosition(view.getCenter());
 
-    generateTrees();
+    srand(time(NULL));
+    generateRandPosObjects(tree, 20, trees);
+    generateRandPosObjects(cave, 8, caves);
 
     while (window.isOpen()) {
         window.clear();
@@ -60,6 +60,7 @@ void Game::start()
 
         window.setView(view);
         window.draw(sMap);
+        for (Object * t : caves) { window.draw(*t); }
         for (Object * t : trees) { window.draw(*t); }
         //miniMapRect.setPosition(view.getCenter().x+window.getSize().x/5, view.getCenter().y+window.getSize().y/4);
         window.draw(miniMapRect);
@@ -68,6 +69,7 @@ void Game::start()
 
         window.setView(miniMap);
         window.draw(sMap);
+        for (Object * t : caves) { window.draw(*t); }
         for (Object * t : trees) { window.draw(*t); }
         window.draw(cookie);
 
@@ -80,6 +82,7 @@ void Game::loadTextures() {
     if (!tMap.loadFromFile("img/grass.png")) { exit(0); }
     if (!tCookie.loadFromFile("img/cookie.png")) { exit(0); }
     if (!tree.loadFromFile("img/tree.png")) { exit(0); }
+    if (!cave.loadFromFile("img/cave.png")) { exit(0); }
 }
 
 void Game::createMiniMapRect() {
@@ -88,12 +91,13 @@ void Game::createMiniMapRect() {
     miniMapRect.setOutlineThickness(2);
     miniMapRect.setOutlineColor(sf::Color::Red);
 }
-
-void Game::generateTrees() {
-    for (int i = 0; i<10; ++i) {
-        Object * t = new Object(tree);
-        t->setPosition(rand()%3000, rand()%2000);
-        trees.push_back(t);
+#include <random>
+void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Object*> & v) {
+    for (int i = 0; i<n; ++i) {
+        Object * o = new Object(texture);
+        o->setOrigin(o->getGlobalBounds().width/2, o->getGlobalBounds().height/2);
+        o->setPosition(rand()%3000, rand()%2000);
+        v.push_back(o);
     }
 }
 

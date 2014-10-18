@@ -24,6 +24,7 @@ class Game
         //textures
         sf::Texture tMap;
         sf::Texture tree;
+        sf::Texture cave;
         sf::Texture tCookie;
 
         sf::RenderWindow window;
@@ -34,12 +35,13 @@ class Game
 
         sf::Sprite cookie;
         std::vector<Object*> trees;
+        std::vector<Object*> caves;
 
         sf::Event event;
         int speed = 50;
 
         void loadTextures();
-        void generateTrees();
+        void generateRandPosObjects(sf::Texture &, int, std::vector<Object*> &);
         void createMiniMapRect();
 };
 
