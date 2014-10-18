@@ -10,9 +10,7 @@ Game::Game()
 
 void Game::start()
 {
-    if (!tMap.loadFromFile("img/grass.png")) {
-        exit(0);
-    }
+    loadTextures();
 
     tMap.setRepeated(true);
     sMap.setTexture(tMap);
@@ -35,11 +33,11 @@ void Game::start()
 
     window.setFramerateLimit(60);
 
-
-    sf::Texture texture;
-    texture.loadFromFile("img/cookie.png");
-    cookie.setTexture(texture);
+    cookie.setTexture(tCookie);
+    cookie.setOrigin(cookie.getGlobalBounds().width/2, cookie.getGlobalBounds().height/2);
     cookie.setPosition(view.getCenter());
+
+    generateTrees();
 
     while (window.isOpen()) {
         window.clear();
@@ -62,6 +60,7 @@ void Game::start()
 
         window.setView(view);
         window.draw(sMap);
+        for (Object * t : trees) { window.draw(*t); }
         //miniMapRect.setPosition(view.getCenter().x+window.getSize().x/5, view.getCenter().y+window.getSize().y/4);
         window.draw(miniMapRect);
 
@@ -69,7 +68,7 @@ void Game::start()
 
         window.setView(miniMap);
         window.draw(sMap);
-
+        for (Object * t : trees) { window.draw(*t); }
         window.draw(cookie);
 
         window.display();
@@ -77,11 +76,25 @@ void Game::start()
 
 }
 
+void Game::loadTextures() {
+    if (!tMap.loadFromFile("img/grass.png")) { exit(0); }
+    if (!tCookie.loadFromFile("img/cookie.png")) { exit(0); }
+    if (!tree.loadFromFile("img/tree.png")) { exit(0); }
+}
+
 void Game::createMiniMapRect() {
     miniMapRect.setSize(sf::Vector2f(202,152));
     miniMapRect.setFillColor(sf::Color::Black);
     miniMapRect.setOutlineThickness(2);
     miniMapRect.setOutlineColor(sf::Color::Red);
+}
+
+void Game::generateTrees() {
+    for (int i = 0; i<10; ++i) {
+        Object * t = new Object(tree);
+        t->setPosition(rand()%3000, rand()%2000);
+        trees.push_back(t);
+    }
 }
 
 TaskManager * Game::getTaskManager() {

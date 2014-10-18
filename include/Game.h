@@ -2,6 +2,8 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include "Object.h"
+#include <vector>
 
 class TaskManager;
 
@@ -19,18 +21,25 @@ class Game
         const int WINDOWX = 800;
         const int WINDOWY = 600;
 
-        sf::RenderWindow window;
+        //textures
         sf::Texture tMap;
+        sf::Texture tree;
+        sf::Texture tCookie;
+
+        sf::RenderWindow window;
         sf::Sprite sMap;
         sf::RectangleShape miniMapRect;
         sf::View view;
         sf::View miniMap;
 
         sf::Sprite cookie;
+        std::vector<Object*> trees;
 
         sf::Event event;
-        int speed = 48;
+        int speed = 50;
 
+        void loadTextures();
+        void generateTrees();
         void createMiniMapRect();
 };
 
