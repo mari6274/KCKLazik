@@ -41,24 +41,8 @@ void Game::start()
     generateRandPosObjects(cave, 8, caves);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-    //wypisuje odleglosci pomiedzy drzewami, ale nie umiem przeniesc tego do helpera
-    //usunicie jak ktos przeniesie do helpera
 
-    Object * o = trees.back();
-    float minimum=2000;
-    for(int i=0; i<20; i++)
-    {
-        o=trees.at(i);
-
-        if (Helper::distance(cookie.getPosition(),o->getPosition())<minimum)
-            minimum=Helper::distance(cookie.getPosition(),o->getPosition());
-        std::cout<<Helper::distance(cookie.getPosition(),o->getPosition())<<std::endl;
-
-
-    }
-    std::cout<<std::endl<<std::endl<<"Najblizsze drzewo znajduje sie w odleglosci "<<minimum;
-
-//std::cout<<std::endl<<std::endl<<Helper::minimum(trees,cookie.getPosition());
+    std::cout << std::endl << std::endl << "Najblizsze drzewo w odleglosci: " << Helper::minimum(trees, cookie.getPosition());
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
