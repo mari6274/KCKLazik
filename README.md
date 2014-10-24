@@ -13,7 +13,7 @@ Biblioteka multimedialna (głównie do prezentacji grafiki)
 http://www.sfml-dev.org
 
 **Polecenia:**
-* idź do \<koordynaty\>/\<miejsca\>
+* idź do \<koordynaty\>\<miejsca\>
 * wykop
 * wykonaj analize \<nazwa pobranego obiektu\>
 * sfotografuj
