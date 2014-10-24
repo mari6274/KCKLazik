@@ -12,3 +12,6 @@ Projekt na KCK
 * idź do <nazwa obiektu> i wykop
 * wykop
 * ustaw sie po <nazwa kierunku> <nazwa obiektu>
+
+*komenda "Szukaj w okolicy drzewa" 
+*komenda "pomiędzy drzewem z gruszkami a krzakiem"
