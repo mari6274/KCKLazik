@@ -14,10 +14,10 @@ http://www.sfml-dev.org
 
 **Komendy przewidziane:**
 * idź do \<nazwa obiektu\>
-* idź do <nazwa obiektu> i wykop
+* idź do \<nazwa obiektu\> i wykop
 * wykop
-* ustaw sie po <nazwa kierunku> <nazwa obiektu>
-* sprawdź wszystkie <obiekt>
-* sprawdź <liczba> najbliższych <obiekt>
-* szukaj w okolicy <obiekt> 
-* szukaj pomiędzy <obiekt> a <obiekt>
+* ustaw sie po \<nazwa kierunku\> \<nazwa obiektu\>
+* sprawdź wszystkie \<obiekt\>
+* sprawdź \<liczba\> najbliższych \<obiekt\>
+* szukaj w okolicy \<obiekt\> 
+* szukaj pomiędzy \<obiekt\> a \<obiekt\>
