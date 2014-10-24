@@ -13,7 +13,7 @@ Biblioteka multimedialna (głównie do prezentacji grafiki)
 http://www.sfml-dev.org
 
 **Komendy przewidziane:**
-* idź do <nazwa obiektu>
+* idź do \<nazwa obiektu\>
 * idź do <nazwa obiektu> i wykop
 * wykop
 * ustaw sie po <nazwa kierunku> <nazwa obiektu>
