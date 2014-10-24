@@ -1,4 +1,4 @@
-KCKPoszukiwaczSkarbow
+Łazik Marsjański
 =====================
 
 **Skład grupy**
@@ -6,18 +6,23 @@ KCKPoszukiwaczSkarbow
 * Sławomir Golijasz
 * Paweł Pisarek
 
-**Krótki opisy projektu:** Poszukiwacz skarbu przemieszcza się po mapie 2d za pomocą poleceń użytkownika i poszukuje skarbów na określonych polach mapy.
+**Krótki opisy projektu:** Łazik marsjański bada marsa, przemieszcza się po powierzchni marsja, robi analizy i zdjecia marsa. Polecenia, będzie można łączyć.
 
 **Wykorzystujemy SFML 2.1**
 Biblioteka multimedialna (głównie do prezentacji grafiki)
 http://www.sfml-dev.org
 
-**Komendy przewidziane:**
-* idź do \<nazwa obiektu\>
-* idź do \<nazwa obiektu\> i wykop
+**Polecenia:**
+* idź do \<koordynaty\>/\<miejsca\>
 * wykop
-* ustaw sie po \<nazwa kierunku\> \<nazwa obiektu\>
-* sprawdź wszystkie \<obiekt\>
-* sprawdź \<liczba\> najbliższych \<obiekt\>
-* szukaj w okolicy \<obiekt\> 
-* szukaj pomiędzy \<obiekt\> a \<obiekt\>
+* wykonaj anlize \<nazwa pobranego obiektu\>
+* sfotografuj
+* obróć się
+* przesuń się \<o ile\>
+* przeslij \<dane obiektu\>
+* podaj swoje koordynaty
+
+** przykładowe polecenie łączone:**
+* idź do \<koordynaty\>/\<miejsca\> i zrób wykop
+* wykop, wykonaj anlize \<nazwa pobranego obiektu\> i * przeslij \<dane obiektu\>
+* przesuń się \<o ile\> i obróć się, a następnie idź do \<koordynaty\>/\<miejsca\>
