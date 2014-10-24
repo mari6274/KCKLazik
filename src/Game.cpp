@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "SFMLPhysics.h"
+#include "Helper.h"
+#include <iostream>
 
 Game::Game()
 {
@@ -37,12 +39,38 @@ void Game::start()
     generateRandPosObjects(tree, 20, trees);
     generateRandPosObjects(cave, 8, caves);
 
-    while (window.isOpen()) {
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+    //wypisuje odleglosci pomiedzy drzewami, ale nie umiem przeniesc tego do helpera
+    //usunicie jak ktos przeniesie do helpera
+
+    Object * o = trees.back();
+    float minimum=2000;
+    for(int i=0; i<20; i++)
+    {
+        o=trees.at(i);
+
+        if (Helper::distance(cookie.getPosition(),o->getPosition())<minimum)
+            minimum=Helper::distance(cookie.getPosition(),o->getPosition());
+        std::cout<<Helper::distance(cookie.getPosition(),o->getPosition())<<std::endl;
+
+
+    }
+    std::cout<<std::endl<<std::endl<<"Najblizsze drzewo znajduje sie w odleglosci "<<minimum;
+
+//std::cout<<std::endl<<std::endl<<Helper::minimum(trees,cookie.getPosition());
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    while (window.isOpen())
+    {
         window.clear();
 
-        while (window.pollEvent(event)) {
+        while (window.pollEvent(event))
+        {
 
-            if(event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+            if(event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+            {
                 window.close();
                 exit(0);
             }
@@ -55,8 +83,14 @@ void Game::start()
 
         window.setView(view);
         window.draw(sMap);
-        for (Object * t : caves) { window.draw(*t); }
-        for (Object * t : trees) { window.draw(*t); }
+        for (Object * t : caves)
+        {
+            window.draw(*t);
+        }
+        for (Object * t : trees)
+        {
+            window.draw(*t);
+        }
 
         window.draw(miniMapRect);
 
@@ -64,8 +98,14 @@ void Game::start()
 
         window.setView(miniMap);
         window.draw(sMap);
-        for (Object * t : caves) { window.draw(*t); }
-        for (Object * t : trees) { window.draw(*t); }
+        for (Object * t : caves)
+        {
+            window.draw(*t);
+        }
+        for (Object * t : trees)
+        {
+            window.draw(*t);
+        }
         window.draw(cookie);
 
         window.display();
@@ -73,15 +113,30 @@ void Game::start()
 
 }
 
-void Game::loadTextures() {
-    if (!tMap.loadFromFile("img/grass.png")) { exit(0); }
-    if (!tCookie.loadFromFile("img/cookie.png")) { exit(0); }
-    if (!tree.loadFromFile("img/tree.png")) { exit(0); }
-    if (!cave.loadFromFile("img/cave.png")) { exit(0); }
+void Game::loadTextures()
+{
+    if (!tMap.loadFromFile("img/grass.png"))
+    {
+        exit(0);
+    }
+    if (!tCookie.loadFromFile("img/cookie.png"))
+    {
+        exit(0);
+    }
+    if (!tree.loadFromFile("img/tree.png"))
+    {
+        exit(0);
+    }
+    if (!cave.loadFromFile("img/cave.png"))
+    {
+        exit(0);
+    }
 }
 
-void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Object*> & v) {
-    for (int i = 0; i<n; ++i) {
+void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Object*> & v)
+{
+    for (int i = 0; i<n; ++i)
+    {
         Object * o = new Object(texture);
         o->setOrigin(o->getGlobalBounds().width/2, o->getGlobalBounds().height/2);
         o->setPosition(rand()%3000, rand()%2000);
@@ -89,30 +144,36 @@ void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Obje
     }
 }
 
-TaskManager * Game::getTaskManager() {
+TaskManager * Game::getTaskManager()
+{
     return taskManager;
 }
 
-TaskManager::TaskManager(Game * game) {
+TaskManager::TaskManager(Game * game)
+{
     this->game = game;
 }
 
-void TaskManager::goLeft() {
+void TaskManager::goLeft()
+{
     game->cookie.move(-game->speed, 0);
     if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->cookie.getGlobalBounds()))) game->view.move(-game->speed, 0);
 }
 
-void TaskManager::goRight() {
+void TaskManager::goRight()
+{
     game->cookie.move(game->speed, 0);
     if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->cookie.getGlobalBounds()))) game->view.move(game->speed, 0);
 }
 
-void TaskManager::goUp() {
+void TaskManager::goUp()
+{
     game->cookie.move(0, -game->speed);
     if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->cookie.getGlobalBounds()))) game->view.move(0, -game->speed);
 }
 
-void TaskManager::goDown() {
+void TaskManager::goDown()
+{
     game->cookie.move(0, game->speed);
     if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->cookie.getGlobalBounds()))) game->view.move(0, game->speed);
 }
