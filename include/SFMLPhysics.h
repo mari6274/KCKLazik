@@ -6,7 +6,6 @@
 class SFMLPhysics
 {
     public:
-        SFMLPhysics();
         static sf::FloatRect getViewBounds(const sf::View &view);
         static sf::Vector2f getCenterOfRect(const sf::FloatRect &rect);
     protected:

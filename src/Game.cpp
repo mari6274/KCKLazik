@@ -100,7 +100,7 @@ void Game::start()
 
 void Game::loadTextures()
 {
-    if (!tMap.loadFromFile("img/grass.png"))
+    if (!tMap.loadFromFile("img/mars.jpg"))
     {
         exit(0);
     }
