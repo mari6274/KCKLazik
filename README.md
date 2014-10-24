@@ -24,6 +24,6 @@ http://www.sfml-dev.org
 * podaj swoje koordynaty
 
 **Przykładowe polecenie łączone:**
-* idź do \<koordynaty\/\<miejsca\> i zrób wykop
+* idź do \<koordynaty\>\<miejsca\> i zrób wykop
 * wykop, wykonaj anlize \<nazwa pobranego obiektu\> i * przeslij \<dane obiektu\>
 * przesuń się \<o ile\> i obróć się w\<kierunek\>, a następnie idź do \<koordynaty\>/\<miejsca\>
