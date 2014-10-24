@@ -51,6 +51,7 @@ class TaskManager {
         void goRight();
         void goUp();
         void goDown();
+        bool goCoordinates(int x, int y);
     private:
         Game * game;
 };

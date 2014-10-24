@@ -1,5 +1,8 @@
 #include "Game.h"
 #include "SFMLPhysics.h"
+#include "Helper.h"
+
+#include <iostream>
 
 Game::Game()
 {
@@ -47,10 +50,10 @@ void Game::start()
                 exit(0);
             }
 
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) taskManager->goLeft();
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) taskManager->goRight();
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) taskManager->goUp();
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) taskManager->goDown();
+//            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) taskManager->goLeft();
+//            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) taskManager->goRight();
+//            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) taskManager->goUp();
+//            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) taskManager->goDown();
         }
 
         window.setView(view);
@@ -115,4 +118,9 @@ void TaskManager::goUp() {
 void TaskManager::goDown() {
     game->cookie.move(0, game->speed);
     if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->cookie.getGlobalBounds()))) game->view.move(0, game->speed);
+}
+
+bool TaskManager::goCoordinates(int x, int y) {
+    game->cookie.setPosition(x,y);
+    return true;
 }
