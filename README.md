@@ -17,7 +17,7 @@ http://www.sfml-dev.org
 * wykop
 * wykonaj analize \<nazwa pobranego obiektu\>
 * sfotografuj
-* obróć się
+* obróć się w\<kierunek\>
 * przesuń się \<o ile\>
 * przeslij \<dane obiektu\>
 * podaj swoje koordynaty
@@ -25,4 +25,4 @@ http://www.sfml-dev.org
 **Przykładowe polecenie łączone:**
 * idź do \<koordynaty\>/\<miejsca\> i zrób wykop
 * wykop, wykonaj anlize \<nazwa pobranego obiektu\> i * przeslij \<dane obiektu\>
-* przesuń się \<o ile\> i obróć się, a następnie idź do \<koordynaty\>/\<miejsca\>
+* przesuń się \<o ile\> i obróć się w\<kierunek\>, a następnie idź do \<koordynaty\>/\<miejsca\>
