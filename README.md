@@ -6,7 +6,8 @@
 * Sławomir Golijasz
 * Paweł Pisarek
 
-**Krótki opisy projektu:** Łazik marsjański bada marsa, przemieszcza się po powierzchni marsja, robi analizy i zdjecia marsa. Polecenia będzie można łączyć.
+**Krótki opisy projektu:** Łazik marsjański bada Marsa, przemieszcza się po powierzchni Marsa. Wykonuje analizy obiektów, gromadzi dane oraz fotografuje teren.
+Polecenia będzie można łączyć.
 
 **Wykorzystujemy SFML 2.1**
 Biblioteka multimedialna (głównie do prezentacji grafiki)
@@ -23,6 +24,6 @@ http://www.sfml-dev.org
 * podaj swoje koordynaty
 
 **Przykładowe polecenie łączone:**
-* idź do \<koordynaty\>/\<miejsca\> i zrób wykop
+* idź do \<koordynaty\>\<miejsca\> i zrób wykop
 * wykop, wykonaj anlize \<nazwa pobranego obiektu\> i * przeslij \<dane obiektu\>
 * przesuń się \<o ile\> i obróć się w\<kierunek\>, a następnie idź do \<koordynaty\>/\<miejsca\>
