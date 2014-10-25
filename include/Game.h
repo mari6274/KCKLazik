@@ -36,7 +36,6 @@ class Game
         std::vector<Object*> craters;
 
         sf::Event event;
-        int speed = 50;
 
         void loadTextures();
         void generateRandPosObjects(sf::Texture &, int, std::vector<Object*> &);
@@ -45,11 +44,10 @@ class Game
 class TaskManager {
     public:
         TaskManager(Game * game);
-        void goLeft();
-        void goRight();
-        void goUp();
-        void goDown();
+
+        bool move(int x, int y);
         bool goCoordinates(int x, int y);
+
         sf::Vector2f getCoordinates();
     private:
         Game * game;

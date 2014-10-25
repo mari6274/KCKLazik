@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "SFMLPhysics.h"
 #include "Helper.h"
 
 #include <iostream>
@@ -33,7 +32,7 @@ void Game::start()
     window.setFramerateLimit(60);
 
     rover.setTexture(tRover);
-    rover.setOrigin(rover.getGlobalBounds().width/2, rover.getGlobalBounds().height/2);
+    rover.setOrigin(Helper::getCenterOfRect(rover.getGlobalBounds()));
     rover.setPosition(view.getCenter());
 
     srand(time(NULL));
@@ -43,13 +42,6 @@ void Game::start()
         o->setScale((rand()%10+5)/10.f, (rand()%10+5)/10.f);
         o->setRotation(rand()%360);
     }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    std::cout << std::endl << std::endl << "Najblizszy krater w odleglosci: " << Helper::minimum(craters, rover.getPosition());
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     while (window.isOpen())
     {
@@ -64,10 +56,10 @@ void Game::start()
                 exit(0);
             }
 
-//            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) taskManager->goLeft();
-//            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) taskManager->goRight();
-//            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) taskManager->goUp();
-//            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) taskManager->goDown();
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) taskManager->move(-10, 0);
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) taskManager->move(10, 0);
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) taskManager->move(0, -10);
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) taskManager->move(0, 10);
         }
 
         window.setView(view);
@@ -116,7 +108,7 @@ void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Obje
     for (int i = 0; i<n; ++i)
     {
         Object * o = new Object(texture);
-        o->setOrigin(o->getGlobalBounds().width/2, o->getGlobalBounds().height/2);
+        o->setOrigin(Helper::getCenterOfRect(o->getGlobalBounds()));
         o->setPosition(rand()%3000, rand()%2000);
         v.push_back(o);
     }
@@ -132,28 +124,12 @@ TaskManager::TaskManager(Game * game)
     this->game = game;
 }
 
-void TaskManager::goLeft()
+bool TaskManager::move(int x, int y)
 {
-    game->rover.move(-game->speed, 0);
-    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->rover.getGlobalBounds()))) game->view.move(-game->speed, 0);
-}
-
-void TaskManager::goRight()
-{
-    game->rover.move(game->speed, 0);
-    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->rover.getGlobalBounds()))) game->view.move(game->speed, 0);
-}
-
-void TaskManager::goUp()
-{
-    game->rover.move(0, -game->speed);
-    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->rover.getGlobalBounds()))) game->view.move(0, -game->speed);
-}
-
-void TaskManager::goDown()
-{
-    game->rover.move(0, game->speed);
-    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->rover.getGlobalBounds()))) game->view.move(0, game->speed);
+    int rx = game->rover.getPosition().x;
+    int ry = game->rover.getPosition().y;
+    game->rover.move(x, y);
+    if (!Helper::containsRect(Helper::getViewBounds(game->view), game->rover.getGlobalBounds())) game->view.setCenter(game->rover.getPosition());
 }
 
 bool TaskManager::goCoordinates(int x, int y) {
