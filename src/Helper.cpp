@@ -51,8 +51,8 @@ sf::Vector2f Helper::getCenterOfRect(const sf::FloatRect& rect)
 
 bool Helper::containsRect(const sf::FloatRect& rect1, const sf::FloatRect& rect2)
 {
-    std::cout << "rect1: " << rect1.top << " " << rect1.height << " " << rect1.left << " " << rect1.width << std::endl;
-    std::cout << "rect2: " << rect2.top << " " << rect2.height << " " << rect2.left << " " << rect2.width << std::endl << std::endl;
+//    std::cout << "rect1: " << rect1.top << " " << rect1.height << " " << rect1.left << " " << rect1.width << std::endl;
+//    std::cout << "rect2: " << rect2.top << " " << rect2.height << " " << rect2.left << " " << rect2.width << std::endl << std::endl;
     if (
         rect1.top <= rect2.top &&
         rect1.left <= rect2.left &&

@@ -6,9 +6,11 @@
 class Object : public sf::Sprite
 {
     public:
-        Object(const sf::Texture &);
+        Object(const sf::Texture &, sf::String);
+        sf::String getName();
     protected:
     private:
+        sf::String name;
 };
 
 #endif // OBJECT_H

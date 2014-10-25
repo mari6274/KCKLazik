@@ -40,7 +40,7 @@ void Game::start()
     for (Object * o : craters)
     {
         o->setScale((rand()%10+5)/10.f, (rand()%10+5)/10.f);
-        o->setRotation(rand()%360);
+//        o->setRotation(rand()%360);
     }
 
     while (window.isOpen())
@@ -107,8 +107,8 @@ void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Obje
 {
     for (int i = 0; i<n; ++i)
     {
-        Object * o = new Object(texture);
-        o->setOrigin(Helper::getCenterOfRect(o->getGlobalBounds()));
+        Object * o = new Object(texture, "krater");
+        o->setOrigin(Helper::getCenterOfRect(o->getLocalBounds()));
         o->setPosition(rand()%3000, rand()%2000);
         v.push_back(o);
     }
@@ -126,10 +126,21 @@ TaskManager::TaskManager(Game * game)
 
 bool TaskManager::move(int x, int y)
 {
-    int rx = game->rover.getPosition().x;
-    int ry = game->rover.getPosition().y;
+    sf::FloatRect fr = game->rover.getGlobalBounds();
+    fr.top += y;
+    fr.left += x;
+    for (Object * o : game->craters)
+    {
+        if (fr.intersects(o->getGlobalBounds()))
+        {
+            std::wcout << L"Nie można przejść gdyż napotkano obiekt: " << o->getName().toWideString() << std::endl;
+            return false;
+        }
+    }
+
     game->rover.move(x, y);
     if (!Helper::containsRect(Helper::getViewBounds(game->view), game->rover.getGlobalBounds())) game->view.setCenter(game->rover.getPosition());
+    return true;
 }
 
 bool TaskManager::goCoordinates(int x, int y) {
