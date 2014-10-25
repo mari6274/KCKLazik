@@ -37,12 +37,16 @@ void Game::start()
     cookie.setPosition(view.getCenter());
 
     srand(time(NULL));
-    generateRandPosObjects(tree, 20, trees);
-    generateRandPosObjects(cave, 8, caves);
+    generateRandPosObjects(crater, 3, craters);
+    for (Object * o : craters)
+    {
+        o->setScale((rand()%10+5)/10.f, (rand()%10+5)/10.f);
+        o->setRotation(rand()%360);
+    }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    std::cout << std::endl << std::endl << "Najblizsze drzewo w odleglosci: " << Helper::minimum(trees, cookie.getPosition());
+    std::cout << std::endl << std::endl << "Najblizszy krater w odleglosci: " << Helper::minimum(craters, cookie.getPosition());
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,11 +72,7 @@ void Game::start()
 
         window.setView(view);
         window.draw(sMap);
-        for (Object * t : caves)
-        {
-            window.draw(*t);
-        }
-        for (Object * t : trees)
+        for (Object * t : craters)
         {
             window.draw(*t);
         }
@@ -83,14 +83,11 @@ void Game::start()
 
         window.setView(miniMap);
         window.draw(sMap);
-        for (Object * t : caves)
+        for (Object * t : craters)
         {
             window.draw(*t);
         }
-        for (Object * t : trees)
-        {
-            window.draw(*t);
-        }
+
         window.draw(cookie);
 
         window.display();
@@ -108,11 +105,7 @@ void Game::loadTextures()
     {
         exit(0);
     }
-    if (!tree.loadFromFile("img/tree.png"))
-    {
-        exit(0);
-    }
-    if (!cave.loadFromFile("img/cave.png"))
+    if (!crater.loadFromFile("img/crater.png"))
     {
         exit(0);
     }
@@ -166,4 +159,8 @@ void TaskManager::goDown()
 bool TaskManager::goCoordinates(int x, int y) {
     game->cookie.setPosition(x,y);
     return true;
+}
+
+sf::Vector2f TaskManager::getCoordinates() {
+    return game->cookie.getPosition();
 }

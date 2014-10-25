@@ -23,8 +23,7 @@ class Game
 
         //textures
         sf::Texture tMap;
-        sf::Texture tree;
-        sf::Texture cave;
+        sf::Texture crater;
         sf::Texture tCookie;
 
         sf::RenderWindow window;
@@ -34,8 +33,7 @@ class Game
         sf::View miniMap;
 
         sf::Sprite cookie;
-        std::vector<Object*> trees;
-        std::vector<Object*> caves;
+        std::vector<Object*> craters;
 
         sf::Event event;
         int speed = 50;
@@ -52,6 +50,7 @@ class TaskManager {
         void goUp();
         void goDown();
         bool goCoordinates(int x, int y);
+        sf::Vector2f getCoordinates();
     private:
         Game * game;
 };
