@@ -14,7 +14,7 @@ Biblioteka multimedialna (głównie do prezentacji grafiki)
 http://www.sfml-dev.org
 
 **Polecenia:**
-* idź do \<koordynaty\>\<miejsca\>
+* idź do \<koordynaty\>/\<miejsca\>
 * wykop
 * wykonaj analize \<nazwa pobranego obiektu\>
 * sfotografuj
@@ -24,6 +24,8 @@ http://www.sfml-dev.org
 * podaj swoje koordynaty
 
 **Przykładowe polecenie łączone:**
-* idź do \<koordynaty\>\<miejsca\> i zrób wykop
+* idź do \<koordynaty\>/\<miejsca\> i zrób wykop
 * wykop, wykonaj anlize \<nazwa pobranego obiektu\> i * przeslij \<dane obiektu\>
 * przesuń się \<o ile\> i obróć się w\<kierunek\>, a następnie idź do \<koordynaty\>/\<miejsca\>
+
+Łazik może przekazać informacje o tym, że nie może wykonać jakiejś czynności. Może także podać powód. Dopytuje co zrobić w zaistniałej sytuacji.
