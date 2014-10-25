@@ -24,7 +24,7 @@ class Game
         //textures
         sf::Texture tMap;
         sf::Texture crater;
-        sf::Texture tCookie;
+        sf::Texture tRover;
 
         sf::RenderWindow window;
         sf::Sprite sMap;
@@ -32,7 +32,7 @@ class Game
         sf::View view;
         sf::View miniMap;
 
-        sf::Sprite cookie;
+        sf::Sprite rover;
         std::vector<Object*> craters;
 
         sf::Event event;

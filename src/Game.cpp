@@ -32,9 +32,9 @@ void Game::start()
 
     window.setFramerateLimit(60);
 
-    cookie.setTexture(tCookie);
-    cookie.setOrigin(cookie.getGlobalBounds().width/2, cookie.getGlobalBounds().height/2);
-    cookie.setPosition(view.getCenter());
+    rover.setTexture(tRover);
+    rover.setOrigin(rover.getGlobalBounds().width/2, rover.getGlobalBounds().height/2);
+    rover.setPosition(view.getCenter());
 
     srand(time(NULL));
     generateRandPosObjects(crater, 3, craters);
@@ -46,7 +46,7 @@ void Game::start()
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    std::cout << std::endl << std::endl << "Najblizszy krater w odleglosci: " << Helper::minimum(craters, cookie.getPosition());
+    std::cout << std::endl << std::endl << "Najblizszy krater w odleglosci: " << Helper::minimum(craters, rover.getPosition());
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ void Game::start()
 
         window.draw(miniMapRect);
 
-        window.draw(cookie);
+        window.draw(rover);
 
         window.setView(miniMap);
         window.draw(sMap);
@@ -88,7 +88,7 @@ void Game::start()
             window.draw(*t);
         }
 
-        window.draw(cookie);
+        window.draw(rover);
 
         window.display();
     }
@@ -101,7 +101,7 @@ void Game::loadTextures()
     {
         exit(0);
     }
-    if (!tCookie.loadFromFile("img/cookie.png"))
+    if (!tRover.loadFromFile("img/rover.png"))
     {
         exit(0);
     }
@@ -134,33 +134,33 @@ TaskManager::TaskManager(Game * game)
 
 void TaskManager::goLeft()
 {
-    game->cookie.move(-game->speed, 0);
-    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->cookie.getGlobalBounds()))) game->view.move(-game->speed, 0);
+    game->rover.move(-game->speed, 0);
+    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->rover.getGlobalBounds()))) game->view.move(-game->speed, 0);
 }
 
 void TaskManager::goRight()
 {
-    game->cookie.move(game->speed, 0);
-    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->cookie.getGlobalBounds()))) game->view.move(game->speed, 0);
+    game->rover.move(game->speed, 0);
+    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->rover.getGlobalBounds()))) game->view.move(game->speed, 0);
 }
 
 void TaskManager::goUp()
 {
-    game->cookie.move(0, -game->speed);
-    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->cookie.getGlobalBounds()))) game->view.move(0, -game->speed);
+    game->rover.move(0, -game->speed);
+    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->rover.getGlobalBounds()))) game->view.move(0, -game->speed);
 }
 
 void TaskManager::goDown()
 {
-    game->cookie.move(0, game->speed);
-    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->cookie.getGlobalBounds()))) game->view.move(0, game->speed);
+    game->rover.move(0, game->speed);
+    if (!SFMLPhysics::getViewBounds(game->view).contains(SFMLPhysics::getCenterOfRect(game->rover.getGlobalBounds()))) game->view.move(0, game->speed);
 }
 
 bool TaskManager::goCoordinates(int x, int y) {
-    game->cookie.setPosition(x,y);
+    game->rover.setPosition(x,y);
     return true;
 }
 
 sf::Vector2f TaskManager::getCoordinates() {
-    return game->cookie.getPosition();
+    return game->rover.getPosition();
 }
