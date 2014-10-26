@@ -42,8 +42,10 @@ void Game::start()
 //        o->setRotation(rand()%360);
     }
 
-    //wszystkie wektory do kupy
-    objects.push_back(&craters);
+    //vector of colliders
+
+    //vector of noncolliders
+    noncolliders.push_back(&craters);
 
     while (window.isOpen())
     {
@@ -176,13 +178,15 @@ bool TaskManager::goTo(sf::Vector2f v)
                 else if (distp3 <= distp1 && distp3 <= distp2 && distp3 <= distp4) rov.setPosition(p3);
                     else rov.setPosition(p4);
 
-
-        for (Object * o : game->craters)
+        for (std::vector<Object*> * vect : game->colliders)
         {
-            if (rov.getGlobalBounds().intersects(o->getGlobalBounds()))
+            for (Object * o : *vect)
             {
-                error =  "Nie można przejść gdyż napotkano obiekt: " + o->getName().toAnsiString();
-                return false;
+                if (rov.getGlobalBounds().intersects(o->getGlobalBounds()))
+                {
+                    error =  "Nie można przejść gdyż napotkano obiekt: " + o->getName().toAnsiString();
+                    return false;
+                }
             }
         }
 
@@ -208,7 +212,7 @@ bool TaskManager::rotate(int angle)
 
     rov.setRotation(angle);
 
-    for (std::vector<Object*> * vect : game->objects)
+    for (std::vector<Object*> * vect : game->colliders)
     {
         for (Object * o : *vect)
         {
@@ -223,4 +227,17 @@ bool TaskManager::rotate(int angle)
     game->rover.setRotation(rov.getRotation());
 
     return true;
+}
+
+Object * TaskManager::getLocalObject()
+{
+    for (std::vector<Object*> * vect : game->colliders)
+    {
+        for (Object * o : *vect)
+        {
+            if (game->rover.getGlobalBounds().intersects(o->getGlobalBounds())) return o;
+        }
+    }
+
+    return NULL;
 }

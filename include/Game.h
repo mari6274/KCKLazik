@@ -32,7 +32,8 @@ class Game
         sf::View view;
         sf::View miniMap;
 
-        std::vector<std::vector<Object*>*> objects;
+        std::vector<std::vector<Object*>*> colliders;
+        std::vector<std::vector<Object*>*> noncolliders;
         sf::Sprite rover;
         std::vector<Object*> craters;
 
@@ -52,6 +53,7 @@ class TaskManager {
         bool goCoordinates(int x, int y);
 
         sf::Vector2f getCoordinates();
+        Object * getLocalObject();
         sf::String getError();
     private:
         Game * game;
