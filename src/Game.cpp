@@ -42,6 +42,9 @@ void Game::start()
 //        o->setRotation(rand()%360);
     }
 
+    //wszystkie wektory do kupy
+    objects.push_back(&craters);
+
     while (window.isOpen())
     {
         window.clear();
@@ -55,10 +58,10 @@ void Game::start()
                 exit(0);
             }
 
-            // if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) taskManager->move(-100, 0);
-            // if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) taskManager->move(100, 0);
-            // if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) taskManager->move(0, -100);
-            // if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) taskManager->move(0, 100);
+//             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) taskManager->move(-100, 0);
+//             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) taskManager->move(100, 0);
+//             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) taskManager->move(0, -100);
+//             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) taskManager->move(0, 100);
         }
 
         window.setView(view);
@@ -197,4 +200,27 @@ void TaskManager::quit() {
 
 sf::String TaskManager::getError() {
     return error;
+}
+
+bool TaskManager::rotate(int angle)
+{
+    sf::Sprite rov = game->rover;
+
+    rov.setRotation(angle);
+
+    for (std::vector<Object*> * vect : game->objects)
+    {
+        for (Object * o : *vect)
+        {
+            if (rov.getGlobalBounds().intersects(o->getGlobalBounds()))
+            {
+                error =  "Nie można się obrócić gdyż napotkano obiekt: " + o->getName().toAnsiString();
+                return false;
+            }
+        }
+    }
+
+    game->rover.setRotation(rov.getRotation());
+
+    return true;
 }

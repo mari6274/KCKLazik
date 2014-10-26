@@ -32,6 +32,7 @@ class Game
         sf::View view;
         sf::View miniMap;
 
+        std::vector<std::vector<Object*>*> objects;
         sf::Sprite rover;
         std::vector<Object*> craters;
 
@@ -47,6 +48,7 @@ class TaskManager {
 
         void quit();
         bool move(int x, int y);
+        bool rotate(int angle);
         bool goCoordinates(int x, int y);
 
         sf::Vector2f getCoordinates();
