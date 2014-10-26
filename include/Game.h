@@ -51,6 +51,7 @@ class TaskManager {
         sf::Vector2f getCoordinates();
     private:
         Game * game;
+        bool goTo(sf::Vector2f v);
 };
 
 #endif // GAME_H

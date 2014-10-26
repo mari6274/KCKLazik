@@ -11,7 +11,6 @@ Game::Game()
 void Game::start()
 {
     loadTextures();
-
     tMap.setRepeated(true);
     sMap.setTexture(tMap);
     sMap.setTextureRect(sf::IntRect(0,0,3000,2000));
@@ -56,10 +55,10 @@ void Game::start()
                 exit(0);
             }
 
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) taskManager->move(-10, 0);
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) taskManager->move(10, 0);
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) taskManager->move(0, -10);
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) taskManager->move(0, 10);
+            // if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) taskManager->move(-100, 0);
+            // if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) taskManager->move(100, 0);
+            // if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) taskManager->move(0, -100);
+            // if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) taskManager->move(0, 100);
         }
 
         window.setView(view);
@@ -126,28 +125,66 @@ TaskManager::TaskManager(Game * game)
 
 bool TaskManager::move(int x, int y)
 {
-    sf::FloatRect fr = game->rover.getGlobalBounds();
-    fr.top += y;
-    fr.left += x;
-    for (Object * o : game->craters)
-    {
-        if (fr.intersects(o->getGlobalBounds()))
-        {
-            std::wcout << L"Nie można przejść gdyż napotkano obiekt: " << o->getName().toWideString() << std::endl;
-            return false;
-        }
-    }
+    sf::Vector2f v = game->rover.getPosition();
+    v.y += y;
+    v.x += x;
 
-    game->rover.move(x, y);
-    if (!Helper::containsRect(Helper::getViewBounds(game->view), game->rover.getGlobalBounds())) game->view.setCenter(game->rover.getPosition());
-    return true;
+    if (goTo(v)) return true;
+        else return false;
 }
 
 bool TaskManager::goCoordinates(int x, int y) {
-    game->rover.setPosition(x,y);
-    return true;
+    sf::Vector2f v(x, y);
+
+    if (goTo(v)) return true;
+        else return false;
 }
 
 sf::Vector2f TaskManager::getCoordinates() {
     return game->rover.getPosition();
+}
+
+bool TaskManager::goTo(sf::Vector2f v)
+{
+    sf::Sprite rov = game->rover;
+
+    while (v != rov.getPosition())
+    {
+        sf::sleep(sf::milliseconds(5));
+        rov = game->rover;
+
+        sf::Vector2f p1 = rov.getPosition();
+        p1.x -= 1;
+        sf::Vector2f p2 = rov.getPosition();
+        p2.x += 1;
+        sf::Vector2f p3 = rov.getPosition();
+        p3.y -= 1;
+        sf::Vector2f p4 = rov.getPosition();
+        p4.y += 1;
+
+        float distp1 = Helper::distance(v, p1);
+        float distp2 = Helper::distance(v, p2);
+        float distp3 = Helper::distance(v, p3);
+        float distp4 = Helper::distance(v, p4);
+
+        if (distp1 <= distp2 && distp1 <= distp3 && distp1 <= distp4) { rov.setPosition(p1); }
+            else if (distp2 <= distp1 && distp2 <= distp3 && distp2 <= distp4) rov.setPosition(p2);
+                else if (distp3 <= distp1 && distp3 <= distp2 && distp3 <= distp4) rov.setPosition(p3);
+                    else rov.setPosition(p4);
+
+
+        for (Object * o : game->craters)
+        {
+            if (rov.getGlobalBounds().intersects(o->getGlobalBounds()))
+            {
+                std::cout << "Nie można przejść gdyż napotkano obiekt: " << o->getName().toAnsiString() << std::endl;
+                return false;
+            }
+        }
+
+        game->rover.setPosition(rov.getPosition());
+        if (!Helper::containsRect(Helper::getViewBounds(game->view), game->rover.getGlobalBounds())) game->view.setCenter(game->rover.getPosition());
+    }
+
+    return true;
 }
