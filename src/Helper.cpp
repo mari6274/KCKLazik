@@ -21,7 +21,7 @@ float Helper::minimum(std::vector<Object*> & v, sf::Vector2f pozycja)
         float dist = Helper::distance(pozycja,o->getPosition());
         if (dist < minimum)
             minimum=dist;
-        std::cout<< dist <<std::endl;
+        //std::cout<< dist <<std::endl;
     }
     return minimum;
 
@@ -42,8 +42,8 @@ sf::FloatRect Helper::getViewBounds(const sf::View &view)
 
 sf::Vector2f Helper::getCenterOfRect(const sf::FloatRect& rect)
 {
-    float x = rect.left+rect.width/2.f;
-    float y = rect.top+rect.height/2.f;
+    float x = rect.left+(rect.width/2.f);
+    float y = rect.top+(rect.height/2.f);
     //std::cout << x << " " << y << std::endl;
     sf::Vector2f vec(x,y);
     return vec;
@@ -61,7 +61,8 @@ bool Helper::containsRect(const sf::FloatRect& rect1, const sf::FloatRect& rect2
         )
     {
         return true;
-    } else
+    }
+    else
     {
         return false;
     }

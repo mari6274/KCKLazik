@@ -45,13 +45,16 @@ class TaskManager {
     public:
         TaskManager(Game * game);
 
+        void quit();
         bool move(int x, int y);
         bool goCoordinates(int x, int y);
 
         sf::Vector2f getCoordinates();
+        sf::String getError();
     private:
         Game * game;
         bool goTo(sf::Vector2f v);
+        sf::String error;
 };
 
 #endif // GAME_H

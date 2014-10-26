@@ -17,8 +17,12 @@ void Game::start()
 
     window.create(sf::VideoMode(WINDOWX+200, WINDOWY), "sfmlview");
 
+    rover.setTexture(tRover);
+    rover.setOrigin(rover.getGlobalBounds().width/2, rover.getGlobalBounds().height/2);
+    rover.setPosition(1500,1000);
+
     view.setSize(WINDOWX, WINDOWY);
-    view.setCenter(1500,1000);
+    view.setCenter(rover.getPosition());
     view.setViewport(sf::FloatRect(0, 0, 0.8f, 1));
     window.setView(view);
 
@@ -29,10 +33,6 @@ void Game::start()
     window.setView(miniMap);
 
     window.setFramerateLimit(60);
-
-    rover.setTexture(tRover);
-    rover.setOrigin(Helper::getCenterOfRect(rover.getGlobalBounds()));
-    rover.setPosition(view.getCenter());
 
     srand(time(NULL));
     generateRandPosObjects(crater, 3, craters);
@@ -107,7 +107,7 @@ void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Obje
     for (int i = 0; i<n; ++i)
     {
         Object * o = new Object(texture, "krater");
-        o->setOrigin(Helper::getCenterOfRect(o->getLocalBounds()));
+        o->setOrigin(o->getGlobalBounds().width/2, o->getGlobalBounds().height/2);
         o->setPosition(rand()%3000, rand()%2000);
         v.push_back(o);
     }
@@ -134,8 +134,9 @@ bool TaskManager::move(int x, int y)
 }
 
 bool TaskManager::goCoordinates(int x, int y) {
-    sf::Vector2f v(x, y);
-
+    sf::Vector2f v;
+    v.x = x;
+    v.y = y;
     if (goTo(v)) return true;
         else return false;
 }
@@ -177,7 +178,7 @@ bool TaskManager::goTo(sf::Vector2f v)
         {
             if (rov.getGlobalBounds().intersects(o->getGlobalBounds()))
             {
-                std::cout << "Nie można przejść gdyż napotkano obiekt: " << o->getName().toAnsiString() << std::endl;
+                error =  "Nie można przejść gdyż napotkano obiekt: " + o->getName().toAnsiString();
                 return false;
             }
         }
@@ -187,4 +188,13 @@ bool TaskManager::goTo(sf::Vector2f v)
     }
 
     return true;
+}
+
+void TaskManager::quit() {
+    game->window.close();
+    exit(0);
+}
+
+sf::String TaskManager::getError() {
+    return error;
 }
