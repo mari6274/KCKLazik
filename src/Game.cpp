@@ -35,15 +35,17 @@ void Game::start()
     window.setFramerateLimit(60);
 
     srand(time(NULL));
-    generateRandPosObjects(crater, 3, craters);
+    generateRandPosObjects(crater, 3, craters, "Krater");
     for (Object * o : craters)
     {
         o->setScale((rand()%10+5)/10.f, (rand()%10+5)/10.f);
 //        o->setRotation(rand()%360);
     }
+    generateRandPosObjects(rock1, 5, rocks, "Skała");
+    generateRandPosObjects(rock2, 5, rocks, "Skała");
 
     //vector of colliders
-
+    colliders.push_back(&rocks);
     //vector of noncolliders
     noncolliders.push_back(&craters);
 
@@ -68,9 +70,19 @@ void Game::start()
 
         window.setView(view);
         window.draw(sMap);
-        for (Object * t : craters)
+        for (std::vector<Object*> * vec : noncolliders)
         {
-            window.draw(*t);
+            for (Object * t : *vec)
+            {
+                window.draw(*t);
+            }
+        }
+        for (std::vector<Object*> * vec : colliders)
+        {
+            for (Object * t : *vec)
+            {
+                window.draw(*t);
+            }
         }
 
         window.draw(miniMapRect);
@@ -79,10 +91,21 @@ void Game::start()
 
         window.setView(miniMap);
         window.draw(sMap);
-        for (Object * t : craters)
+        for (std::vector<Object*> * vec : noncolliders)
         {
-            window.draw(*t);
+            for (Object * t : *vec)
+            {
+                window.draw(*t);
+            }
         }
+        for (std::vector<Object*> * vec : colliders)
+        {
+            for (Object * t : *vec)
+            {
+                window.draw(*t);
+            }
+        }
+
 
         window.draw(rover);
 
@@ -105,13 +128,21 @@ void Game::loadTextures()
     {
         exit(0);
     }
+    if (!rock1.loadFromFile("img/rock1.png"))
+    {
+        exit(0);
+    }
+    if (!rock2.loadFromFile("img/rock2.png"))
+    {
+        exit(0);
+    }
 }
 
-void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Object*> & v)
+void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Object*> & v, sf::String name)
 {
     for (int i = 0; i<n; ++i)
     {
-        Object * o = new Object(texture, "krater");
+        Object * o = new Object(texture, name);
         o->setOrigin(o->getGlobalBounds().width/2, o->getGlobalBounds().height/2);
         o->setPosition(rand()%3000, rand()%2000);
         v.push_back(o);

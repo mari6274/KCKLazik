@@ -24,6 +24,8 @@ class Game
         //textures
         sf::Texture tMap;
         sf::Texture crater;
+        sf::Texture rock1;
+        sf::Texture rock2;
         sf::Texture tRover;
 
         sf::RenderWindow window;
@@ -36,11 +38,12 @@ class Game
         std::vector<std::vector<Object*>*> noncolliders;
         sf::Sprite rover;
         std::vector<Object*> craters;
+        std::vector<Object*> rocks;
 
         sf::Event event;
 
         void loadTextures();
-        void generateRandPosObjects(sf::Texture &, int, std::vector<Object*> &);
+        void generateRandPosObjects(sf::Texture &, int, std::vector<Object*> &, sf::String);
 };
 
 class TaskManager {
