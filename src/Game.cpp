@@ -152,6 +152,12 @@ sf::Vector2f TaskManager::getCoordinates() {
 
 bool TaskManager::goTo(sf::Vector2f v)
 {
+    if (!game->sMap.getGlobalBounds().contains(v)) {
+        error = "Podana pozycja jest poza obszarem eksploracji";
+        return false;
+    }
+
+
     sf::Sprite rov = game->rover;
 
     while (v != rov.getPosition())
@@ -167,16 +173,22 @@ bool TaskManager::goTo(sf::Vector2f v)
         p3.y -= 1;
         sf::Vector2f p4 = rov.getPosition();
         p4.y += 1;
+        sf::Vector2f p13(p1.x, p3.y);
+        sf::Vector2f p14(p1.x, p4.y);
+        sf::Vector2f p23(p2.x, p3.y);
+        sf::Vector2f p24(p2.x, p4.y);
 
-        float distp1 = Helper::distance(v, p1);
-        float distp2 = Helper::distance(v, p2);
-        float distp3 = Helper::distance(v, p3);
-        float distp4 = Helper::distance(v, p4);
+        std::vector<sf::Vector2f *> p;
+        p.push_back(&p1);
+        p.push_back(&p2);
+        p.push_back(&p3);
+        p.push_back(&p4);
+        p.push_back(&p13);
+        p.push_back(&p14);
+        p.push_back(&p23);
+        p.push_back(&p24);
 
-        if (distp1 <= distp2 && distp1 <= distp3 && distp1 <= distp4) { rov.setPosition(p1); }
-            else if (distp2 <= distp1 && distp2 <= distp3 && distp2 <= distp4) rov.setPosition(p2);
-                else if (distp3 <= distp1 && distp3 <= distp2 && distp3 <= distp4) rov.setPosition(p3);
-                    else rov.setPosition(p4);
+        rov.setPosition(*Helper::minimum(p, v));
 
         for (std::vector<Object*> * vect : game->colliders)
         {
@@ -240,4 +252,9 @@ Object * TaskManager::getLocalObject()
     }
 
     return NULL;
+}
+
+bool TaskManager::goToAuto(sf::Vector2f v)
+{
+    //
 }

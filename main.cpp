@@ -24,9 +24,12 @@ void interpreter(TaskManager * tm) {
         std::cout << " >>> ";
         getline(std::cin, command);
 
-        if (command == "idź 10 w lewo") if (!tm->move(-10, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "idź do 0 0") tm->goCoordinates(-10, -10);
-        if (command == "rozłącz") tm->quit();
+        if (command == "idz 10 w lewo") if (!tm->move(-10, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
+        if (command == "idz 10 w prawo") if (!tm->move(10, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
+        if (command == "idz 10 w gore") if (!tm->move(0, -10)) std::cout << tm->getError().toAnsiString() << std::endl;
+        if (command == "idz 10 w dol") if (!tm->move(0, 10)) std::cout << tm->getError().toAnsiString() << std::endl;
+        if (command == "idz do 0 0") if (!tm->goCoordinates(0, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
+        if (command == "rozlacz") tm->quit();
         //...
     }
 }

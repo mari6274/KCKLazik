@@ -11,19 +11,43 @@ float Helper::distance(sf::Vector2f a, sf::Vector2f b)
     return distance;
 }
 
-float Helper::minimum(std::vector<Object*> & v, sf::Vector2f pozycja)
+Object * Helper::minimum(std::vector<Object*> & v, sf::Vector2f pozycja)
 {
 
     int minimum=20000;
+    Object * minObj;
     for(int i=0; i<v.size(); i++)
     {
         Object * o=v.at(i);
         float dist = Helper::distance(pozycja,o->getPosition());
         if (dist < minimum)
+        {
             minimum=dist;
+            minObj = o;
+        }
         //std::cout<< dist <<std::endl;
     }
-    return minimum;
+    return minObj;
+
+}
+
+sf::Vector2f * Helper::minimum(std::vector<sf::Vector2f*> & v, sf::Vector2f pozycja)
+{
+
+    int minimum=20000;
+    sf::Vector2f * minV2f;
+    for(int i=0; i<v.size(); i++)
+    {
+        sf::Vector2f * v2f=v.at(i);
+        float dist = Helper::distance(pozycja,*v2f);
+        if (dist < minimum)
+        {
+            minimum=dist;
+            minV2f = v2f;
+        }
+        //std::cout<< dist <<std::endl;
+    }
+    return minV2f;
 
 }
 

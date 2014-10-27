@@ -11,7 +11,8 @@ class Helper
         static sf::Vector2f getCenterOfRect(const sf::FloatRect &rect);
         static bool containsRect(const sf::FloatRect &rect1, const sf::FloatRect &rect2);
         static float distance(sf::Vector2f a, sf::Vector2f b);
-        static float minimum(std::vector<Object*> & v, sf::Vector2f pozycja);
+        static Object * minimum(std::vector<Object*> & v, sf::Vector2f pozycja);
+        static sf::Vector2f * minimum(std::vector<sf::Vector2f*> & v, sf::Vector2f pozycja);
     protected:
     private:
 };

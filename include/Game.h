@@ -58,6 +58,7 @@ class TaskManager {
     private:
         Game * game;
         bool goTo(sf::Vector2f v);
+        bool goToAuto(sf::Vector2f v);
         sf::String error;
 };
 
