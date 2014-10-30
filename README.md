@@ -34,7 +34,6 @@ http://www.sfml-dev.org
 * przesuń się \<o ile\> i obróć się w\<kierunek\>, a następnie idź do \<koordynaty\>/\<miejsca\> oraz sfotografuj okoliczne obiekty
 
 **Przykład dialogu z agentem**
->
 \>\>\> Przesuń się o 100 w lewo
 Po drodze napotkano przeszkodę: skała. Wykonać analizę?
 \>\>\> Tak
