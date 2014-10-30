@@ -34,13 +34,14 @@ http://www.sfml-dev.org
 * przesuń się \<o ile\> i obróć się w\<kierunek\>, a następnie idź do \<koordynaty\>/\<miejsca\> oraz sfotografuj okoliczne obiekty
 
 **Przykład dialogu z agentem**
-\>\>\> Przesuń się o 100 w lewo
-Po drodze napotkano przeszkodę: skała. Wykonać analizę?
-\>\>\> Tak
-Skała wulkaniczna, wielkość: 30x20, temperatura : -10
-Wyszukać dalszą trasę automatycznie?
-\>\>\> Nie
-\>\>\> Podaj współrzędne
-x = 1578 y = 2421
-\>\>\> znajdź trasę do (200, 120) i idź
+>
+\>\>\> Przesuń się o 100 w lewo  
+Po drodze napotkano przeszkodę: skała. Wykonać analizę?  
+\>\>\> Tak  
+Skała wulkaniczna, wielkość: 30x20, temperatura : -10  
+Wyszukać dalszą trasę automatycznie?  
+\>\>\> Nie  
+\>\>\> Podaj współrzędne  
+x = 1578 y = 2421  
+\>\>\> znajdź trasę do (200, 120) i idź  
 Cel osiągnięty
