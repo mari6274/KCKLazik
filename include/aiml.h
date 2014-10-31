@@ -1,31 +1,32 @@
-#include "Game.h"
-#include <SFML/System.hpp>
-#include <iostream>
-#include <cstdio>
+#ifndef
 #include<fstream>
+
+#include<iostream>
 #include <vector>
 #include<map>
 #define DEBUG false
 
-void interpreter(TaskManager *);
+// trim from start
+
 inline std::string trim(std::string& str)
 {
     str.erase(0, str.find_first_not_of(' '));       //prefixing spaces
     str.erase(str.find_last_not_of(' ')+1);         //surfixing spaces
     return str;
 }
-using namespace std;
+//using namespace std;
 
 struct category
 {
-    string pattern1;
-    string template1;
+    std::string pattern1;
+    std::string template1;
 
 };
 
-string JakiPoziom(string tekst)
+
+std::string JakiPoziom(std::string tekst)
 {
-    string    poziom="";
+    std::string    poziom="";
     if (tekst[0]=='<')
     {
         tekst.erase(0,1);
@@ -55,7 +56,7 @@ string JakiPoziom(string tekst)
 }
 
 
-string PomiedzyTagami(string tekst,string poziom)
+std::string PomiedzyTagami(std::string tekst,std::string poziom)
 {
 //   bool zm=true;
 //    if (tekst[0]!='<')
@@ -70,7 +71,7 @@ string PomiedzyTagami(string tekst,string poziom)
 //
 //    }
 
-    string slowo="";
+    std::string slowo="";
     if(tekst.find("<"+poziom+">")==0 )
     {
         tekst.erase(0,poziom.size()+2);
@@ -84,22 +85,22 @@ string PomiedzyTagami(string tekst,string poziom)
 
 
 }
-string pobierzxml()
+std::string pobierzxml()
 {
     fstream plik;
-    string tekst="";
+    std::string tekst="";
 
 
     plik.open( "aiml.xml", ios::in );
     if( plik.good() )
     {
-        string napis;
+        std::string napis;
         getline( plik, napis );
 
         while( !plik.eof() )
         {
             getline( plik, napis );
-     if(DEBUG)       cout<<napis<<endl;
+     if(DEBUG)       std::cout<<napis<<endl;
             trim(napis);
 
 //            if(napis=="<aiml>" ||  napis=="</aiml>");
@@ -114,7 +115,7 @@ string pobierzxml()
 //            {
 //
 //
-//                cout<<napis.size()<<" "<<napis.find("</category>");
+//                std::cout<<napis.size()<<" "<<napis.find("</category>");
 //                cout << napis << endl;
 //            }
             tekst=tekst+napis;
@@ -123,7 +124,7 @@ string pobierzxml()
         plik.close();
     }
     else cout << "Error! Nie udalo otworzyc sie pliku!" << endl;
-    // cout<<JakiPoziom(tekst);
+    // std::cout<<JakiPoziom(tekst);
 
 
     return tekst;
@@ -135,18 +136,18 @@ string pobierzxml()
 vector<category> wstawxml()
 {
 
-    string tekst=pobierzxml();
-    //  cout<<tekst<<endl;
+    std::string tekst=pobierzxml();
+    //  std::cout<<tekst<<endl;
     vector<category> kategorie;
     category kategoria;
 
-    string kat="";
+    std::string kat="";
     int dlugosc=0;
     for(int i=0; i<100; i++)
     {
         if(tekst.size()==0)break;
 
-        // cout<<PomiedzyTagami(tekst,"category")<<endl<<endl;
+        // std::cout<<PomiedzyTagami(tekst,"category")<<endl<<endl;
 
         if(JakiPoziom(tekst)=="aiml")
             tekst=PomiedzyTagami(tekst,JakiPoziom(tekst));
@@ -154,7 +155,7 @@ vector<category> wstawxml()
         {
             kat=tekst;
             tekst=PomiedzyTagami(tekst,JakiPoziom(tekst));
-//           cout<<endl<<tekst<<endl;
+//           std::cout<<endl<<tekst<<endl;
             dlugosc=(tekst.size()+JakiPoziom("category").size()*2+5+16);//niewiem czemu +16 ale musi tak byc
 
         }
@@ -174,11 +175,11 @@ vector<category> wstawxml()
             kategoria.template1=PomiedzyTagami(tekst,"template");
             tekst.erase(0,PomiedzyTagami(tekst,"template").size()+JakiPoziom(tekst).size()*2+5);
 
-//cout<<endl<<"usuwam"<<dlugosc<<kat;
+//std::cout<<endl<<"usuwam"<<dlugosc<<kat;
             kat.erase(0,dlugosc);
 
 
-            //          cout<<endl<<endl<<"usunienty"<<kat<<endl<<endl;
+            //          std::cout<<endl<<endl<<"usunienty"<<kat<<endl<<endl;
             tekst=kat;
             // kategorie.push_back(kategoria);
         }
@@ -187,17 +188,17 @@ vector<category> wstawxml()
 
     return kategorie;
 }
-string znajdowanie(string a)
+std::string znajdowanie(std::string a)
 {
      vector<category> kategorie;
 
-    map<string, string> znajdz;
+    map<std::string, std::string> znajdz;
     kategorie=wstawxml();
 
     for(int i=0; i<kategorie.size(); i++)
     {
-     if(DEBUG)   cout<<kategorie.at(i).pattern1<<endl;
-       if(DEBUG)   cout<<kategorie.at(i).template1<<endl<<endl;
+     if(DEBUG)   std::cout<<kategorie.at(i).pattern1<<std::endl;
+       if(DEBUG)   std::cout<<kategorie.at(i).template1<<std::endl<<std::endl;
         if(JakiPoziom(kategorie.at(i).template1)=="srai")  znajdz[kategorie.at(i).pattern1] =znajdz[ PomiedzyTagami(kategorie.at(i).template1,"srai")];
         else
             znajdz[kategorie.at(i).pattern1]=kategorie.at(i).template1;
@@ -212,33 +213,3 @@ else return znajdz[a];
 }
 
 
-using namespace std;
-int main()
-{
-    Game g;
-    sf::Thread thread(&Game::start, &g);
-    thread.launch();
-
-    TaskManager * tm = g.getTaskManager();
-
-    sf::Thread thread2(&interpreter, tm);
-    thread2.launch();
-}
-
-void interpreter(TaskManager * tm) {
-    std::string command;
-    while (true)
-    {
-        std::cout << " >>> ";
-        getline(std::cin, command);
-        cout<<znajdowanie(command);
-
-        if (command == "idz 10 w lewo") if (!tm->move(-10, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "idz 10 w prawo") if (!tm->move(10, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "idz 10 w gore") if (!tm->move(0, -10)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "idz 10 w dol") if (!tm->move(0, 10)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "idz do 0 0") if (!tm->goCoordinates(0, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "rozlacz") tm->quit();
-        //...
-    }
-}
