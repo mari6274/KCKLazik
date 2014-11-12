@@ -18,8 +18,8 @@ void Game::start()
     window.create(sf::VideoMode(WINDOWX+200, WINDOWY), "sfmlview");
 
     rover.setTexture(tRover);
+    rover.setPosition(1525,1025);
     rover.setOrigin(rover.getGlobalBounds().width/2, rover.getGlobalBounds().height/2);
-    rover.setPosition(1500,1000);
 
     view.setSize(WINDOWX, WINDOWY);
     view.setCenter(rover.getPosition());
@@ -36,11 +36,11 @@ void Game::start()
 
     srand(time(NULL));
     generateRandPosObjects(crater, 3, craters, "Krater");
-    for (Object * o : craters)
-    {
-        o->setScale((rand()%10+5)/10.f, (rand()%10+5)/10.f);
+//    for (Object * o : craters)
+//    {
+//        o->setScale((rand()%10+5)/10.f, (rand()%10+5)/10.f);
 //        o->setRotation(rand()%360);
-    }
+//    }
     generateRandPosObjects(rock1, 5, rocks, "Skała");
     generateRandPosObjects(rock2, 5, rocks, "Skała");
 
@@ -143,8 +143,12 @@ void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Obje
     for (int i = 0; i<n; ++i)
     {
         Object * o = new Object(texture, name);
+        int width = (int)(o->getGlobalBounds().width/50);
+        int height = (int)(o->getGlobalBounds().height/50);
+        o->setPosition(((rand()%(60-width))+width/2)*50, ((rand()%(40-height))+height/2)*50);
+        std::cout<< o->getPosition().x << " " << o->getPosition().y << std::endl;
         o->setOrigin(o->getGlobalBounds().width/2, o->getGlobalBounds().height/2);
-        o->setPosition(rand()%3000, rand()%2000);
+
         v.push_back(o);
     }
 }
@@ -162,8 +166,8 @@ TaskManager::TaskManager(Game * game)
 bool TaskManager::move(int x, int y)
 {
     sf::Vector2f v = game->rover.getPosition();
-    v.y += y;
-    v.x += x;
+    v.y += y*50;
+    v.x += x*50;
 
     if (goTo(v)) return true;
         else return false;
@@ -171,8 +175,8 @@ bool TaskManager::move(int x, int y)
 
 bool TaskManager::goCoordinates(int x, int y) {
     sf::Vector2f v;
-    v.x = x;
-    v.y = y;
+    v.x = (x%50)+25;
+    v.y = (y%50)+25;
     if (goTo(v)) return true;
         else return false;
 }
@@ -193,17 +197,17 @@ bool TaskManager::goTo(sf::Vector2f v)
 
     while (v != rov.getPosition())
     {
-        sf::sleep(sf::milliseconds(5));
+        sf::sleep(sf::milliseconds(50));
         rov = game->rover;
 
         sf::Vector2f p1 = rov.getPosition();
-        p1.x -= 1;
+        p1.x -= 50;
         sf::Vector2f p2 = rov.getPosition();
-        p2.x += 1;
+        p2.x += 50;
         sf::Vector2f p3 = rov.getPosition();
-        p3.y -= 1;
+        p3.y -= 50;
         sf::Vector2f p4 = rov.getPosition();
-        p4.y += 1;
+        p4.y += 50;
         sf::Vector2f p13(p1.x, p3.y);
         sf::Vector2f p14(p1.x, p4.y);
         sf::Vector2f p23(p2.x, p3.y);
