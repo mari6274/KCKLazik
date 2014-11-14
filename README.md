@@ -20,7 +20,7 @@ http://www.sfml-dev.org
 * idź po prostej do \<koordynaty\>/\<miejsca\>
 * przesuń się \<o ile\>
 * opisz otoczenie (wypisanie okolicznych obiektów)
-* wykonaj analize \<nazwa pobranego obiektu\>
+* analizuj próbkę \<nazwa pobranego obiektu\>
 * sfotografuj
 * obróć się w\<kierunek\>
 * przeslij \<dane obiektu\>
