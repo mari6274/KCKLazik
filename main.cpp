@@ -5,7 +5,9 @@
 #include<fstream>
 #include <vector>
 #include<map>
-#define DEBUG false
+#include"Interpreter.h"
+#define DEBUG true
+
 
 void interpreter(TaskManager *);
 inline std::string trim(std::string& str)
@@ -120,6 +122,7 @@ string pobierzxml()
             tekst=tekst+napis;
 
         }
+
         plik.close();
     }
     else cout << "Error! Nie udalo otworzyc sie pliku!" << endl;
@@ -215,6 +218,11 @@ else return znajdz[a];
 using namespace std;
 int main()
 {
+    Interpreter i;
+    i.imterpretuj();
+
+
+
     Game g;
     sf::Thread thread(&Game::start, &g);
     thread.launch();
