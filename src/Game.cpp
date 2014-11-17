@@ -46,8 +46,9 @@ void Game::start()
 
     //vector of colliders
     colliders.push_back(&rocks);
+    colliders.push_back(&craters);
     //vector of noncolliders
-    noncolliders.push_back(&craters);
+
 
     while (window.isOpen())
     {
@@ -178,12 +179,11 @@ bool TaskManager::goCoordinates(int x, int y, bool automatic) {
     v.y = (y%50)+25;
     if (automatic)
     {
-        goToAuto(v);
+        return goToAuto(v);
     }
     else
     {
-        if (goTo(v)) return true;
-            else return false;
+        return (goTo(v));
     }
 
 }
@@ -299,11 +299,21 @@ Object * TaskManager::getLocalObject()
 bool TaskManager::goToAuto(sf::Vector2f v)
 {
     std::vector<AStarVector2f*> path = AStar(v);
-    for (auto it = path.end()-2; it!=path.begin()-1; --it)
+    if (!path.empty())
     {
-        sf::sleep(sf::milliseconds(500));
-        game->rover.setPosition(*(*it));
-        game->view.setCenter(*(*it));
+        for (auto it = path.end()-2; it!=path.begin()-1; --it)
+        {
+            sf::sleep(sf::milliseconds(500));
+            game->rover.setPosition(*(*it));
+            game->view.setCenter(*(*it));
+        }
+        for (AStarVector2f * a : path)
+        {
+            delete a;
+        }
+    }
+    else {
+        error = "Nie można znaleźć trasy.";
     }
 }
 
@@ -432,6 +442,8 @@ std::vector<AStarVector2f*> TaskManager::AStar(sf::Vector2f target)
                 delete a;
             }
         }
-        std::cout << q->x << " " << q->y << "\t" << q->parent->x << " " << q->parent->y << std::endl;
+        //std::cout << q->x << " " << q->y << "\t" << q->parent->x << " " << q->parent->y << std::endl;
     }
+    std::vector<AStarVector2f*> path;
+    return path;
 }
