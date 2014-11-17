@@ -221,23 +221,26 @@ int main()
 
     TaskManager * tm = g.getTaskManager();
 
+    sf::sleep(sf::milliseconds(5000));
     sf::Thread thread2(&interpreter, tm);
     thread2.launch();
 }
 
 void interpreter(TaskManager * tm) {
     std::string command;
+    tm->goCoordinates(0, 0, true);
     while (true)
     {
         std::cout << " >>> ";
         getline(std::cin, command);
-        cout<<znajdowanie(command);
+        //cout<<znajdowanie(command);
 
         if (command == "idz 10 w lewo") if (!tm->move(-10, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
         if (command == "idz 10 w prawo") if (!tm->move(10, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
         if (command == "idz 10 w gore") if (!tm->move(0, -10)) std::cout << tm->getError().toAnsiString() << std::endl;
         if (command == "idz 10 w dol") if (!tm->move(0, 10)) std::cout << tm->getError().toAnsiString() << std::endl;
         if (command == "idz do 0 0") if (!tm->goCoordinates(0, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
+        if (command == "auto 0 0") tm->goCoordinates(0, 0, true);
         if (command == "rozlacz") tm->quit();
         //...
     }

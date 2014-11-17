@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Object.h"
 #include <vector>
+#include <AStarVector2f.h>
 
 class TaskManager;
 
@@ -53,7 +54,7 @@ class TaskManager {
         void quit();
         bool move(int x, int y);
         bool rotate(int angle);
-        bool goCoordinates(int x, int y);
+        bool goCoordinates(int x, int y, bool automatic = false);
 
         sf::Vector2f getCoordinates();
         Object * getLocalObject();
@@ -62,6 +63,10 @@ class TaskManager {
         Game * game;
         bool goTo(sf::Vector2f v);
         bool goToAuto(sf::Vector2f v);
+        float calcF(AStarVector2f * a, sf::Vector2f target);
+        std::vector<AStarVector2f*> generatePath(AStarVector2f * a);
+        bool checkCollisions(sf::Vector2f v);
+        std::vector<AStarVector2f*> AStar(sf::Vector2f target);
         sf::String error;
 };
 

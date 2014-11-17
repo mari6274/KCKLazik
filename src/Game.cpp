@@ -146,8 +146,7 @@ void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Obje
         int width = (int)(o->getGlobalBounds().width/50);
         int height = (int)(o->getGlobalBounds().height/50);
         o->setPosition(((rand()%(60-width))+width/2)*50, ((rand()%(40-height))+height/2)*50);
-        std::cout<< o->getPosition().x << " " << o->getPosition().y << std::endl;
-        o->setOrigin(o->getGlobalBounds().width/2, o->getGlobalBounds().height/2);
+        //o->setOrigin(o->getGlobalBounds().width/2, o->getGlobalBounds().height/2);
 
         v.push_back(o);
     }
@@ -173,12 +172,20 @@ bool TaskManager::move(int x, int y)
         else return false;
 }
 
-bool TaskManager::goCoordinates(int x, int y) {
+bool TaskManager::goCoordinates(int x, int y, bool automatic) {
     sf::Vector2f v;
     v.x = (x%50)+25;
     v.y = (y%50)+25;
-    if (goTo(v)) return true;
-        else return false;
+    if (automatic)
+    {
+        goToAuto(v);
+    }
+    else
+    {
+        if (goTo(v)) return true;
+            else return false;
+    }
+
 }
 
 sf::Vector2f TaskManager::getCoordinates() {
@@ -291,5 +298,140 @@ Object * TaskManager::getLocalObject()
 
 bool TaskManager::goToAuto(sf::Vector2f v)
 {
-    //
+    std::vector<AStarVector2f*> path = AStar(v);
+    for (auto it = path.end()-2; it!=path.begin()-1; --it)
+    {
+        sf::sleep(sf::milliseconds(500));
+        game->rover.setPosition(*(*it));
+        game->view.setCenter(*(*it));
+    }
+}
+
+float TaskManager::calcF(AStarVector2f * a, sf::Vector2f target)
+{
+    return a->g+Helper::distance(*a, target);
+}
+
+std::vector<AStarVector2f*> TaskManager::generatePath(AStarVector2f* a)
+{
+    AStarVector2f debug = *a;
+    std::vector<AStarVector2f*> path;
+    sf::Vector2f start = game->rover.getPosition();
+    while (start != *(a->parent))
+    {
+        debug = *a;
+        path.push_back(a);
+        a = a->parent;
+    }
+    return path;
+}
+
+bool TaskManager::checkCollisions(sf::Vector2f v)
+{
+    for (std::vector<Object*>* objs : game->colliders)
+    {
+        for (Object * o : *objs)
+        {
+            if (o->getGlobalBounds().contains(v)) return true;
+        }
+    }
+    return false;
+}
+
+std::vector<AStarVector2f*> TaskManager::AStar(sf::Vector2f target)
+{
+    std::vector<AStarVector2f*> CL;
+    std::vector<AStarVector2f*> OL;
+
+    sf::Vector2f rov = game->rover.getPosition();
+
+    AStarVector2f * start = new AStarVector2f(rov.x, rov.y);
+    start->parent = start;
+    OL.push_back(start);
+
+    while (!OL.empty())
+    {
+
+        AStarVector2f * q = OL.front();
+        auto qit = OL.begin();
+        for (auto it = OL.begin(); it != OL.end(); ++it)
+        {
+            if (calcF(*it, target) < calcF(q, target))
+            {
+                q = *it;
+                qit = it;
+            }
+        }
+        CL.push_back(q);
+        OL.erase(qit);
+
+        if (*q == target)
+        {
+
+            std::vector<AStarVector2f*> path= generatePath(q);
+            return path;
+        }
+
+        //sąsiedzi
+        AStarVector2f * u = new AStarVector2f(q->x, q->y-50);
+        AStarVector2f * r = new AStarVector2f(q->x+50, q->y);
+        AStarVector2f * d = new AStarVector2f(q->x, q->y+50);
+        AStarVector2f * l = new AStarVector2f(q->x-50, q->y);
+        AStarVector2f * ur = new AStarVector2f(q->x+50, q->y-50);
+        AStarVector2f * dr = new AStarVector2f(q->x+50, q->y+50);
+        AStarVector2f * dl = new AStarVector2f(q->x-50, q->y+50);
+        AStarVector2f * ul = new AStarVector2f(q->x-50, q->y-50);
+
+        std::vector<AStarVector2f*> neights;
+        neights.push_back(u);
+        neights.push_back(r);
+        neights.push_back(d);
+        neights.push_back(l);
+        neights.push_back(ur);
+        neights.push_back(dr);
+        neights.push_back(dl);
+        neights.push_back(ul);
+
+        for (AStarVector2f * a : neights)
+        {
+            bool onCL = false;
+            for (AStarVector2f * b : CL)
+            {
+                if (*b == *a) {
+                    onCL = true;
+                    break;
+                }
+            }
+
+            bool onOL = false;
+            auto itOl = OL.begin();
+            for (auto it = OL.begin(); it != OL.end(); ++it)
+            {
+                if ((*(*it)) == *a) {
+                    onOL = true;
+                    itOl = it;
+                    break;
+                }
+            }
+
+            if (checkCollisions(*a) || onCL) {}
+            else if (!onOL)
+            {
+                a->parent = q;
+                a->g = Helper::distance(*a, *q)+q->g;
+                OL.push_back(a);
+            }
+            else
+            {
+                float nowaG = Helper::distance(*a, *q)+q->g;
+                if (nowaG < (*itOl)->g)
+                {
+                    (*itOl)->parent = q;
+                    (*itOl)->g = nowaG;
+                }
+                delete a;
+            }
+        }
+        std::cout << q->x << " " << q->y << "\t" << q->parent->x << " " << q->parent->y << std::endl;
+    }
 }
