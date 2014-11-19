@@ -219,7 +219,7 @@ using namespace std;
 int main()
 {
     Interpreter i;
-    i.imterpretuj();
+    i.interpretuj();
 
 
 

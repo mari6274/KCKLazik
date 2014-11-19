@@ -53,7 +53,7 @@ class TaskManager {
 
         void quit();
         bool move(int x, int y);
-        bool rotate(int angle);
+        void rotate(int angle);
         bool goCoordinates(int x, int y, bool automatic = false);
 
         sf::Vector2f getCoordinates();

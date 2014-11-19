@@ -10,7 +10,7 @@ Interpreter::~Interpreter()
     //dtor
 }
 
-void Interpreter::imterpretuj()
+void Interpreter::interpretuj()
 {
     InterpMorf *nazwa;
     nazwa=morfeusz_analyse("Mam tak samo jak ty");

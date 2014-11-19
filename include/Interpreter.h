@@ -6,7 +6,7 @@ class Interpreter
 {
     public:
         Interpreter();
-    void imterpretuj();
+    void interpretuj();
 
 
         virtual ~Interpreter();

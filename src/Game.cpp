@@ -204,7 +204,7 @@ bool TaskManager::goTo(sf::Vector2f v)
 
     while (v != rov.getPosition())
     {
-        sf::sleep(sf::milliseconds(50));
+        sf::sleep(sf::milliseconds(100));
         rov = game->rover;
 
         sf::Vector2f p1 = rov.getPosition();
@@ -245,7 +245,7 @@ bool TaskManager::goTo(sf::Vector2f v)
         }
 
         game->rover.setPosition(rov.getPosition());
-        if (!Helper::containsRect(Helper::getViewBounds(game->view), game->rover.getGlobalBounds())) game->view.setCenter(game->rover.getPosition());
+        game->view.setCenter(rov.getPosition());
     }
 
     return true;
@@ -260,27 +260,9 @@ sf::String TaskManager::getError() {
     return error;
 }
 
-bool TaskManager::rotate(int angle)
+void TaskManager::rotate(int angle)
 {
-    sf::Sprite rov = game->rover;
-
-    rov.setRotation(angle);
-
-    for (std::vector<Object*> * vect : game->colliders)
-    {
-        for (Object * o : *vect)
-        {
-            if (rov.getGlobalBounds().intersects(o->getGlobalBounds()))
-            {
-                error =  "Nie można się obrócić gdyż napotkano obiekt: " + o->getName().toAnsiString();
-                return false;
-            }
-        }
-    }
-
-    game->rover.setRotation(rov.getRotation());
-
-    return true;
+    game->rover.setRotation(angle);
 }
 
 Object * TaskManager::getLocalObject()
@@ -303,7 +285,7 @@ bool TaskManager::goToAuto(sf::Vector2f v)
     {
         for (auto it = path.end()-2; it!=path.begin()-1; --it)
         {
-            sf::sleep(sf::milliseconds(500));
+            sf::sleep(sf::milliseconds(100));
             game->rover.setPosition(*(*it));
             game->view.setCenter(*(*it));
         }
