@@ -91,3 +91,15 @@ bool Helper::containsRect(const sf::FloatRect& rect1, const sf::FloatRect& rect2
         return false;
     }
 }
+
+bool Helper::checkCollisions(sf::Vector2f v, const std::vector<std::vector<Object* >* > & colliders)
+{
+    for (std::vector<Object*>* objs : colliders)
+    {
+        for (Object * o : *objs)
+        {
+            if (o->getGlobalBounds().contains(v)) return true;
+        }
+    }
+    return false;
+}

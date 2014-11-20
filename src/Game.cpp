@@ -146,7 +146,11 @@ void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Obje
         Object * o = new Object(texture, name);
         int width = (int)(o->getGlobalBounds().width/50);
         int height = (int)(o->getGlobalBounds().height/50);
-        o->setPosition(((rand()%(60-width))+width/2)*50, ((rand()%(40-height))+height/2)*50);
+        do
+        {
+            o->setPosition((rand()%(60-width))*50, (rand()%(40-height))*50);
+        } while (Helper::checkCollisions(o->getPosition(), colliders));
+
         //o->setOrigin(o->getGlobalBounds().width/2, o->getGlobalBounds().height/2);
 
         v.push_back(o);
