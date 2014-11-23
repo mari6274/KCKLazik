@@ -219,8 +219,8 @@ else return znajdz[a];
 using namespace std;
 int main()
 {
-    Interpreter i;
-    i.interpretuj();
+//    Interpreter i;
+//    i.interpretuj();
 
 
 
