@@ -14,6 +14,7 @@ class Helper
         static Object * minimum(std::vector<Object*> & v, sf::Vector2f pozycja);
         static sf::Vector2f * minimum(std::vector<sf::Vector2f*> & v, sf::Vector2f pozycja);
         static bool checkCollisions(sf::Vector2f v, const std::vector<std::vector<Object*>*> & colliders);
+        static sf::String stringZPlikuNaSfString(std::string s);
 
     protected:
     private:

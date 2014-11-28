@@ -103,3 +103,11 @@ bool Helper::checkCollisions(sf::Vector2f v, const std::vector<std::vector<Objec
     }
     return false;
 }
+
+sf::String Helper::stringZPlikuNaSfString(std::string s)
+{
+    std::basic_string < sf::Uint32 > tmp;
+    sf::Utf8::toUtf32( s.begin(), s.end(), std::back_inserter( tmp ) );
+    sf::String sfs = tmp;
+    return sfs;
+}
