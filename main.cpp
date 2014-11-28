@@ -222,9 +222,6 @@ int main()
 //    Interpreter i;
 //    i.interpretuj();
 
-
-
-
     Game g;
     sf::Thread thread(&Game::start, &g);
     thread.launch();

@@ -38,7 +38,7 @@ void Interpreter::interpretuj()
         InterpMorf *wyraz;
 
         wyraz=morfeusz_analyse(cstr);
-        std::cout << wyraz->forma << " " << wyraz->haslo << std::endl;
+        std::cout << wyraz->forma << " " << wyraz->haslo  << " " << wyraz->interp << std::endl;
     }
 
 
