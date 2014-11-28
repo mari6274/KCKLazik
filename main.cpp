@@ -5,12 +5,13 @@
 #include<fstream>
 #include <vector>
 #include<map>
+#include "Console.h"
 #include"Interpreter.h"
 #define DEBUG true
 #include "AIML.h"
 
 
-void interpreter(TaskManager *);
+void interpreter(Game *);
 inline std::string trim(std::string& str)
 {
     str.erase(0, str.find_first_not_of(' '));       //prefixing spaces
@@ -222,31 +223,51 @@ int main()
 //    Interpreter i;
 //    i.interpretuj();
 
+<<<<<<< HEAD
     Game g;
     sf::Thread thread(&Game::start, &g);
+=======
+    Game * g = new Game();
+    sf::Thread thread(&Game::start, g);
+
+>>>>>>> a29269638053dbc4ecbbfdb491c442a90f006075
     thread.launch();
 
-    TaskManager * tm = g.getTaskManager();
-
-    sf::Thread thread2(&interpreter, tm);
+    sf::Thread thread2(&interpreter, g);
     thread2.launch();
 }
 
-void interpreter(TaskManager * tm) {
-    std::string command;
+void interpreter(Game * g) {
+    sf::String command;
+    TaskManager * tm = g->getTaskManager();
+    Console * console = g->getConsole();
     while (true)
     {
-        std::cout << " >>> ";
-        getline(std::cin, command);
-        //cout<<znajdowanie(command);
+        std::vector<sf::String> commands;
+        commands.push_back(L"idź 10 w lewo");
+        commands.push_back(L"idź 10 w prawo");
+        commands.push_back(L"idź 10 w górę");
+        commands.push_back(L"idź 10 w dół");
+        commands.push_back(L"idź do 0 0");
+        commands.push_back(L"auto 0 0");
+        commands.push_back(L"rozłącz");
 
-        if (command == "idz 10 w lewo") if (!tm->move(-10, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "idz 10 w prawo") if (!tm->move(10, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "idz 10 w gore") if (!tm->move(0, -10)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "idz 10 w dol") if (!tm->move(0, 10)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "idz do 0 0") if (!tm->goCoordinates(0, 0)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "auto 0 0") if (!tm->goCoordinates(0, 0, true)) std::cout << tm->getError().toAnsiString() << std::endl;
-        if (command == "rozlacz") tm->quit();
+        command = tm->readCommand();
+
+        console->setOutput(znajdowanie(command));
+        if (command == commands[0]) if (!tm->move(-10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
+            console->setOutput(tm->getError());
+        if (command == commands[1]) if (!tm->move(10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
+            console->setOutput(tm->getError());
+        if (command == commands[2]) if (!tm->move(0, -10)) //std::cout << tm->getError().toAnsiString() << std::endl;
+            console->setOutput(tm->getError());
+        if (command == commands[3]) if (!tm->move(0, 10)) //std::cout << tm->getError().toAnsiString() << std::endl;
+            console->setOutput(tm->getError());
+        if (command == commands[4]) if (!tm->goCoordinates(0, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
+            console->setOutput(tm->getError());
+        if (command == commands[5]) if (!tm->goCoordinates(0, 0, true)) //std::cout << tm->getError().toAnsiString() << std::endl;
+            console->setOutput(tm->getError());
+        if (command == commands[6]) tm->quit();
         //...
     }
 }

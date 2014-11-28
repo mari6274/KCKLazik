@@ -1,11 +1,7 @@
-#include<fstream>
-#include<iostream>
-#include <vector>
-#include<map>
-#define DEBUG false
-
-// trim from start
-
+#include "AIML.h"
+AIML::AIML()
+{
+/*    void AIML(TaskManager *);
 inline std::string trim(std::string& str)
 {
     str.erase(0, str.find_first_not_of(' '));       //prefixing spaces
@@ -118,6 +114,7 @@ string pobierzxml()
             tekst=tekst+napis;
 
         }
+
         plik.close();
     }
     else cout << "Error! Nie udalo otworzyc sie pliku!" << endl;
@@ -207,6 +204,12 @@ string znajdowanie(string a)
 
 if(znajdz[a]=="") return ("nie rozpoznano komendy");
 else return znajdz[a];
+}*/
+
+
 }
 
-
+AIML::~AIML()
+{
+    //dtor
+}

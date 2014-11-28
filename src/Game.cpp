@@ -6,6 +6,8 @@
 Game::Game()
 {
     taskManager = new TaskManager(this);
+    console = new Console(&window);
+    command = "";
 }
 
 void Game::start()
@@ -21,9 +23,9 @@ void Game::start()
     rover.setPosition(1525,1025);
     rover.setOrigin(rover.getGlobalBounds().width/2, rover.getGlobalBounds().height/2);
 
-    view.setSize(WINDOWX, WINDOWY);
+    view.setSize(WINDOWX, WINDOWY-150);
     view.setCenter(rover.getPosition());
-    view.setViewport(sf::FloatRect(0, 0, 0.8f, 1));
+    view.setViewport(sf::FloatRect(0, 0, 0.8f, 0.75f));
     window.setView(view);
 
     miniMap.setSize(200,150);
@@ -35,23 +37,19 @@ void Game::start()
     window.setFramerateLimit(60);
 
     srand(time(NULL));
-    generateRandPosObjects(crater, 3, craters, "Krater");
-//    for (Object * o : craters)
-//    {
-//        o->setScale((rand()%10+5)/10.f, (rand()%10+5)/10.f);
-//        o->setRotation(rand()%360);
-//    }
-    generateRandPosObjects(rock1, 5, rocks, "Skała");
-    generateRandPosObjects(rock2, 5, rocks, "Skała");
+    generateRandPosObjects(crater, 6, craters, "Krater");
+    generateRandPosObjects(rock1, 20, rocks, L"Skała");
+    generateRandPosObjects(rock2, 20, rocks, L"Skała");
 
     //vector of colliders
     colliders.push_back(&rocks);
     colliders.push_back(&craters);
     //vector of noncolliders
 
-
     while (window.isOpen())
     {
+        enter = false;
+
         window.clear();
 
         while (window.pollEvent(event))
@@ -63,10 +61,25 @@ void Game::start()
                 exit(0);
             }
 
-//             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) taskManager->move(-100, 0);
-//             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) taskManager->move(100, 0);
-//             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) taskManager->move(0, -100);
-//             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) taskManager->move(0, 100);
+            if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return)
+            {
+                enter = true;
+            }
+
+            if (event.type == sf::Event::TextEntered)
+            {
+                if(event.text.unicode == 8)
+                {
+                    if (command.getSize() > 0) command.erase(command.getSize() -1, command.getSize());
+                }
+                else if (event.text.unicode != 13 && command.getSize() < 90)
+                {
+                    command=command+event.text.unicode;
+                }
+
+                console->setCommand(command);
+            }
+
         }
 
         window.setView(view);
@@ -110,6 +123,9 @@ void Game::start()
 
         window.draw(rover);
 
+        window.setView(window.getDefaultView());
+        //
+        console->draw();
         window.display();
     }
 
@@ -187,7 +203,7 @@ bool TaskManager::goCoordinates(int x, int y, bool automatic) {
     }
     else
     {
-        return (goTo(v));
+        return goTo(v);
     }
 
 }
@@ -242,7 +258,7 @@ bool TaskManager::goTo(sf::Vector2f v)
             {
                 if (rov.getGlobalBounds().intersects(o->getGlobalBounds()))
                 {
-                    error =  "Nie można przejść gdyż napotkano obiekt: " + o->getName().toAnsiString();
+                    error =  L"Nie można przejść gdyż napotkano obiekt: " + o->getName().toWideString();
                     return false;
                 }
             }
@@ -297,9 +313,11 @@ bool TaskManager::goToAuto(sf::Vector2f v)
         {
             delete a;
         }
+        return true;
     }
     else {
         error = "Nie można znaleźć trasy.";
+        return false;
     }
 }
 
@@ -368,7 +386,7 @@ std::vector<AStarVector2f*> TaskManager::AStar(sf::Vector2f target)
             return path;
         }
 
-        //sąsiedzi
+        //sĂ„â€¦siedzi
         AStarVector2f * u = new AStarVector2f(q->x, q->y-50);
         AStarVector2f * r = new AStarVector2f(q->x+50, q->y);
         AStarVector2f * d = new AStarVector2f(q->x, q->y+50);
@@ -432,4 +450,27 @@ std::vector<AStarVector2f*> TaskManager::AStar(sf::Vector2f target)
     }
     std::vector<AStarVector2f*> path;
     return path;
+}
+
+Console * Game::getConsole()
+{
+    return console;
+}
+
+sf::String TaskManager::readCommand()
+{
+
+    sf::Event event;
+    while (!game->enter || game->command=="")
+    {
+
+    }
+    game->enter = false;
+    sf::String temp = game->command;
+    //sf::sleep(sf::milliseconds(100));
+    game->console->setOutput(temp);
+    game->console->setCommand("");
+
+    game->command = "";
+    return temp;
 }

@@ -1,7 +1,7 @@
 #include "AIML.h"
 AIML::AIML()
 {
-/*    void interpreter(TaskManager *);
+/*    void AIML(TaskManager *);   //wczesniej interpreter
 inline std::string trim(std::string& str)
 {
     str.erase(0, str.find_first_not_of(' '));       //prefixing spaces

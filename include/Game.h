@@ -5,6 +5,7 @@
 #include "Object.h"
 #include <vector>
 #include <AStarVector2f.h>
+#include "Console.h"
 
 class TaskManager;
 
@@ -15,6 +16,7 @@ class Game
         Game();
         void start();
         TaskManager * getTaskManager();
+        Console * getConsole();
     protected:
     private:
         TaskManager * taskManager;
@@ -34,6 +36,7 @@ class Game
         sf::RectangleShape miniMapRect;
         sf::View view;
         sf::View miniMap;
+        Console * console;
 
         std::vector<std::vector<Object*>*> colliders;
         std::vector<std::vector<Object*>*> noncolliders;
@@ -45,6 +48,9 @@ class Game
 
         void loadTextures();
         void generateRandPosObjects(sf::Texture &, int, std::vector<Object*> &, sf::String);
+
+        sf::String command;
+        bool enter;
 };
 
 class TaskManager {
@@ -59,6 +65,8 @@ class TaskManager {
         sf::Vector2f getCoordinates();
         Object * getLocalObject();
         sf::String getError();
+
+        sf::String readCommand();
     private:
         Game * game;
         bool goTo(sf::Vector2f v);
