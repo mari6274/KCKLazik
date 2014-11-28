@@ -14,6 +14,10 @@ Z łazikiem komunikujemy się za pomocą komend wydawanych za pomocą klawiatury
 * SFML 2.1 - Biblioteka multimedialna (głównie do prezentacji grafiki)
 http://www.sfml-dev.org
 * AIML (???)
+* Morfeusz - Narzędzie do analizy morfologicznej
+
+**Algorytmy**
+* A* (AStar)
 
 **Polecenia:**
 * znajdź trasę do \<koordynaty\> i idź
