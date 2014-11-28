@@ -249,7 +249,7 @@ void interpreter(Game * g) {
 
         command = tm->readCommand();
 
-        //cout<<znajdowanie(command);
+        console->setOutput(znajdowanie(command));
         if (command == commands[0]) if (!tm->move(-10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
             console->setOutput(tm->getError());
         if (command == commands[1]) if (!tm->move(10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
