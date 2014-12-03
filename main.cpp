@@ -8,7 +8,7 @@
 #include "Console.h"
 #include"Interpreter.h"
 #define DEBUG true
-#include "AIML.h"
+#include "Aiml.h"
 
 
 void interpreter(Game *);
