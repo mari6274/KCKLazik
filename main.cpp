@@ -9,7 +9,7 @@
 #include"Interpreter.h"
 #define DEBUG true
 #include "Aiml.h"
-
+#include "Helper.h"
 
 void interpreter(Game *);
 inline std::string trim(std::string& str)
@@ -249,7 +249,7 @@ void interpreter(Game * g) {
 
         command = tm->readCommand();
 
-        console->setOutput(znajdowanie(command));
+        console->setOutput(Helper::stringZPlikuNaSfString(znajdowanie(command)));
         if (command == commands[0]) if (!tm->move(-10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
             console->setOutput(tm->getError());
         if (command == commands[1]) if (!tm->move(10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
