@@ -220,17 +220,12 @@ else return znajdz[a];
 using namespace std;
 int main()
 {
-//    Interpreter i;
-//    i.interpretuj();
+    Interpreter i;
+    i.interpretuj();
 
-<<<<<<< HEAD
-    Game g;
-    sf::Thread thread(&Game::start, &g);
-=======
     Game * g = new Game();
     sf::Thread thread(&Game::start, g);
 
->>>>>>> a29269638053dbc4ecbbfdb491c442a90f006075
     thread.launch();
 
     sf::Thread thread2(&interpreter, g);
