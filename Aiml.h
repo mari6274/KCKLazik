@@ -2,11 +2,11 @@
 #define AIML_H
 
 
-class Aiml
+class AIML
 {
     public:
-        Aiml();
-        virtual ~Aiml();
+        AIML();
+        virtual ~AIML();
     protected:
     private:
 };

@@ -23,18 +23,13 @@ std::vector<std::string> &split(const std::string &s, char delim, std::vector<st
     return elems;
 }
 
-char * znajdzslowo_klucz(char slowo[])
+char * znajdz_slowo_klucz(char slowo[])
 {
-    char * spr1="impt:sg:sec:imperf";
-    char * spr2="impt:sg:sec:perf";
-    char * word;
     InterpMorf *wyraz;
     wyraz=morfeusz_analyse(slowo);
-    word=(wyraz->interp);
-    char * klucz =(wyraz->haslo);
-    if ( strcmp(word,spr1)==0 || strcmp(word,spr2)==0)
+    if ( strcmp((wyraz->interp),"impt:sg:sec:imperf")==0 || strcmp((wyraz->interp),"impt:sg:sec:perf")==0)
     {
-        return klucz;
+        return (wyraz->haslo);
     }
     else
         return "null";
@@ -44,25 +39,19 @@ char * znajdzslowo_klucz(char slowo[])
 void Interpreter::interpretuj()
 {
     char * klucz;
-    char * Gklucz="null";
     std::string polecenie;
     std::cout << "wpisz polecenie: ";
     getline(std::cin, polecenie);
     std::vector<std::string> v;
     split(polecenie, ' ', v);
-
     for (std::string x : v)
     {
         char * cstr = new char[x.length()+1];
         strcpy(cstr, x.c_str());
         InterpMorf *wyraz;
         wyraz=morfeusz_analyse(cstr);
-        std::cout << wyraz->forma << " " << wyraz->haslo  << " " << wyraz->interp << std::endl;
-        klucz=znajdzslowo_klucz(cstr);
-        if (strcmp(klucz,"null")!=0)
-        {
-             Gklucz=klucz;
-        }
+        klucz=znajdz_slowo_klucz(cstr);
+        if ( strcmp("null",klucz)!=0)
+             std::cout << klucz << std::endl;
     }
-     std::cout << Gklucz;
 }
