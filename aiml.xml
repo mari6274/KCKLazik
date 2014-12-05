@@ -1,85 +1,65 @@
-<?xml version="1.0" encoding="UTF-8"?>
+ï»¿<?xml version="1.0" encoding="UTF-8"?>
 <aiml>
  <category>
-    <pattern>znajdŸ trasê do obiektu i idŸ</pattern>
-    <template>Program pyta siê czy isc automatycznie i idzie</template>
+    <pattern>znajdÅº trasÄ™ do 0 0 i idÅº</pattern>
+    <template>idzie do pkt 0 0 </template>
   </category>
 
-
   <category>
-    <pattern>idŸ po prostej do obiektu</pattern>
+    <pattern>idÅº po prostej do 0 0</pattern>
     <template>
-      <srai>znajdŸ trasê do obiektu i idŸ</srai>
+      <srai>znajdÅº trasÄ™ do 0 0 i idÅº</srai>
     </template>
   </category>
 
   <category>
-    <pattern>przesuñ siê o 10</pattern>
-    <template>£azik idzie 10 w prawo</template>
-  </category>
-
-  <category>
-    <pattern>idz 10 w prawo</pattern>
-    <template>
-      <srai>przesuñ siê o 10</srai>
-    </template>
+    <pattern>przesuÅ„ siÄ™ 0</pattern>
+    <template>przesuwa siÄ™ </template>
   </category>
 
   <category>
     <pattern>opisz otoczenie</pattern>
-    <template>wypisanie okolicznych obiektów</template>
+    <template>(wypisanie okolicznych obiektÃ³w)</template>
+  </category>
+
+  <category>
+    <pattern>analizuj prÃ³bkÄ™ *</pattern>
+    <template>nalizuje *</template>
   </category>
   
-   <category>
-    <pattern>analizuj próbkê obiekt</pattern>
-    <template>analizuje próbkê obiekt</template>
-  </category>
   
-   <category>
+  <category>
     <pattern>sfotografuj</pattern>
-    <template>Robi zdjêcie objektu</template>
+    <template>sfotografowanoÄ…</template>
   </category>
   
-   <category>
-    <pattern>Rób zdjêcie</pattern>
-    <template>
-      <srai>sfotografuj</srai>
-    </template>
+  
+  <category>
+    <pattern>obrÃ³Ä‡ siÄ™ w *</pattern>
+    <template>obrÃ³ca siÄ™ w *</template>
   </category>
   
   <category>
-    <pattern>obróæ siê w kierunek</pattern>
-    <template>Obraca siê w kierunku</template>
+    <pattern>przeslij *</pattern>
+    <template>przesylam *</template>
   </category>
   
-   <category>
-    <pattern>przeslij objekt</pattern>
-    <template>Dane zosta³y wys³ane do bazy i oczekujê na dalsze instrukcje  </template>
-  </category>
-  
-   <category>
+  <category>
     <pattern>podaj swoje koordynaty</pattern>
-    <template>Moje wspó³rzêdne to x , y  </template>
+    <template>jestem w </template>
   </category>
   
-   <category>
+  <category>
     <pattern>prezentuj zgromadzone dane</pattern>
-    <template>Znalaz³em kamieñ potem kolejny a potem jeszcze kilka ogólnie du¿o kamieni</template>
+    <template>mam  w schowku</template>
   </category>
   
-   <category>
-    <pattern>zbliz sie do obiekt</pattern>
+  
+  <category>
+    <pattern>zbliÅ¼ siÄ™ do 0 0</pattern>
     <template>
-      <srai>znajdŸ trasê do obiektu i idŸ</srai>
-    </template>
+	 <srai>znajdÅº trasÄ™ do 0 0 i idÅº</srai>
+	</template>
   </category>
-  
-   <category>
-    <pattern>Gdzie jesteœ?</pattern>
-    <template>
-      <srai>podaj swoje koordynaty</srai>
-    </template>
-  </category>
-  
   
  </aiml>

@@ -30,9 +30,12 @@
 
 
 
-
+# Project files
 *.cbp
 *.depend
 *.layout
 bin/
 obj/
+
+# Temporary files
+*.swp

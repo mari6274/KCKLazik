@@ -1,5 +1,5 @@
-#include "AIML.h"
-AIML::AIML()
+#include "Aiml.h"
+Aiml::Aiml()
 {
 /*    void AIML(TaskManager *);
 inline std::string trim(std::string& str)
@@ -209,7 +209,7 @@ else return znajdz[a];
 
 }
 
-AIML::~AIML()
+Aiml::~Aiml()
 {
     //dtor
 }
