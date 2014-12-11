@@ -63,7 +63,7 @@ class TaskManager {
         bool goCoordinates(int x, int y, bool automatic = false);
 
         sf::Vector2f getCoordinates();
-        Object * getLocalObject();
+        std::vector<Object*> getLocalObjects();
         sf::String getError();
 
         sf::String readCommand();

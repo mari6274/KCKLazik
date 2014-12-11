@@ -285,17 +285,24 @@ void TaskManager::rotate(int angle)
     game->rover.setRotation(angle);
 }
 
-Object * TaskManager::getLocalObject()
+std::vector<Object *> TaskManager::getLocalObjects()
 {
-    for (std::vector<Object*> * vect : game->colliders)
+    std::vector<Object *> localObjects;
+    for (int i = -2; i<3; ++i)
     {
-        for (Object * o : *vect)
+        for (int j = -2; j<3; ++j)
         {
-            if (game->rover.getGlobalBounds().intersects(o->getGlobalBounds())) return o;
+            float x = game->rover.getPosition().x + i*50;
+            float y = game->rover.getPosition().y + j*50;
+            sf::Vector2f v(x,y);
+            std::vector<Object*> temp = Helper::getColliders(v, game->colliders);
+            for (Object* o : temp)
+            {
+                localObjects.push_back(o);
+            }
         }
     }
-
-    return NULL;
+    return localObjects;
 }
 
 bool TaskManager::goToAuto(sf::Vector2f v)

@@ -104,6 +104,20 @@ bool Helper::checkCollisions(sf::Vector2f v, const std::vector<std::vector<Objec
     return false;
 }
 
+std::vector<Object*> Helper::getColliders(sf::Vector2f v, const std::vector<std::vector<Object* >* > & colliders)
+{
+    std::vector<Object*> ret;
+
+    for (std::vector<Object*>* objs : colliders)
+    {
+        for (Object * o : *objs)
+        {
+            if (o->getGlobalBounds().contains(v)) ret.push_back(o);
+        }
+    }
+    return ret;
+}
+
 sf::String Helper::stringZPlikuNaSfString(std::string s)
 {
     std::basic_string < sf::Uint32 > tmp;
