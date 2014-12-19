@@ -220,6 +220,7 @@ else return znajdz[a];
 using namespace std;
 int main()
 {
+
     Game * g = new Game();
     sf::Thread thread(&Game::start, g);
 
