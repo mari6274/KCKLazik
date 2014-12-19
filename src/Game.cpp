@@ -214,12 +214,6 @@ sf::Vector2f TaskManager::getCoordinates() {
 
 bool TaskManager::goTo(sf::Vector2f v)
 {
-    if (!game->sMap.getGlobalBounds().contains(v)) {
-        error = "Podana pozycja jest poza obszarem eksploracji";
-        return false;
-    }
-
-
     sf::Sprite rov = game->rover;
 
     while (v != rov.getPosition())
@@ -262,6 +256,11 @@ bool TaskManager::goTo(sf::Vector2f v)
                     return false;
                 }
             }
+        }
+
+        if (!game->sMap.getGlobalBounds().contains(rov.getPosition())) {
+            error = "Podana pozycja jest poza obszarem eksploracji";
+            return false;
         }
 
         game->rover.setPosition(rov.getPosition());
@@ -479,5 +478,8 @@ sf::String TaskManager::readCommand()
     game->console->setCommand("");
 
     game->command = "";
+
+    temp.
+
     return temp;
 }

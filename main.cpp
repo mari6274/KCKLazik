@@ -220,9 +220,6 @@ else return znajdz[a];
 using namespace std;
 int main()
 {
-    Interpreter i;
-    i.interpretuj();
-
     Game * g = new Game();
     sf::Thread thread(&Game::start, g);
 
@@ -236,33 +233,37 @@ void interpreter(Game * g) {
     sf::String command;
     TaskManager * tm = g->getTaskManager();
     Console * console = g->getConsole();
-    while (true)
-    {
-        std::vector<sf::String> commands;
-        commands.push_back(L"idź 10 w lewo");
-        commands.push_back(L"idź 10 w prawo");
-        commands.push_back(L"idź 10 w górę");
-        commands.push_back(L"idź 10 w dół");
-        commands.push_back(L"idź do 0 0");
-        commands.push_back(L"auto 0 0");
-        commands.push_back(L"rozłącz");
+    Interpreter interpreter(tm, console);
+    interpreter.interpretuj();
 
-        command = tm->readCommand();
 
-        console->setOutput(Helper::stringZPlikuNaSfString(znajdowanie(command)));
-        if (command == commands[0]) if (!tm->move(-10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
-            console->setOutput(tm->getError());
-        if (command == commands[1]) if (!tm->move(10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
-            console->setOutput(tm->getError());
-        if (command == commands[2]) if (!tm->move(0, -10)) //std::cout << tm->getError().toAnsiString() << std::endl;
-            console->setOutput(tm->getError());
-        if (command == commands[3]) if (!tm->move(0, 10)) //std::cout << tm->getError().toAnsiString() << std::endl;
-            console->setOutput(tm->getError());
-        if (command == commands[4]) if (!tm->goCoordinates(0, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
-            console->setOutput(tm->getError());
-        if (command == commands[5]) if (!tm->goCoordinates(0, 0, true)) //std::cout << tm->getError().toAnsiString() << std::endl;
-            console->setOutput(tm->getError());
-        if (command == commands[6]) tm->quit();
-        //...
-    }
+//    while (true)
+//    {
+//        std::vector<sf::String> commands;
+//        commands.push_back(L"idź 10 w lewo");
+//        commands.push_back(L"idź 10 w prawo");
+//        commands.push_back(L"idź 10 w górę");
+//        commands.push_back(L"idź 10 w dół");
+//        commands.push_back(L"idź do 0 0");
+//        commands.push_back(L"auto 0 0");
+//        commands.push_back(L"rozłącz");
+//
+//        command = tm->readCommand();
+//
+//        console->setOutput(Helper::stringZPlikuNaSfString(znajdowanie(command)));
+//        if (command == commands[0]) if (!tm->move(-10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
+//            console->setOutput(tm->getError());
+//        if (command == commands[1]) if (!tm->move(10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
+//            console->setOutput(tm->getError());
+//        if (command == commands[2]) if (!tm->move(0, -10)) //std::cout << tm->getError().toAnsiString() << std::endl;
+//            console->setOutput(tm->getError());
+//        if (command == commands[3]) if (!tm->move(0, 10)) //std::cout << tm->getError().toAnsiString() << std::endl;
+//            console->setOutput(tm->getError());
+//        if (command == commands[4]) if (!tm->goCoordinates(0, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
+//            console->setOutput(tm->getError());
+//        if (command == commands[5]) if (!tm->goCoordinates(0, 0, true)) //std::cout << tm->getError().toAnsiString() << std::endl;
+//            console->setOutput(tm->getError());
+//        if (command == commands[6]) tm->quit();
+//        //...
+//    }
 }

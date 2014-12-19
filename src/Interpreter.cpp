@@ -4,9 +4,10 @@
 #include <sstream>
 #include <string.h>
 #include <string>
-Interpreter::Interpreter()
+Interpreter::Interpreter(TaskManager * tm, Console * console)
 {
-
+    this->taskManager = tm;
+    this->console = console;
 }
 
 Interpreter::~Interpreter()
