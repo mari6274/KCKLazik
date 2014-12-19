@@ -479,7 +479,5 @@ sf::String TaskManager::readCommand()
 
     game->command = "";
 
-    temp.
-
     return temp;
 }
