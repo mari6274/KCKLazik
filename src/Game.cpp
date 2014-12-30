@@ -218,7 +218,7 @@ bool TaskManager::goTo(sf::Vector2f v)
 
     while (v != rov.getPosition())
     {
-        sf::sleep(sf::milliseconds(100));
+        sf::sleep(sf::milliseconds(150));
         rov = game->rover;
 
         sf::Vector2f p1 = rov.getPosition();
@@ -284,12 +284,12 @@ void TaskManager::rotate(int angle)
     game->rover.setRotation(angle);
 }
 
-std::vector<Object *> TaskManager::getLocalObjects()
+std::vector<Object *> TaskManager::getLocalObjects(int distance = 2)
 {
     std::vector<Object *> localObjects;
-    for (int i = -2; i<3; ++i)
+    for (int i = -distance; i<=distance; ++i)
     {
-        for (int j = -2; j<3; ++j)
+        for (int j = -distance; j<=distance; ++j)
         {
             float x = game->rover.getPosition().x + i*50;
             float y = game->rover.getPosition().y + j*50;
@@ -304,6 +304,11 @@ std::vector<Object *> TaskManager::getLocalObjects()
     return localObjects;
 }
 
+std::vector<Object*> TaskManager::getNeighbors()
+{
+    return getLocalObjects(1);
+}
+
 bool TaskManager::goToAuto(sf::Vector2f v)
 {
     std::vector<AStarVector2f*> path = AStar(v);
@@ -311,7 +316,7 @@ bool TaskManager::goToAuto(sf::Vector2f v)
     {
         for (auto it = path.end()-2; it!=path.begin()-1; --it)
         {
-            sf::sleep(sf::milliseconds(100));
+            sf::sleep(sf::milliseconds(150));
             game->rover.setPosition(*(*it));
             game->view.setCenter(*(*it));
         }
@@ -473,7 +478,6 @@ sf::String TaskManager::readCommand()
     }
     game->enter = false;
     sf::String temp = game->command;
-    //sf::sleep(sf::milliseconds(100));
     game->console->setOutput(temp);
     game->console->setCommand("");
 
