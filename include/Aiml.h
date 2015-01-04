@@ -7,6 +7,8 @@
 #include<fstream>
 #include <vector>
 #define DEBUG false
+#include "Game.h"
+#include "Console.h"
 
 
 

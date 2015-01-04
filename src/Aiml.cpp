@@ -516,7 +516,7 @@ destination cel;
         }
         else
         {
-
+            taskManager->goCoordinates(0,0);
 
                   odpowiedz.erase(odpowiedz.find("%"),odpowiedz.find(odpowiedz)+1);
             cout<< trim(odpowiedz)<<" "<<cel.toString();
