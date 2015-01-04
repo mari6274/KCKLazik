@@ -297,7 +297,8 @@ std::vector<Object *> TaskManager::getLocalObjects(int distance = 2)
             std::vector<Object*> temp = Helper::getColliders(v, game->colliders);
             for (Object* o : temp)
             {
-                localObjects.push_back(o);
+                if (!Helper::checkIfVectorContainsObject(o, &localObjects))
+                    localObjects.push_back(o);
             }
         }
     }

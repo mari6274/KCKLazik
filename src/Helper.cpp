@@ -125,3 +125,13 @@ sf::String Helper::stringZPlikuNaSfString(std::string s)
     sf::String sfs = tmp;
     return sfs;
 }
+
+bool Helper::checkIfVectorContainsObject(Object* o, std::vector<Object *> * v)
+{
+    for (Object * x : *v)
+    {
+        if (o == x)
+            return true;
+    }
+    return false;
+}

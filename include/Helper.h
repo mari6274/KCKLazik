@@ -16,6 +16,7 @@ class Helper
         static bool checkCollisions(sf::Vector2f v, const std::vector<std::vector<Object*>*> & colliders);
         static std::vector<Object*> getColliders(sf::Vector2f v, const std::vector<std::vector<Object*>*> & colliders);
         static sf::String stringZPlikuNaSfString(std::string s);
+        static bool checkIfVectorContainsObject(Object * o, std::vector<Object *> * v);
 
     protected:
     private:
