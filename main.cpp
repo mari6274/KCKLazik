@@ -596,6 +596,7 @@ destination cel;
         string ys = ssq.str();
 
 
+
             // return trim(odpowiedz)+" "+cel.toString();
             return "auto "+xs+" "+ys;  // jeżeli chcesz istnieje potrzeba modyfikacji odkpmentuj powyzsza linnie
         }
@@ -676,6 +677,11 @@ void interpreter(Game * g)
         command = tm->readCommand();
 
 
+        vector <string> punkty;
+
+        punkty=explode(weToZrob(command),' ');
+       // wypisz(punkty);
+        tm->goCoordinates(string_to_int(punkty[1]),string_to_int(punkty[2]),false);
 
 
         console->setOutput(Helper::stringZPlikuNaSfString(weToZrob(command)));
