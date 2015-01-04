@@ -480,6 +480,7 @@ sf::String TaskManager::readCommand()
     game->enter = false;
     sf::String temp = game->command;
     game->console->setOutput(temp);
+    Helper::usunOgonki(temp);
     game->console->setCommand("");
 
     game->command = "";

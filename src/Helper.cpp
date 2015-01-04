@@ -135,3 +135,35 @@ bool Helper::checkIfVectorContainsObject(Object* o, std::vector<Object *> * v)
     }
     return false;
 }
+
+void Helper::usunOgonki(sf::String& s)
+{
+
+    for (int i = 0; i < s.getSize() ; ++i )
+    {
+        usunOgonkiZnaku(&s[i]);
+    }
+}
+
+void Helper::usunOgonkiZnaku(sf::Uint32 * x)
+{
+
+    if (*x == 260) *x = 65; //¹ -> a
+    if (*x == 261) *x = 97; //¥ -> A
+    if (*x == 281) *x = 101; //ê -> e
+    if (*x == 280) *x = 69; //Ê -> E
+    if (*x == 243) *x = 111; //ó -> o
+    if (*x == 211) *x = 79; //Ó -> O
+    if (*x == 263) *x = 99; //æ -> c
+    if (*x == 262) *x = 67; //Æ -> C
+    if (*x == 322) *x = 108; //³ -> l
+    if (*x == 321) *x = 76; //£ -> L
+    if (*x == 347) *x = 115; //œ -> s
+    if (*x == 346) *x = 83; //Œ -> S
+    if (*x == 378) *x = 122; //Ÿ -> z
+    if (*x == 377) *x = 90; // -> Z
+    if (*x == 380) *x = 122; //¿ -> z
+    if (*x == 379) *x = 90; //¯ -> Z
+    if (*x == 324) *x = 110; //ñ -> n
+    if (*x == 323) *x = 78; //Ñ -> N
+}

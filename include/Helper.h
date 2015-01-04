@@ -17,9 +17,11 @@ class Helper
         static std::vector<Object*> getColliders(sf::Vector2f v, const std::vector<std::vector<Object*>*> & colliders);
         static sf::String stringZPlikuNaSfString(std::string s);
         static bool checkIfVectorContainsObject(Object * o, std::vector<Object *> * v);
+        static void usunOgonki(sf::String & s);
 
     protected:
     private:
+        static void usunOgonkiZnaku(sf::Uint32 * x);
 };
 
 #endif // HELPER_H
