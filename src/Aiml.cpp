@@ -516,9 +516,11 @@ destination cel;
         }
         else
         {
-            taskManager->goCoordinates(0,0);
+
 
                   odpowiedz.erase(odpowiedz.find("%"),odpowiedz.find(odpowiedz)+1);
+
+             taskManager->goCoordinates(cel.x,cel.y);
             cout<< trim(odpowiedz)<<" "<<cel.toString();
 
 
@@ -533,8 +535,8 @@ destination cel;
 
 
 
-            // return trim(odpowiedz)+" "+cel.toString();
-            return "auto "+xs+" "+ys;  // jeżeli chcesz istnieje potrzeba modyfikacji odkpmentuj powyzsza linnie
+             return trim(odpowiedz)+" "+cel.toString();
+           // return "auto "+xs+" "+ys;  // jeżeli chcesz istnieje potrzeba modyfikacji odkpmentuj powyzsza linnie
         }
     }
     else if(odpowiedz.find('^') != string::npos)
