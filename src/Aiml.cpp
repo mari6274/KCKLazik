@@ -1,5 +1,10 @@
 #include "Aiml.h"
 
+Aiml::Aiml(Console* c, TaskManager* t)
+{
+    this->console = c;
+    this->taskManager = t;
+}
 
 inline std::string Aiml::trim(std::string& str)
 {

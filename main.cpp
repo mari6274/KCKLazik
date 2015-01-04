@@ -50,7 +50,7 @@ void interpreter(Game * g)
 
         command = tm->readCommand();
 
-        Aiml aiml;
+        Aiml aiml(console, tm);
         vector <string> punkty;
 
         punkty=aiml.explode(aiml.weToZrob(command),' ');

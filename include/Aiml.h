@@ -72,12 +72,16 @@ public:
 class Aiml
 {
     public:
+        Aiml(Console * c, TaskManager * t);
         string znajdowanie(string a);
         string weToZrob(string komedna);
         vector<string> explode(const string& str, const char delimiter);
         int string_to_int(string a);
     protected:
     private:
+        Console * console;
+        TaskManager * taskManager;
+
         inline std::string trim(std::string& str);
         string JakiPoziom(string tekst);
         string PomiedzyTagami(string tekst,string poziom);
