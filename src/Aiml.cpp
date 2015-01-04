@@ -285,10 +285,10 @@ string Aiml::weToZrob(string komedna)
     //funkcja ogarnia caly ten smiatnik
 
 
-vector < string > dane;
-string command=komedna,odpowiedz="";
+    vector < string > dane;
+    string command=komedna,odpowiedz="";
 
-destination cel;
+    destination cel;
     kierunek k;
     map<string, destination> objekty;
     vector < string > TablicaZnazwamiObjektow;
@@ -322,7 +322,7 @@ destination cel;
     objekty[objektyJakoCele.nazwa]=objektyJakoCele;
     TablicaZnazwamiObjektow.push_back(objektyJakoCele.nazwa);
 
-     dane=explode(command,' ');
+    dane=explode(command,' ');
     command=implode(dane,' ');
 
 
@@ -420,13 +420,13 @@ destination cel;
             if(odpowiedz.find('#') != string::npos)
             {
 
-               // for( size_t i = 0; i < dane.size(); i++ )
-                    //        cout<<dane[i]<<'['<<i<<']'<<',';
-                    //    cout<<"\n";
-                    if (dane.size()!=4)
-                    {
-                        k.error="podano zbyt dużo argumentow ale byc może gdzies dojedziemy";
-                    }
+                // for( size_t i = 0; i < dane.size(); i++ )
+                //        cout<<dane[i]<<'['<<i<<']'<<',';
+                //    cout<<"\n";
+                if (dane.size()!=4)
+                {
+                    k.error="podano zbyt dużo argumentow ale byc może gdzies dojedziemy";
+                }
 
                 wypisz(dane);
 
@@ -482,7 +482,7 @@ destination cel;
         //     cout<<znajdowanie(command);
     }
 
- //   printf( "\n\nKoniec\n" );
+//   printf( "\n\nKoniec\n" );
 
 //  for( size_t i = 0; i < dane.size(); i++ )
 //         cout<<dane[i]<<'['<<i<<']'<<',';
@@ -511,13 +511,13 @@ destination cel;
             if(k.kierunek=="lewo")
                 taskManager->move(-k.odleglosc,0);
 
-             if(k.kierunek=="prawo")
+            if(k.kierunek=="prawo")
                 taskManager->move(k.odleglosc,0);
 
-              if(k.kierunek=="gora")
+            if(k.kierunek=="gora")
                 taskManager->move(0,-k.odleglosc);
 
-             if(k.kierunek=="dol")
+            if(k.kierunek=="dol")
                 taskManager->move(0,k.odleglosc);
 
 
@@ -536,25 +536,26 @@ destination cel;
         {
 
 
-                  odpowiedz.erase(odpowiedz.find("%"),odpowiedz.find(odpowiedz)+1);
+            odpowiedz.erase(odpowiedz.find("%"),odpowiedz.find(odpowiedz)+1);
 
-             taskManager->goCoordinates(cel.x,cel.y);
+            taskManager->goCoordinates(cel.x,cel.y);
+            cout<<"tutaj jest wykonywana komeda ruchu";
             cout<< trim(odpowiedz)<<" "<<cel.toString();
 
 
-           // return trim(odpowiedz)+" "+cel.toString();
+            // return trim(odpowiedz)+" "+cel.toString();
 
-          ostringstream ss,ssq;
-        ss << cel.x;
-        string xs = ss.str();
+            ostringstream ss,ssq;
+            ss << cel.x;
+            string xs = ss.str();
 
-        ssq << cel.y;
-        string ys = ssq.str();
+            ssq << cel.y;
+            string ys = ssq.str();
 
 
 
-             return trim(odpowiedz)+" "+cel.toString();
-           // return "auto "+xs+" "+ys;  // jeżeli chcesz istnieje potrzeba modyfikacji odkpmentuj powyzsza linnie
+            return trim(odpowiedz)+" "+cel.toString();
+            // return "auto "+xs+" "+ys;  // jeżeli chcesz istnieje potrzeba modyfikacji odkpmentuj powyzsza linnie
         }
     }
     else if(odpowiedz.find('^') != string::npos)
@@ -563,7 +564,24 @@ destination cel;
             if (in_array(dane[0],kierunkiSwiata))
             {
                 odpowiedz.erase(odpowiedz.find("^"),odpowiedz.find(odpowiedz)+1);
+
                 cout<<trim(odpowiedz)<<" "<<dane[0];
+
+                if(dane[0]=="lewo")
+                    taskManager->rotate(-90);
+
+                if(dane[0]=="prawo")
+                    taskManager->rotate(90);
+
+                if(dane[0]=="gora")
+                    taskManager->rotate(0);
+
+                if(dane[0]=="dol")
+                    taskManager->rotate(180);
+
+                taskManager->getError();
+
+
                 return trim(odpowiedz)+" "+dane[0];
             }
             else
@@ -591,7 +609,7 @@ destination cel;
         cout<<znajdowanie(command);
         return znajdowanie(command);
     }
-   // printf( "\n\nKoniec\n" );
+    // printf( "\n\nKoniec\n" );
 
 
 

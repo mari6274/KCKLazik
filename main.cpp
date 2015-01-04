@@ -51,28 +51,28 @@ void interpreter(Game * g)
         command = tm->readCommand();
 
         Aiml aiml(console, tm);
-        vector <string> punkty;
+       // vector <string> punkty;
 
-        punkty=aiml.explode(aiml.weToZrob(command),' ');
+     //   punkty=aiml.explode(aiml.weToZrob(command),' ');
        // wypisz(punkty);
-        tm->goCoordinates(aiml.string_to_int(punkty[1]),aiml.string_to_int(punkty[2]),false);
+     //   tm->goCoordinates(aiml.string_to_int(punkty[1]),aiml.string_to_int(punkty[2]),false);
 
 
         console->setOutput(Helper::stringZPlikuNaSfString(aiml.weToZrob(command)));
 
-        if (command == commands[0]) if (!tm->move(-10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
-                console->setOutput(tm->getError());
-        if (command == commands[1]) if (!tm->move(10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
-                console->setOutput(tm->getError());
-        if (command == commands[2]) if (!tm->move(0, -10)) //std::cout << tm->getError().toAnsiString() << std::endl;
-                console->setOutput(tm->getError());
-        if (command == commands[3]) if (!tm->move(0, 10)) //std::cout << tm->getError().toAnsiString() << std::endl;
-                console->setOutput(tm->getError());
-        if (command == commands[4]) if (!tm->goCoordinates(0, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
-                console->setOutput(tm->getError());
-        if (command == commands[5]) if (!tm->goCoordinates(0, 0, true)) //std::cout << tm->getError().toAnsiString() << std::endl;
-                console->setOutput(tm->getError());
-        if (command == commands[6]) tm->quit();
+    //    if (command == commands[0]) if (!tm->move(-10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
+      //          console->setOutput(tm->getError());
+      //if (command == commands[1]) if (!tm->move(10, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
+        //        console->setOutput(tm->getError());
+    //    if (command == commands[2]) if (!tm->move(0, -10)) //std::cout << tm->getError().toAnsiString() << std::endl;
+      //          console->setOutput(tm->getError());
+ //       if (command == commands[3]) if (!tm->move(0, 10)) //std::cout << tm->getError().toAnsiString() << std::endl;
+   //             console->setOutput(tm->getError());
+     //   if (command == commands[4]) if (!tm->goCoordinates(0, 0)) //std::cout << tm->getError().toAnsiString() << std::endl;
+       //         console->setOutput(tm->getError());
+   //     if (command == commands[5]) if (!tm->goCoordinates(0, 0, true)) //std::cout << tm->getError().toAnsiString() << std::endl;
+     //           console->setOutput(tm->getError());
+       // if (command == commands[6]) tm->quit();
         //...
     }
 }
