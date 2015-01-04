@@ -504,6 +504,24 @@ destination cel;
         {
             odpowiedz.erase(odpowiedz.find("#"),odpowiedz.find(odpowiedz)+1);
             cout<< trim(odpowiedz)<<" "<<k.toString();
+
+
+
+
+            if(k.kierunek=="lewo")
+                taskManager->move(-k.odleglosc,0);
+
+             if(k.kierunek=="prawo")
+                taskManager->move(k.odleglosc,0);
+
+              if(k.kierunek=="gora")
+                taskManager->move(0,-k.odleglosc);
+
+             if(k.kierunek=="dol")
+                taskManager->move(0,k.odleglosc);
+
+
+
             return trim(odpowiedz)+" "+k.toString();
         }
     }
