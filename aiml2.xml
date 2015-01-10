@@ -1,48 +1,54 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <aiml>
+
+   
 <category>
     <pattern>znajdz trase do %</pattern>
     <template>idzie do pkt %</template>
   </category>
+  
+  <category>
+    <pattern>znajdz trase do i idz</pattern>
+    <template>
+      <srai>znajdz trase do %</srai>
+    </template>
+  </category>
+  
 
+  
+  <category>
+    <pattern>idz po prostej do</pattern>
+    <template>
+      <srai>znajdz trase do %</srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>przesun sie #</pattern>
+    <template>idz #</template>
+  </category>
+  
    <category>
-    <pattern>znajdź trasę do i idź</pattern>
-    <template>
-      <srai>znajdz trase do %</srai>
-    </template>
-  </category>
-  
-  <category>
-    <pattern>idź po prostej do</pattern>
-    <template>
-      <srai>znajdz trase do %</srai>
-    </template>
-  </category>
-
-  <category>
-    <pattern>przesuń się #</pattern>
-    <template>przesuwa się #</template>
-  </category>
-  
-  <category>
-    <pattern>przesuń się</pattern>
+    <pattern>przesun sie</pattern>
     <template>
       <srai>przesun sie #</srai>
     </template>
   </category>
+  
+  
 
-   <category>
+  <category>
     <pattern>opisz otoczenie</pattern>
     <template>wypisz(TablicaZnazwamiObjektow)</template>
   </category>
 
   <category>
-    <pattern>analizuj próbkę %</pattern>
+    <pattern>analizuj probke %</pattern>
     <template>nalizuje %</template>
   </category>
   
   
-  <category>
+   <category>
     <pattern>analizuj probke</pattern>
     <template>
       <srai>analizuj probke %</srai>
@@ -52,27 +58,26 @@
   
   <category>
     <pattern>sfotografuj</pattern>
-    <template>sfotografowanoą</template>
+    <template>sfotografowano�</template>
   </category>
   
   
   <category>
-    <pattern>obróć się w ^</pattern>
-    <template>obraca się w ^</template>
+    <pattern>obroc sie w ^</pattern>
+    <template>obraca sie w ^</template>
   </category>
-  
   
   <category>
     <pattern>obroc sie w</pattern>
     <template>
-      <srai>obróć się w ^</srai>
+      <srai>obroc sie w ^</srai>
     </template>
   </category>
   
   
   <category>
-    <pattern>prześlij %</pattern>
-    <template>przesyłam %</template>
+    <pattern>przeslij %</pattern>
+    <template>przesylam %</template>
   </category>
   
   <category>
@@ -82,12 +87,12 @@
   
   <category>
     <pattern>prezentuj zgromadzone dane</pattern>
-    <template>mam w schowku</template>
+    <template>mam  w schowku wypisz(TablicaZnazwamiObjektow)</template>
   </category>
   
   
   <category>
-    <pattern>zbliż się do</pattern>
+    <pattern>zbliz sie do</pattern>
     <template>
 	 <srai>znajdz trase do %</srai>
 	</template>
