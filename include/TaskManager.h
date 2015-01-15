@@ -22,6 +22,7 @@ class TaskManager {
         sf::String getError();
 
         sf::String readCommand();
+        void setInfo(sf::String info);
     private:
         Game * game;
         sf::String error;

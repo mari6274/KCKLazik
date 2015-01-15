@@ -9,6 +9,7 @@ Game::Game()
     taskManager = new TaskManager(this);
     console = new Console(&window);
     command = "";
+    infoBox = new InfoBox(&window);
 }
 
 void Game::start()
@@ -127,6 +128,7 @@ void Game::start()
         window.setView(window.getDefaultView());
         //
         console->draw();
+        infoBox->draw();
         window.display();
     }
 

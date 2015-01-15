@@ -309,3 +309,8 @@ sf::String TaskManager::readCommand()
 
     return temp;
 }
+
+void TaskManager::setInfo(sf::String info)
+{
+    game->infoBox.setInfo(info);
+}

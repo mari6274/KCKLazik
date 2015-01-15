@@ -6,6 +6,7 @@
 #include <vector>
 #include <AStarVector2f.h>
 #include "Console.h"
+#include "InfoBox.h"
 
 class TaskManager;
 
@@ -37,6 +38,7 @@ class Game
         sf::View view;
         sf::View miniMap;
         Console * console;
+        InfoBox * infoBox;
 
         std::vector<std::vector<Object*>*> colliders;
         std::vector<std::vector<Object*>*> noncolliders;
