@@ -16,19 +16,30 @@
 
 using namespace std;
 
-struct category
+struct Category
 {
     string pattern1;
     string template1;
 
 };
 
-class destination
+class Destination
 {
 public:
     int x,y;
     string nazwa;
     bool error=false;
+
+    Destination()
+    {
+
+    };
+    Destination(Object* o)
+    {
+        this->nazwa = o->getName();
+        this->x = o->getPosition().x;
+        this->y = o->getPosition().y;
+    };
 
     const string toString()
     {
@@ -49,7 +60,7 @@ public:
 
 };
 
-class kierunek
+class Kierunek
 {
 public:
     int odleglosc;
@@ -89,7 +100,7 @@ class Aiml
         string JakiPoziom(string tekst);
         string PomiedzyTagami(string tekst,string poziom);
         string pobierzxml();
-        vector<category> wstawxml();
+        vector<Category> wstawxml();
         string implode(vector<string> & elements, char delimiter);
         vector < string > CzesciowaKomenda(vector < string > dana);
         string CzesciowaKomendajaka(vector < string > dana);

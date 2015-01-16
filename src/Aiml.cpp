@@ -92,13 +92,13 @@ string Aiml::pobierzxml()
 
 
 
-vector<category> Aiml::wstawxml()
+vector<Category> Aiml::wstawxml()
 {
 
     string tekst=pobierzxml();
     //  cout<<tekst<<endl;
-    vector<category> kategorie;
-    category kategoria;
+    vector<Category> kategorie;
+    Category kategoria;
 
     string kat="";
     int dlugosc=0;
@@ -150,7 +150,7 @@ vector<category> Aiml::wstawxml()
 string Aiml::znajdowanie(string a)
 {
     // cout<<" \n\n                     "<<a<<"\n\n\n";
-    vector<category> kategorie;
+    vector<Category> kategorie;
 
     map<string, string> znajdz;
     kategorie=wstawxml();
@@ -288,9 +288,9 @@ string Aiml::weToZrob(string komedna)
     vector < string > dane;
     string command=komedna,odpowiedz="";
 
-    destination cel;
-    kierunek k;
-    map<string, destination> objekty;
+    Destination cel;
+    Kierunek k;
+    map<string, Destination> objekty;
     vector < string > TablicaZnazwamiObjektow;
     vector <string> kierunkiSwiata;
     kierunkiSwiata.push_back("polnoc");
@@ -303,7 +303,7 @@ string Aiml::weToZrob(string komedna)
     kierunkiSwiata.push_back("gora");
 
 
-    destination objektyJakoCele;
+    Destination objektyJakoCele;
     objektyJakoCele.nazwa="wulkan";
     objektyJakoCele.x=3;
     objektyJakoCele.y=7;
