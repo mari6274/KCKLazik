@@ -129,7 +129,16 @@ std::vector<Object *> TaskManager::getLocalObjects(int distance = 2)
 
 std::vector<Object*> TaskManager::getNeighbors()
 {
+    sf::String s;
+    std::vector<Object*> v = getLocalObjects(1);
+    for (Object * x : v)
+    {
+        s += x->getName();
+        s += "\n";
+    }
+    game->infoBox->setInfo(s);
     return getLocalObjects(1);
+
 }
 
 bool TaskManager::goToAuto(sf::Vector2f v)

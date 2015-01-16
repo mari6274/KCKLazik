@@ -326,6 +326,8 @@ string Aiml::weToZrob(string komedna)
     command=implode(dane,' ');
 
 
+
+
     if("nie rozpoznano komendy"==znajdowanie(command) )
     {
 
@@ -605,6 +607,11 @@ string Aiml::weToZrob(string komedna)
     }
     else
     {
+        cout<<znajdowanie(command);
+        if (znajdowanie(command).find('@') != string::npos)
+        {
+            taskManager->getNeighbors();
+        }
         //  cout<<" \n rozpoznano komende ";
         cout<<znajdowanie(command);
         return znajdowanie(command);

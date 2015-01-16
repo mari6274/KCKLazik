@@ -14,6 +14,12 @@
     </template>
   </category>
   
+  <category>
+    <pattern>opisz</pattern>
+    <template>@</template>
+  </category>
+  
+
 
   
   <category>
@@ -34,13 +40,6 @@
       <srai>przesun sie #</srai>
     </template>
   </category>
-  
-  
-
-  <category>
-    <pattern>opisz otoczenie</pattern>
-    <template>wypisz(TablicaZnazwamiObjektow)</template>
-  </category>
 
   <category>
     <pattern>analizuj probke %</pattern>
@@ -58,7 +57,7 @@
   
   <category>
     <pattern>sfotografuj</pattern>
-    <template>sfotografowano¹</template>
+    <template>sfotografowano¹z</template>
   </category>
   
   
@@ -97,5 +96,7 @@
 	 <srai>znajdz trase do %</srai>
 	</template>
   </category>
+  
+
   
  </aiml>
