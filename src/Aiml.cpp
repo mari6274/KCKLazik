@@ -390,7 +390,7 @@ string Aiml::weToZrob(string komedna)
 
                     if(czyliczba(string_to_int(dane.front())))
                     {
-                        cel.nazwa="za malo wspozednych";
+                        cel.nazwa="za mało współżędnych";
                         cel.error=true;
                     }
                     else

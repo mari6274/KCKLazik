@@ -312,5 +312,5 @@ sf::String TaskManager::readCommand()
 
 void TaskManager::setInfo(sf::String info)
 {
-    game->infoBox.setInfo(info);
+    game->infoBox->setInfo(info);
 }

@@ -40,7 +40,7 @@ public:
         ssq << y;
         string ys = ssq.str();
 
-        if(nazwa=="nie znaleziono objektu"||nazwa=="dane nie moga byc uznane za poprawne"||nazwa=="dane sa nie poprawne ale nie wiem dla czego moze za duzo?"||nazwa=="za malo wspozednych")
+        if(nazwa=="nie znaleziono objektu"||nazwa=="dane nie moga byc uznane za poprawne"||nazwa=="dane sa nie poprawne ale nie wiem dla czego moze za duzo?"||nazwa=="za mało współżędnych")
             return nazwa;
 
         else
