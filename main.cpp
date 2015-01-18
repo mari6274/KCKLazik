@@ -38,6 +38,7 @@ void interpreter(Game * g)
     sf::String command;
     TaskManager * tm = g->getTaskManager();
     Console * console = g->getConsole();
+    Aiml aiml(console, tm);
     while (true)
     {
         std::vector<sf::String> commands;
@@ -50,14 +51,11 @@ void interpreter(Game * g)
         commands.push_back(L"rozłącz");
 
         command = tm->readCommand();
-
-        Aiml aiml(console, tm);
        // vector <string> punkty;
 
      //   punkty=aiml.explode(aiml.weToZrob(command),' ');
        // wypisz(punkty);
      //   tm->goCoordinates(aiml.string_to_int(punkty[1]),aiml.string_to_int(punkty[2]),false);
-
 
         console->setOutput(Helper::stringZPlikuNaSfString(aiml.weToZrob(command)));
 
