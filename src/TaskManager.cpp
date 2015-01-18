@@ -1,4 +1,5 @@
 #include "TaskManager.h"
+#include <sstream>
 
 TaskManager::TaskManager(Game * game)
 {
@@ -133,9 +134,21 @@ std::vector<Object*> TaskManager::getNeighbors()
     std::vector<Object*> v = getLocalObjects(1);
     for (Object * x : v)
     {
-        s += x->getName();
-        s += "\n";
+        std::stringstream ss1;
+        std::stringstream ss2;
+        ss1 << x->getPosition().x;
+        ss2 << x->getPosition().y;
+        std::string stds1;
+        std::string stds2;
+        ss1 >> stds1;
+        ss2 >> stds2;
+
+        s += x->getName() + " (" + stds1 + ", " + stds2 + ")\n";
+        ss1.clear();
+        ss2.clear();
     }
+
+    //TODO wypisywanie wspolrzednych obiektow, lista obiektow na stale
     game->infoBox->setInfo(s);
     return getLocalObjects(1);
 
