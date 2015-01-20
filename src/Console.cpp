@@ -46,14 +46,17 @@ void Console::draw()
 
 #include <cstdlib>
 
-void Console::setOutput(sf::String s)
+void Console::setOutput(sf::String s, bool speech)
 {
     t1.setString(t2.getString());
     t2.setString(t3.getString());
     t3.setString(s);
 
-    sf::String speech = "espeak.exe -v polish -s 120 --path=espeak_data \"" + s + "\"";
-    std::system(speech.toAnsiString().c_str());
+    if (speech) {
+        sf::String speech = "espeak.exe -v polish -s 120 --path=espeak_data \"" + s + "\"";
+        std::system(speech.toAnsiString().c_str());
+    }
+
 }
 
 void Console::setCommand(sf::String s)

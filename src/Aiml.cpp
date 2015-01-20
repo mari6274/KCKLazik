@@ -427,7 +427,7 @@ string Aiml::weToZrob(string komedna)
                 //    cout<<"\n";
                 if (dane.size()!=4)
                 {
-                    k.error="podano zbyt dużo argumentow ale byc może gdzies dojedziemy";
+                    k.error="podano zbyt dużo argumentów ale być może gdzieć dojedziemy";
                 }
 
                 wypisz(dane);
@@ -442,12 +442,12 @@ string Aiml::weToZrob(string komedna)
                             k.kierunek=dane[3];
                         else
                         {
-                            k.error="Nie ma takiego kierunku swiata";
+                            k.error="Nie ma takiego kierunku świata";
                         }
                     }
                     else
                     {
-                        k.error="podana wartosc nie jest liczba";
+                        k.error="podana wartość nie jest liczbą";
                     }
 
 
@@ -461,12 +461,12 @@ string Aiml::weToZrob(string komedna)
                             k.kierunek=dane[1];
                         else
                         {
-                            k.error="nie ma takiego kierunku swiata";
+                            k.error="nie ma takiego kierunku świata";
                         }
                     }
                     else
                     {
-                        k.error="podana wartosc nie jest liczba";
+                        k.error="podana wartość nie jest liczbą";
                     }
                 }
 
@@ -589,21 +589,21 @@ string Aiml::weToZrob(string komedna)
             else
             {
                 cout<<" nie isnieje taki kierunek swiata ";
-                return " nie isnieje taki kierunek swiata ";
+                return " nie isnieje taki kierunek świata ";
             }
         else
         {
-            cout<<" raczej za duzo argumentow";
-            return " raczej za duzo argumentow";
+            cout<<" raczej za dużo argumentów";
+            return " raczej za dużo argumentów";
         }
 
     }
     else if(znajdowanie(command).find('%') != string::npos|| znajdowanie(command).find('#') != string::npos)
     {
-        cout<<"komende znaleziono ale nie podano argumentow";
+        cout<<"komende znaleziono ale nie podano argumentów";
         // cout<<znajdowanie(command)<<"wypisywanie";
 
-        return "komende znaleziono ale nie podano argumentow";
+        return "komende znaleziono ale nie podano argumentów";
     }
     else
     {

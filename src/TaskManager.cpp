@@ -323,7 +323,7 @@ sf::String TaskManager::readCommand()
     }
     game->enter = false;
     sf::String temp = game->command;
-    game->console->setOutput(temp);
+    game->console->setOutput(temp, false);
     Helper::usunOgonki(temp);
     game->console->setCommand("");
 
