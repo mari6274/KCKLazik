@@ -75,7 +75,7 @@ bool TaskManager::goTo(sf::Vector2f v)
             {
                 if (rov.getGlobalBounds().intersects(o->getGlobalBounds()))
                 {
-                    error =  L"Nie można przejść gdyż napotkano obiekt: " + o->getName().toWideString();
+                    error =  "Nie można przejść gdyż napotkano obiekt: " + o->getName();
                     return false;
                 }
             }
@@ -148,7 +148,6 @@ std::vector<Object*> TaskManager::getNeighbors()
         ss2.clear();
     }
 
-    //TODO wypisywanie wspolrzednych obiektow, lista obiektow na stale
     game->infoBox->setInfo(s);
     return getLocalObjects(1);
 
@@ -323,7 +322,7 @@ sf::String TaskManager::readCommand()
     }
     game->enter = false;
     sf::String temp = game->command;
-    game->console->setOutput(temp, false);
+    game->console->setOutputFromKeyboard(temp, false);
     Helper::usunOgonki(temp);
     game->console->setCommand("");
 

@@ -10,7 +10,7 @@ class Console
     public:
         Console(sf::RenderWindow * window);
         void draw();
-        void setOutput(sf::String s, bool speech = true);
+        void setOutputFromKeyboard(sf::String s, bool speech = true);
         void setOutput(std::string s, bool speech = true);
         sf::String getCommand();
         void setCommand(sf::String s);

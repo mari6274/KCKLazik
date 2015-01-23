@@ -40,7 +40,7 @@ void interpreter(Game * g)
     Console * console = g->getConsole();
     Aiml aiml(console, tm);
 
-    Mario::KontrolerInterpretera & kontroler = Mario::KontrolerInterpretera::getInstance();
+    Mario::KontrolerInterpretera * kontroler = new Mario::KontrolerInterpretera(console, tm);
 
     while (true)
     {
@@ -51,7 +51,7 @@ void interpreter(Game * g)
             console->setOutput(s);
         }
 
-        //console->setOutput(Helper::stringZPlikuNaSfString(kontroler.interpretuj(command.toAnsiString())));
+        //kontroler->interpretuj();
     }
 }
 

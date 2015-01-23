@@ -44,7 +44,7 @@ void Console::draw()
     window->draw(prompt);
 }
 
-void Console::setOutput(sf::String s, bool speech)
+void Console::setOutputFromKeyboard(sf::String s, bool speech)
 {
     t1.setString(t2.getString());
     t2.setString(t3.getString());

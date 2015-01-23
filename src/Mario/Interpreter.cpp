@@ -38,6 +38,8 @@ std::string Interpreter::interpretuj(std::string in)
     {
 
     }
+
+    return "obroc";
 }
 
 } // namespace Mario

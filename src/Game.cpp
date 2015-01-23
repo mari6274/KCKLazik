@@ -40,8 +40,8 @@ void Game::start()
 
     srand(time(NULL));
     generateRandPosObjects(crater, 6, craters, "Krater");
-    generateRandPosObjects(rock1, 20, rocks, L"Skała");
-    generateRandPosObjects(rock2, 20, rocks, L"Skała");
+    generateRandPosObjects(rock1, 20, rocks, "Skała");
+    generateRandPosObjects(rock2, 20, rocks, "Skała");
 
     //vector of colliders
     colliders.push_back(&rocks);

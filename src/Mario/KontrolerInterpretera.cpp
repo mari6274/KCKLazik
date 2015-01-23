@@ -1,24 +1,31 @@
 #include "Mario/KontrolerInterpretera.h"
-#include "morfeusz.h"
+
 namespace Mario {
 
-KontrolerInterpretera::KontrolerInterpretera()
+KontrolerInterpretera::KontrolerInterpretera(Console * console, TaskManager * tm)
 :
     interpreter(Interpreter::getInstance())
 {
-
+    this->console = console;
+    this->tm = tm;
 }
 
-KontrolerInterpretera & KontrolerInterpretera::getInstance()
+void KontrolerInterpretera::interpretuj()
 {
-    static KontrolerInterpretera instance;
-    return instance;
+    sf::String command = tm->readCommand();
+    std::vector<std::string> komendy = Helper::dzielNaZdania(command);
+    for (std::string komenda : komendy)
+    {
+        wykonajKomende(komenda);
+    }
 }
 
-std::string KontrolerInterpretera::interpretuj(std::string in)
+void KontrolerInterpretera::wykonajKomende(std::string komenda)
 {
-    std::string odp = interpreter.interpretuj(in);
-    return odp;
+    std::string wynik = interpreter.interpretuj(komenda);
+    if (wynik == "obroc")
+        if (!tm->move(10,0))
+            console->setOutput(tm->getError().toAnsiString());
 }
 
 } // namespace Mario
