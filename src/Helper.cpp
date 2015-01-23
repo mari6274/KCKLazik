@@ -182,22 +182,26 @@ std::vector<std::string> Helper::explode(const std::string& str, const char deli
 
 std::vector<std::string> Helper::dzielNaZdania(std::string in)
 {
+    std::string tab[] = {
+        " a nastepnie ",
+        "a nastepnie",
+        " i ",
+        " oraz ",
+        " nastepnie ",
+        " potem ",
+        "potem",
+        "nastepnie",
+        "oraz"
+    };
+
     size_t pos;
-    while ((pos = in.find(" i ")) != std::string::npos)
+
+    for (std::string s : tab)
     {
-        in.replace(pos, 3, "|");
-    }
-    while ((pos = in.find(" oraz ")) != std::string::npos)
-    {
-        in.replace(pos, 6, "|");
-    }
-    while ((pos = in.find(" nastepnie ")) != std::string::npos)
-    {
-        in.replace(pos, 11, "|");
-    }
-    while ((pos = in.find(" potem ")) != std::string::npos)
-    {
-        in.replace(pos, 11, "|");
+        while ((pos = in.find(s)) != std::string::npos)
+        {
+            in.replace(pos, s.length(), "|");
+        }
     }
 
     return Helper::explode(in, '|');

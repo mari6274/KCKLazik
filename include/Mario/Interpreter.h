@@ -6,6 +6,7 @@
 #include <string>
 #include "Helper.h"
 #include "morfeusz.h"
+#include <set>
 
 namespace Mario {
 
@@ -13,11 +14,11 @@ class Interpreter
 {
     public:
         static Interpreter & getInstance();
-        std::string interpretuj(std::string);
+        std::string interpretuj(std::string in);
     protected:
     private:
         Interpreter();
-        std::vector<std::string> morfeusz(std::string in);
+        std::set<std::string> morfeusz(std::string in);
 };
 
 } // namespace Mario

@@ -13,10 +13,10 @@ Interpreter & Interpreter::getInstance()
     return instance;
 }
 
-std::vector<std::string> Interpreter::morfeusz(std::string in)
+std::set<std::string> Interpreter::morfeusz(std::string in)
 {
     std::vector<std::string> words = Helper::explode(in, ' ');
-    std::vector<std::string> output;
+    std::set<std::string> output;
     for (std::string x : words)
     {
         char * cstr = new char[x.length()+1];
@@ -25,10 +25,19 @@ std::vector<std::string> Interpreter::morfeusz(std::string in)
         InterpMorf * im;
         im = morfeusz_analyse(cstr);
 
-        output.push_back(im->haslo);
+        output.insert(im->haslo);
     }
 
     return output;
+}
+
+std::string Interpreter::interpretuj(std::string in)
+{
+    std::set<std::string> leksemy = morfeusz(in);
+    if (leksemy.find("iść") != leksemy.end())
+    {
+
+    }
 }
 
 } // namespace Mario

@@ -17,8 +17,8 @@ KontrolerInterpretera & KontrolerInterpretera::getInstance()
 
 std::string KontrolerInterpretera::interpretuj(std::string in)
 {
-//    std::string vect = interpreter.interpretuj(in);
-
+    std::string odp = interpreter.interpretuj(in);
+    return odp;
 }
 
 } // namespace Mario

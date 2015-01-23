@@ -647,7 +647,6 @@ vector<string> Aiml::start(string komenda)
 
     for (string czesc : czesci)
     {
-        std::cout << std::endl << "$" << czesc << "$" << std::endl;
         wyniki.push_back(weToZrob(czesc));
     }
 
