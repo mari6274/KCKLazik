@@ -167,3 +167,15 @@ void Helper::usunOgonkiZnaku(sf::Uint32 * x)
     if (*x == 324) *x = 110; //ñ -> n
     if (*x == 323) *x = 78; //Ñ -> N
 }
+
+std::vector<std::string> Helper::explode(const std::string& str, const char delimiter)
+{
+    std::vector<std::string> elements;
+    std::stringstream stream(str);
+    std::string item;
+    while (getline(stream, item, delimiter))
+        if (item!="")
+            elements.push_back(item);
+
+    return elements;
+}

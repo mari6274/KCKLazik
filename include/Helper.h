@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Object.h"
+#include <sstream>
 
 class Helper
 {
@@ -18,6 +19,7 @@ class Helper
         static sf::String stringZPlikuNaSfString(std::string s);
         static bool checkIfVectorContainsObject(Object * o, std::vector<Object *> * v);
         static void usunOgonki(sf::String & s);
+        static std::vector<std::string> explode(const std::string& str, const char delimiter);
 
     protected:
     private:
