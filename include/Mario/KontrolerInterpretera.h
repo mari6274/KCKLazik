@@ -12,7 +12,7 @@ class KontrolerInterpretera
 {
     public:
         static KontrolerInterpretera & getInstance();
-        std::string rob();
+        std::string interpretuj(std::string in);
     protected:
     private:
         KontrolerInterpretera();

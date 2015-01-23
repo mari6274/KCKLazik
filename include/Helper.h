@@ -20,6 +20,7 @@ class Helper
         static bool checkIfVectorContainsObject(Object * o, std::vector<Object *> * v);
         static void usunOgonki(sf::String & s);
         static std::vector<std::string> explode(const std::string& str, const char delimiter);
+        static std::vector<std::string> dzielNaZdania(std::string in);
 
     protected:
     private:

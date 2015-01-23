@@ -91,6 +91,8 @@ class Aiml
         string weToZrob(string komedna);
         vector<string> explode(const string& str, const char delimiter);
         int string_to_int(string a);
+
+        vector<string> start(string komenda);
     protected:
     private:
         Console * console;

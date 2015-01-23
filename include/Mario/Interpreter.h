@@ -13,10 +13,10 @@ class Interpreter
 {
     public:
         static Interpreter & getInstance();
+        std::string interpretuj(std::string);
     protected:
     private:
         Interpreter();
-    public:
         std::vector<std::string> morfeusz(std::string in);
 };
 

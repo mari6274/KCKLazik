@@ -636,3 +636,21 @@ bool Aiml::in_array(const string &needle, const vector< string > &haystack)
             return true;
     return false;
 }
+
+vector<string> Aiml::start(string komenda)
+{
+    vector<string> czesci;
+    vector<string> wyniki;
+
+    czesci = Helper::dzielNaZdania(komenda);
+
+
+    for (string czesc : czesci)
+    {
+        std::cout << std::endl << "$" << czesc << "$" << std::endl;
+        wyniki.push_back(weToZrob(czesc));
+    }
+
+    return wyniki;
+
+}

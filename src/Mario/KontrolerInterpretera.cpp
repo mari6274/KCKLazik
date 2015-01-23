@@ -15,14 +15,10 @@ KontrolerInterpretera & KontrolerInterpretera::getInstance()
     return instance;
 }
 
-std::string KontrolerInterpretera::rob()
+std::string KontrolerInterpretera::interpretuj(std::string in)
 {
-    std::vector<std::string> vect = interpreter.morfeusz("idź do domu");
-    for (std::string x : vect)
-    {
-        if (x == "iść") return "super!";
-    }
-    return "błąd";
+//    std::string vect = interpreter.interpretuj(in);
+
 }
 
 } // namespace Mario

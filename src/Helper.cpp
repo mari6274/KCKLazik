@@ -148,24 +148,24 @@ void Helper::usunOgonki(sf::String& s)
 void Helper::usunOgonkiZnaku(sf::Uint32 * x)
 {
 
-    if (*x == 260) *x = 65; //¹ -> a
-    if (*x == 261) *x = 97; //¥ -> A
-    if (*x == 281) *x = 101; //ê -> e
-    if (*x == 280) *x = 69; //Ê -> E
-    if (*x == 243) *x = 111; //ó -> o
-    if (*x == 211) *x = 79; //Ó -> O
-    if (*x == 263) *x = 99; //æ -> c
-    if (*x == 262) *x = 67; //Æ -> C
-    if (*x == 322) *x = 108; //³ -> l
-    if (*x == 321) *x = 76; //£ -> L
-    if (*x == 347) *x = 115; //œ -> s
-    if (*x == 346) *x = 83; //Œ -> S
-    if (*x == 378) *x = 122; //Ÿ -> z
-    if (*x == 377) *x = 90; // -> Z
-    if (*x == 380) *x = 122; //¿ -> z
-    if (*x == 379) *x = 90; //¯ -> Z
-    if (*x == 324) *x = 110; //ñ -> n
-    if (*x == 323) *x = 78; //Ñ -> N
+    if (*x == 260) *x = 65; //Ä… -> a
+    if (*x == 261) *x = 97; //Ä„ -> A
+    if (*x == 281) *x = 101; //Ä™ -> e
+    if (*x == 280) *x = 69; //Ä˜ -> E
+    if (*x == 243) *x = 111; //Ã³ -> o
+    if (*x == 211) *x = 79; //Ã“ -> O
+    if (*x == 263) *x = 99; //Ä‡ -> c
+    if (*x == 262) *x = 67; //Ä† -> C
+    if (*x == 322) *x = 108; //Å‚ -> l
+    if (*x == 321) *x = 76; //Å -> L
+    if (*x == 347) *x = 115; //Å› -> s
+    if (*x == 346) *x = 83; //Åš -> S
+    if (*x == 378) *x = 122; //Åº -> z
+    if (*x == 377) *x = 90; //Å¹ -> Z
+    if (*x == 380) *x = 122; //Å¼ -> z
+    if (*x == 379) *x = 90; //Å» -> Z
+    if (*x == 324) *x = 110; //Å„ -> n
+    if (*x == 323) *x = 78; //Åƒ -> N
 }
 
 std::vector<std::string> Helper::explode(const std::string& str, const char delimiter)
@@ -178,4 +178,27 @@ std::vector<std::string> Helper::explode(const std::string& str, const char deli
             elements.push_back(item);
 
     return elements;
+}
+
+std::vector<std::string> Helper::dzielNaZdania(std::string in)
+{
+    size_t pos;
+    while ((pos = in.find(" i ")) != std::string::npos)
+    {
+        in.replace(pos, 3, "|");
+    }
+    while ((pos = in.find(" oraz ")) != std::string::npos)
+    {
+        in.replace(pos, 6, "|");
+    }
+    while ((pos = in.find(" nastepnie ")) != std::string::npos)
+    {
+        in.replace(pos, 11, "|");
+    }
+    while ((pos = in.find(" potem ")) != std::string::npos)
+    {
+        in.replace(pos, 11, "|");
+    }
+
+    return Helper::explode(in, '|');
 }

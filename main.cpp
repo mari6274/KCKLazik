@@ -45,8 +45,13 @@ void interpreter(Game * g)
     while (true)
     {
         command = tm->readCommand();
-        //console->setOutput(Helper::stringZPlikuNaSfString(aiml.weToZrob(command)));
-        console->setOutput(Helper::stringZPlikuNaSfString(kontroler.rob()));
+        std::vector<std::string> wyniki = aiml.start(command);
+        for (std::string s : wyniki)
+        {
+            console->setOutput(s);
+        }
+
+        //console->setOutput(Helper::stringZPlikuNaSfString(kontroler.interpretuj(command.toAnsiString())));
     }
 }
 

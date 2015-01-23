@@ -2,6 +2,8 @@
 #define CONSOLE_H
 
 #include <SFML/Graphics.hpp>
+#include <cstdlib>
+#include "Helper.h"
 
 class Console
 {
@@ -9,6 +11,7 @@ class Console
         Console(sf::RenderWindow * window);
         void draw();
         void setOutput(sf::String s, bool speech = true);
+        void setOutput(std::string s, bool speech = true);
         sf::String getCommand();
         void setCommand(sf::String s);
     protected:
