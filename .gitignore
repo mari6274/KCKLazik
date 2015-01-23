@@ -23,7 +23,7 @@
 *.lib
 
 # Executables
-#*.exe
+*.exe
 *.out
 *.app
 
@@ -39,3 +39,5 @@ obj/
 
 # Temporary files
 *.swp
+
+!espeak.exe
