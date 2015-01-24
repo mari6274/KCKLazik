@@ -12,7 +12,7 @@ KontrolerInterpretera::KontrolerInterpretera(Console * console, TaskManager * tm
 
 void KontrolerInterpretera::interpretuj()
 {
-    sf::String command = tm->readCommand();
+    sf::String command = tm->readCommand(true);
     std::vector<std::string> komendy = Helper::dzielNaZdania(command);
     for (std::string komenda : komendy)
     {
@@ -23,9 +23,9 @@ void KontrolerInterpretera::interpretuj()
 void KontrolerInterpretera::wykonajKomende(std::string komenda)
 {
     std::string wynik = interpreter.interpretuj(komenda);
-    if (wynik == "obroc")
-        if (!tm->move(10,0))
-            console->setOutput(tm->getError().toAnsiString());
+//    if (wynik == "obroc")
+//        if (!tm->move(10,0))
+//            console->setOutput(tm->getError().toAnsiString());
 }
 
 } // namespace Mario

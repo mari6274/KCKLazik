@@ -148,7 +148,7 @@ std::vector<Object*> TaskManager::getNeighbors()
         ss2.clear();
     }
 
-    game->infoBox->setInfo(s);
+    setInfo(s);
     return getLocalObjects(1);
 
 }
@@ -312,7 +312,7 @@ Console * Game::getConsole()
     return console;
 }
 
-sf::String TaskManager::readCommand()
+sf::String TaskManager::readCommand(bool ogonki)
 {
 
     sf::Event event;
@@ -323,7 +323,7 @@ sf::String TaskManager::readCommand()
     game->enter = false;
     sf::String temp = game->command;
     game->console->setOutputFromKeyboard(temp, false);
-    Helper::usunOgonki(temp);
+    if (!ogonki) Helper::usunOgonki(temp);
     game->console->setCommand("");
 
     game->command = "";

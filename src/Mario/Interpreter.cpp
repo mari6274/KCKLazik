@@ -1,4 +1,5 @@
 #include "Mario/Interpreter.h"
+#include <iostream>
 
 namespace Mario {
 
@@ -25,8 +26,22 @@ std::set<std::string> Interpreter::morfeusz(std::string in)
         InterpMorf * im;
         im = morfeusz_analyse(cstr);
 
-        output.insert(im->haslo);
+        if (im->haslo != NULL) {
+            std::string leksem(im->haslo);
+            output.insert(leksem);
+        }
+
     }
+
+    //morfeusz debug
+    std::cout << std::endl << "==============" << std::endl;
+    for (std::string leksem : output)
+    {
+        std::cout << leksem << std::endl;
+
+    }
+    std::cout << "==============" << std::endl;
+    //morfeus debug
 
     return output;
 }

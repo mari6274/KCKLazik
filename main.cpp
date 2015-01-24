@@ -44,14 +44,14 @@ void interpreter(Game * g)
 
     while (true)
     {
-        command = tm->readCommand();
-        std::vector<std::string> wyniki = aiml.start(command);
-        for (std::string s : wyniki)
-        {
-            console->setOutput(s);
-        }
+//        command = tm->readCommand();
+//        std::vector<std::string> wyniki = aiml.start(command);
+//        for (std::string s : wyniki)
+//        {
+//            console->setOutput(s);
+//        }
 
-        //kontroler->interpretuj();
+        kontroler->interpretuj();
     }
 }
 

@@ -21,7 +21,7 @@ class TaskManager {
         std::vector<Object*> getNeighbors();
         sf::String getError();
 
-        sf::String readCommand();
+        sf::String readCommand(bool ogonki = false);
         void setInfo(sf::String info);
     private:
         Game * game;
