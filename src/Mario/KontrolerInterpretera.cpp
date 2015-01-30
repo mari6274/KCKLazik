@@ -28,6 +28,14 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
         if (!tm->move(wynik.dataArray[0],wynik.dataArray[1]))
             console->setOutput(tm->getError().toAnsiString());
 
+    if (wynik.command == "go")
+        if (!tm->goCoordinates(wynik.dataArray[0],wynik.dataArray[1]))
+            console->setOutput(tm->getError().toAnsiString());
+
+    if (wynik.command == "go auto")
+        if (!tm->goCoordinates(wynik.dataArray[0],wynik.dataArray[1], true))
+            console->setOutput(tm->getError().toAnsiString());
+
     if (wynik.command == "") console->setOutput("Nie rozpoznano komendy");
 }
 

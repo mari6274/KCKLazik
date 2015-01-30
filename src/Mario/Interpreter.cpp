@@ -55,13 +55,14 @@ InterpResult Interpreter::interpretuj(std::string in)
     leksemy = morfeusz(in);
 
     if (przesuwanieO()) return ir;
+    if (przesuwanieDo()) return ir;
+    if (przesuwanieAuto()) return ir;
 
     return ir;
 }
 
 bool Interpreter::przesuwanieO()
 {
-
     if (
         leksemy.find("iść") != leksemy.end() &&
         leksemy.find("o") != leksemy.end()
@@ -77,12 +78,40 @@ bool Interpreter::przesuwanieO()
 
 bool Interpreter::przesuwanieDo()
 {
-
+    if (
+        leksemy.find("iść") != leksemy.end() &&
+        leksemy.find("do") != leksemy.end()
+        )
+    {
+        ir.command = "go";
+        ir.dataArray[0] = 5;
+        ir.dataArray[1] = 0;
+        return true;
+    }
+    return false;
 }
 
 bool Interpreter::przesuwanieAuto()
 {
-
+    if (
+        (
+         leksemy.find("iść") != leksemy.end() &&
+         leksemy.find("prosto") != leksemy.end() &&
+         leksemy.find("do") != leksemy.end()
+        )
+        ||
+        (
+         leksemy.find("szukać") != leksemy.end() &&
+         leksemy.find("do") != leksemy.end()
+        )
+        )
+    {
+        ir.command = "go auto";
+        ir.dataArray[0] = 5;
+        ir.dataArray[1] = 0;
+        return true;
+    }
+    return false;
 }
 
 bool Interpreter::obracanie()
