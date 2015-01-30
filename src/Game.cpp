@@ -78,7 +78,6 @@ void Game::start()
                 {
                     command=command+event.text.unicode;
                 }
-
                 console->setCommand(command);
             }
 

@@ -42,6 +42,12 @@ void interpreter(Game * g)
 
     Mario::KontrolerInterpretera * kontroler = new Mario::KontrolerInterpretera(console, tm);
 
+//    sf::String sfs = "błąd";
+//    std::cout << sfs.toAnsiString() << std::endl;
+//    Mario::Interpreter inte = Mario::Interpreter::getInstance();
+//    std::set<std::string> secik =  inte.morfeusz(sfs);
+
+
     while (true)
     {
 //        command = tm->readCommand();
@@ -52,6 +58,7 @@ void interpreter(Game * g)
 //        }
 
         kontroler->interpretuj();
+
     }
 }
 

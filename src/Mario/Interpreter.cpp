@@ -23,12 +23,15 @@ std::set<std::string> Interpreter::morfeusz(std::string in)
         char * cstr = new char[x.length()+1];
         strcpy(cstr, x.c_str());
 
-        InterpMorf * im;
-        im = morfeusz_analyse(cstr);
+        InterpMorf * imtable;
+        imtable = morfeusz_analyse(cstr);
 
-        if (im->haslo != NULL) {
-            std::string leksem(im->haslo);
-            output.insert(leksem);
+        for (int i = 0; imtable[i].p != -1; ++i)
+        {
+            if (imtable[i].haslo != NULL) {
+                std::string leksem(imtable[i].haslo);
+                output.insert(leksem);
+            }
         }
 
     }
@@ -41,20 +44,50 @@ std::set<std::string> Interpreter::morfeusz(std::string in)
 
     }
     std::cout << "==============" << std::endl;
-    //morfeus debug
+    //morfeusz debug
 
     return output;
 }
 
-std::string Interpreter::interpretuj(std::string in)
+InterpResult Interpreter::interpretuj(std::string in)
 {
-    std::set<std::string> leksemy = morfeusz(in);
-    if (leksemy.find("iść") != leksemy.end())
+    ir.command = "";
+    leksemy = morfeusz(in);
+
+    if (przesuwanieO()) return ir;
+
+    return ir;
+}
+
+bool Interpreter::przesuwanieO()
+{
+
+    if (
+        leksemy.find("iść") != leksemy.end() &&
+        leksemy.find("o") != leksemy.end()
+        )
     {
-
+        ir.command = "move";
+        ir.dataArray[0] = 5;
+        ir.dataArray[1] = 0;
+        return true;
     }
+    return false;
+}
 
-    return "obroc";
+bool Interpreter::przesuwanieDo()
+{
+
+}
+
+bool Interpreter::przesuwanieAuto()
+{
+
+}
+
+bool Interpreter::obracanie()
+{
+
 }
 
 } // namespace Mario

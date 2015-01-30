@@ -22,10 +22,13 @@ void KontrolerInterpretera::interpretuj()
 
 void KontrolerInterpretera::wykonajKomende(std::string komenda)
 {
-    std::string wynik = interpreter.interpretuj(komenda);
-//    if (wynik == "obroc")
-//        if (!tm->move(10,0))
-//            console->setOutput(tm->getError().toAnsiString());
+    InterpResult wynik = interpreter.interpretuj(komenda);
+
+    if (wynik.command == "move")
+        if (!tm->move(wynik.dataArray[0],wynik.dataArray[1]))
+            console->setOutput(tm->getError().toAnsiString());
+
+    if (wynik.command == "") console->setOutput("Nie rozpoznano komendy");
 }
 
 } // namespace Mario

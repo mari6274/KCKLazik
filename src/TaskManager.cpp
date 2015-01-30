@@ -328,7 +328,9 @@ sf::String TaskManager::readCommand(bool ogonki)
 
     game->command = "";
 
-    return temp;
+    std::string out;
+    sf::Utf32::toUtf8(temp.begin(), temp.end(), std::back_inserter(out));
+    return out;
 }
 
 void TaskManager::setInfo(sf::String info)

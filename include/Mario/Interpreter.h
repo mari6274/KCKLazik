@@ -7,6 +7,7 @@
 #include "Helper.h"
 #include "morfeusz.h"
 #include <set>
+#include "Mario/InterpResult.h"
 
 namespace Mario {
 
@@ -14,11 +15,18 @@ class Interpreter
 {
     public:
         static Interpreter & getInstance();
-        std::string interpretuj(std::string in);
+        InterpResult interpretuj(std::string in);
     protected:
     private:
         Interpreter();
         std::set<std::string> morfeusz(std::string in);
+
+        InterpResult ir;
+        std::set<std::string> leksemy;
+        bool przesuwanieO();
+        bool przesuwanieDo();
+        bool przesuwanieAuto();
+        bool obracanie();
 };
 
 } // namespace Mario
