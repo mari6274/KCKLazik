@@ -22,8 +22,8 @@ void Game::start()
     window.create(sf::VideoMode(WINDOWX+200, WINDOWY), "sfmlview");
 
     rover.setTexture(tRover);
-    rover.setPosition(1525,1025);
-    rover.setOrigin(rover.getGlobalBounds().width/2, rover.getGlobalBounds().height/2);
+    rover.setPosition(1500,1000);
+    //rover.setOrigin(rover.getGlobalBounds().width/2, rover.getGlobalBounds().height/2);
 
     view.setSize(WINDOWX, WINDOWY-150);
     view.setCenter(rover.getPosition());

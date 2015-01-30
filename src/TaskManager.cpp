@@ -18,8 +18,8 @@ bool TaskManager::move(int x, int y)
 
 bool TaskManager::goCoordinates(int x, int y, bool automatic) {
     sf::Vector2f v;
-    v.x = (x%50)+25;
-    v.y = (y%50)+25;
+    v.x = x*50;
+    v.y = y*50;
     if (automatic)
     {
         return goToAuto(v);
@@ -197,6 +197,8 @@ std::vector<AStarVector2f*> TaskManager::generatePath(AStarVector2f* a)
 
 bool TaskManager::checkCollisions(sf::Vector2f v)
 {
+    if (v.x < 0 || v.x > 59*50 || v.y < 0 || v.y > 39*50) return true;
+
     for (std::vector<Object*>* objs : game->colliders)
     {
         for (Object * o : *objs)
