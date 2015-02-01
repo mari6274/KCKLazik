@@ -187,7 +187,7 @@ std::vector<std::string> Helper::dzielNaZdania(std::string in)
         " oraz ",
         " nastepnie ",
         " następnie ",
-        "nastepnie",
+        "następnie",
         " potem ",
         "potem",
         "nastepnie",
