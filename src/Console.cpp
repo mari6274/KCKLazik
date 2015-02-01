@@ -33,6 +33,8 @@ Console::Console(sf::RenderWindow * window)
     prompt.setPosition(20, 560);
     prompt.setFont(courier);
     prompt.setString(">>>");
+
+    lastCommand = "";
 }
 
 void Console::draw()
@@ -46,6 +48,7 @@ void Console::draw()
 
 void Console::setOutputFromKeyboard(sf::String s, bool speech)
 {
+    lastCommand = s;
     ConsoleHistoryItem chi;
     chi.text = s;
     chi.color = sf::Color::White;
@@ -92,4 +95,10 @@ void Console::setCommand(sf::String s)
 sf::String Console::getCommand()
 {
     return t4.getString();
+}
+
+sf::String Console::getAndSetLastCommand()
+{
+    t4.setString(lastCommand);
+    return lastCommand;
 }

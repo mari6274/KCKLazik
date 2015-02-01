@@ -132,7 +132,7 @@ std::vector<Object *> TaskManager::getLocalObjects(int distance = 2)
 
 std::vector<Object*> TaskManager::getNeighbors()
 {
-    sf::String s;
+    std::string s;
     std::vector<Object*> v = getLocalObjects(1);
     for (Object * x : v)
     {
@@ -337,9 +337,9 @@ sf::String TaskManager::readCommand(bool ogonki)
     return out;
 }
 
-void TaskManager::setInfo(sf::String info)
+void TaskManager::setInfo(std::string info)
 {
-    game->infoBox->setInfo(info);
+    game->infoBox->setInfo(Helper::stringZPlikuNaSfString(info));
 }
 
 sf::Vector2f TaskManager::getRoverPosition()

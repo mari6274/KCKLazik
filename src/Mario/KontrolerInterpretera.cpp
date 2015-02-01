@@ -64,6 +64,12 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
         return;
     }
 
+    if (wynik.command == "neighbors")
+    {
+        tm->getNeighbors();
+        return;
+    }
+
 
     console->setOutput(wynik.command);
 }

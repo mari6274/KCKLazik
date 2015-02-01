@@ -33,6 +33,7 @@ class Interpreter
         bool przesuwanieDo();
         bool przesuwanieAuto();
         bool obracanie();
+        bool sasiedztwo();
 
         std::vector<int> wyszukajLiczby(std::string in);
 };

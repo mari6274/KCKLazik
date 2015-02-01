@@ -59,6 +59,7 @@ InterpResult Interpreter::interpretuj(std::string in)
     if (przesuwanieDo()) return ir;
     if (przesuwanieAuto()) return ir;
     if (obracanie()) return ir;
+    if (sasiedztwo()) return ir;
 
     return ir;
 }
@@ -131,6 +132,7 @@ bool Interpreter::przesuwanieAuto()
 {
     std::vector<std::string> tab = {
         "znaleźć",
+        "wyszukać",
         "szukać",
         "automat",
         "automatycznie",
@@ -212,6 +214,35 @@ bool Interpreter::obracanie()
             ir.command = "Nie określono kierunku lub błędnie określony";
         }
 
+        return true;
+    }
+    return false;
+}
+
+bool Interpreter::sasiedztwo()
+{
+    std::vector<std::string> tab = {
+        "opisać",
+        "opisywać",
+        "wymienić",
+        "wynieniać"
+    };
+
+    std::vector<std::string> tab2 = {
+        "sąsiad",
+        "sąsiedni",
+        "sąsiadujący",
+        "sąsiedztwo",
+        "sąsiadować"
+        "obok"
+    };
+
+    if (
+        anyInLeksemy(tab) &&
+        anyInLeksemy(tab2)
+        )
+    {
+        ir.command = "neighbors";
         return true;
     }
     return false;

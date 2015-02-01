@@ -23,7 +23,7 @@ class TaskManager {
         sf::String getError();
 
         sf::String readCommand(bool ogonki = false);
-        void setInfo(sf::String info);
+        void setInfo(std::string info);
     private:
         Game * game;
         sf::String error;

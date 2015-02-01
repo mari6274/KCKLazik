@@ -196,12 +196,15 @@ std::vector<std::string> Helper::dzielNaZdania(std::string in)
 
     for (std::string s : tab)
     {
-        sf::String temp = Helper::stringZPlikuNaSfString(s);
-        Helper::usunOgonki(temp);
-        s = temp.toAnsiString();
-        while ((pos = in.find(s)) != std::string::npos)
+        sf::String intemp = Helper::stringZPlikuNaSfString(in);
+        Helper::usunOgonki(intemp);
+        std::string intempstd = intemp;
+        while ((pos = intempstd.find(s)) != std::string::npos)
         {
             in.replace(pos, s.length(), "|");
+            intemp = Helper::stringZPlikuNaSfString(in);
+            Helper::usunOgonki(intemp);
+            intempstd = intemp;
         }
     }
 

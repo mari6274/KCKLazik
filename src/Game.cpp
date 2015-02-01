@@ -68,6 +68,11 @@ void Game::start()
                 enter = true;
             }
 
+            if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up)
+            {
+                command = console->getAndSetLastCommand();
+            }
+
             if (event.type == sf::Event::TextEntered)
             {
                 if(event.text.unicode == 8)
@@ -157,7 +162,7 @@ void Game::loadTextures()
     }
 }
 
-void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Object*> & v, sf::String name)
+void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Object*> & v, std::string name)
 {
     for (int i = 0; i<n; ++i)
     {

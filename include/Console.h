@@ -21,10 +21,12 @@ class Console
         void setOutput(std::string s, bool speech = true);
         sf::String getCommand();
         void setCommand(sf::String s);
+        sf::String getAndSetLastCommand();
     protected:
     private:
         std::queue<ConsoleHistoryItem> history;
         void updateView();
+        sf::String lastCommand;
 
         sf::RenderWindow * window;
         sf::Font courier;

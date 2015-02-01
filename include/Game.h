@@ -50,7 +50,7 @@ class Game
         sf::Event event;
 
         void loadTextures();
-        void generateRandPosObjects(sf::Texture &, int, std::vector<Object*> &, sf::String);
+        void generateRandPosObjects(sf::Texture &, int, std::vector<Object*> &, std::string);
 
         sf::String command;
         bool enter;

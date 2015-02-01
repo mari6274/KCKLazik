@@ -1,11 +1,11 @@
 #include "Object.h"
 
-Object::Object(const sf::Texture & texture, sf::String name) : sf::Sprite(texture)
+Object::Object(const sf::Texture & texture, std::string name) : sf::Sprite(texture)
 {
     this->name = name;
 }
 
-sf::String Object::getName()
+std::string Object::getName()
 {
     return this->name;
 }
