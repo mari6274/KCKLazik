@@ -183,8 +183,6 @@ std::vector<std::string> Helper::explode(const std::string& str, const char deli
 std::vector<std::string> Helper::dzielNaZdania(std::string in)
 {
     std::string tab[] = {
-        " a nastepnie ",
-        "a nastepnie",
         " i ",
         " oraz ",
         " nastepnie ",
@@ -198,6 +196,9 @@ std::vector<std::string> Helper::dzielNaZdania(std::string in)
 
     for (std::string s : tab)
     {
+        sf::String temp = Helper::stringZPlikuNaSfString(s);
+        Helper::usunOgonki(temp);
+        s = temp.toAnsiString();
         while ((pos = in.find(s)) != std::string::npos)
         {
             in.replace(pos, s.length(), "|");

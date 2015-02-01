@@ -51,26 +51,52 @@ std::set<std::string> Interpreter::morfeusz(std::string in)
 
 InterpResult Interpreter::interpretuj(std::string in)
 {
-    ir.command = "";
+    ir.command = "Nie rozpoznano komendy";
     leksemy = morfeusz(in);
+    liczby = wyszukajLiczby(in);
 
     if (przesuwanieO()) return ir;
     if (przesuwanieDo()) return ir;
     if (przesuwanieAuto()) return ir;
+    if (obracanie()) return ir;
 
     return ir;
 }
 
+bool Interpreter::inLeksemy(std::string s)
+{
+    return leksemy.find(s) != leksemy.end();
+}
+
+bool Interpreter::anyInLeksemy(std::vector<std::string> tab)
+{
+    for (std::string s : tab)
+    {
+        if (inLeksemy(s)) return true;
+    }
+    return false;
+}
+
 bool Interpreter::przesuwanieO()
 {
+    std::vector<std::string> tab = {
+        "iść",
+        "przesunąć"
+    };
+
     if (
-        leksemy.find("iść") != leksemy.end() &&
-        leksemy.find("o") != leksemy.end()
+        anyInLeksemy(tab) &&
+        inLeksemy("o")
         )
     {
-        ir.command = "move";
-        ir.dataArray[0] = 5;
-        ir.dataArray[1] = 0;
+        if (liczby.size() == 2) {
+            ir.command = "move";
+            ir.dataArray[0] = liczby[0];
+            ir.dataArray[1] = liczby[1];
+        } else {
+            ir.command = "Błędna liczba współrzędnych";
+        }
+
         return true;
     }
     return false;
@@ -78,14 +104,24 @@ bool Interpreter::przesuwanieO()
 
 bool Interpreter::przesuwanieDo()
 {
+    std::vector<std::string> tab = {
+        "iść",
+        "przesunąć"
+    };
+
     if (
-        leksemy.find("iść") != leksemy.end() &&
-        leksemy.find("do") != leksemy.end()
+        anyInLeksemy(tab) &&
+        inLeksemy("do")
         )
     {
-        ir.command = "go";
-        ir.dataArray[0] = 5;
-        ir.dataArray[1] = 0;
+        if (liczby.size() == 2) {
+            ir.command = "go";
+            ir.dataArray[0] = liczby[0];
+            ir.dataArray[1] = liczby[1];
+        } else {
+            ir.command = "Błędna liczba współrzędnych";
+        }
+
         return true;
     }
     return false;
@@ -93,22 +129,27 @@ bool Interpreter::przesuwanieDo()
 
 bool Interpreter::przesuwanieAuto()
 {
+    std::vector<std::string> tab = {
+        "znaleźć",
+        "szukać",
+        "automat",
+        "automatycznie",
+        "auto"
+    };
+
     if (
-        (
-         leksemy.find("iść") != leksemy.end() &&
-         leksemy.find("prosto") != leksemy.end() &&
-         leksemy.find("do") != leksemy.end()
-        )
-        ||
-        (
-         leksemy.find("szukać") != leksemy.end() &&
-         leksemy.find("do") != leksemy.end()
-        )
+        anyInLeksemy(tab) &&
+        inLeksemy("do")
         )
     {
-        ir.command = "go auto";
-        ir.dataArray[0] = 5;
-        ir.dataArray[1] = 0;
+        if (liczby.size() == 2) {
+            ir.command = "go auto";
+            ir.dataArray[0] = liczby[0];
+            ir.dataArray[1] = liczby[1];
+        } else {
+            ir.command = "Błędna liczba współrzędnych";
+        }
+
         return true;
     }
     return false;
@@ -116,7 +157,83 @@ bool Interpreter::przesuwanieAuto()
 
 bool Interpreter::obracanie()
 {
+    std::vector<std::string> tab = {
+        "obracać",
+        "obrócić",
+        "odwrócić",
+        "zwrócić",
+        "skręcić",
+        "skręcać",
+        "zakręcać",
+        "odwracać",
+        "zwracać"
+    };
 
+    std::vector<std::string> left = {
+        "lewo",
+        "zachód"
+    };
+
+    std::vector<std::string> right = {
+        "prawo",
+        "wchód"
+    };
+
+    std::vector<std::string> up = {
+        "góra",
+        "północ"
+    };
+
+    std::vector<std::string> down = {
+        "dół",
+        "dołu",
+        "południe"
+    };
+
+    if (
+        anyInLeksemy(tab)
+        )
+    {
+        ir.command = "rotate";
+
+        if (anyInLeksemy(left)) {
+            ir.dataArray[0] = 270;
+        }
+        else if (anyInLeksemy(right)) {
+            ir.dataArray[0] = 90;
+        }
+        else if (anyInLeksemy(up)) {
+            ir.dataArray[0] = 0;
+        }
+        else if (anyInLeksemy(down)) {
+            ir.dataArray[0] = 180;
+        }
+        else {
+            ir.command = "Nie określono kierunku lub błędnie określony";
+        }
+
+        return true;
+    }
+    return false;
+}
+
+std::vector<int> Interpreter::wyszukajLiczby(std::string in)
+{
+    std::vector<int> numbers;
+    for (int i = 0; i < in.size(); ++i)
+    {
+        if (isdigit(in[i]) || in[i] == '-')
+        {
+            std::string temp;
+            while (isdigit(in[i]) || in[i] == '-')
+            {
+                temp += in[i++];
+            }
+            --i;
+            numbers.push_back(atoi(temp.c_str()));
+        }
+    }
+    return numbers;
 }
 
 } // namespace Mario

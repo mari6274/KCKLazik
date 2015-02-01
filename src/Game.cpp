@@ -19,11 +19,11 @@ void Game::start()
     sMap.setTexture(tMap);
     sMap.setTextureRect(sf::IntRect(0,0,3000,2000));
 
-    window.create(sf::VideoMode(WINDOWX+200, WINDOWY), "sfmlview");
+    window.create(sf::VideoMode(WINDOWX+200, WINDOWY), L"Łazik Marsjański");
 
     rover.setTexture(tRover);
-    rover.setPosition(1500,1000);
-    //rover.setOrigin(rover.getGlobalBounds().width/2, rover.getGlobalBounds().height/2);
+    rover.setPosition(1525,1025);
+    rover.setOrigin(rover.getGlobalBounds().width/2, rover.getGlobalBounds().height/2);
 
     view.setSize(WINDOWX, WINDOWY-150);
     view.setCenter(rover.getPosition());

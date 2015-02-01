@@ -8,7 +8,7 @@ TaskManager::TaskManager(Game * game)
 
 bool TaskManager::move(int x, int y)
 {
-    sf::Vector2f v = game->rover.getPosition();
+    sf::Vector2f v = getRoverPosition();
     v.y += y*50;
     v.x += x*50;
 
@@ -32,17 +32,19 @@ bool TaskManager::goCoordinates(int x, int y, bool automatic) {
 }
 
 sf::Vector2f TaskManager::getCoordinates() {
-    return game->rover.getPosition();
+    return getRoverPosition();
 }
 
 bool TaskManager::goTo(sf::Vector2f v)
 {
     sf::Sprite rov = game->rover;
+    rov.setPosition(getRoverPosition());
 
     while (v != rov.getPosition())
     {
         sf::sleep(sf::milliseconds(150));
         rov = game->rover;
+        rov.setPosition(getRoverPosition());
 
         sf::Vector2f p1 = rov.getPosition();
         p1.x -= 50;
@@ -86,7 +88,7 @@ bool TaskManager::goTo(sf::Vector2f v)
             return false;
         }
 
-        game->rover.setPosition(rov.getPosition());
+        setRoverPosition(rov.getPosition());
         game->view.setCenter(rov.getPosition());
     }
 
@@ -114,8 +116,8 @@ std::vector<Object *> TaskManager::getLocalObjects(int distance = 2)
     {
         for (int j = -distance; j<=distance; ++j)
         {
-            float x = game->rover.getPosition().x + i*50;
-            float y = game->rover.getPosition().y + j*50;
+            float x = getRoverPosition().x + i*50;
+            float y = getRoverPosition().y + j*50;
             sf::Vector2f v(x,y);
             std::vector<Object*> temp = Helper::getColliders(v, game->colliders);
             for (Object* o : temp)
@@ -161,7 +163,7 @@ bool TaskManager::goToAuto(sf::Vector2f v)
         for (auto it = path.end()-2; it!=path.begin()-1; --it)
         {
             sf::sleep(sf::milliseconds(150));
-            game->rover.setPosition(*(*it));
+            setRoverPosition(*(*it));
             game->view.setCenter(*(*it));
         }
         for (AStarVector2f * a : path)
@@ -185,7 +187,7 @@ std::vector<AStarVector2f*> TaskManager::generatePath(AStarVector2f* a)
 {
     AStarVector2f debug = *a;
     std::vector<AStarVector2f*> path;
-    sf::Vector2f start = game->rover.getPosition();
+    sf::Vector2f start = getRoverPosition();
     while (start != *(a->parent))
     {
         debug = *a;
@@ -214,7 +216,7 @@ std::vector<AStarVector2f*> TaskManager::AStar(sf::Vector2f target)
     std::vector<AStarVector2f*> CL;
     std::vector<AStarVector2f*> OL;
 
-    sf::Vector2f rov = game->rover.getPosition();
+    sf::Vector2f rov = getRoverPosition();
 
     AStarVector2f * start = new AStarVector2f(rov.x, rov.y);
     start->parent = start;
@@ -303,7 +305,7 @@ std::vector<AStarVector2f*> TaskManager::AStar(sf::Vector2f target)
                 delete a;
             }
         }
-        //std::cout << q->x << " " << q->y << "\t" << q->parent->x << " " << q->parent->y << std::endl;
+        std::cout << q->x << " " << q->y << "\t" << q->parent->x << " " << q->parent->y << std::endl;
     }
     std::vector<AStarVector2f*> path;
     return path;
@@ -338,4 +340,20 @@ sf::String TaskManager::readCommand(bool ogonki)
 void TaskManager::setInfo(sf::String info)
 {
     game->infoBox->setInfo(info);
+}
+
+sf::Vector2f TaskManager::getRoverPosition()
+{
+    sf::Vector2f v(game->rover.getPosition().x-25, game->rover.getPosition().y-25);
+    return v;
+}
+
+void TaskManager::setRoverPosition(float x, float y)
+{
+    game->rover.setPosition(x+25, y+25);
+}
+
+void TaskManager::setRoverPosition(sf::Vector2f v)
+{
+    game->rover.setPosition(v.x+25, v.y+25);
 }

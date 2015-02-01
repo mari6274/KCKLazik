@@ -8,6 +8,8 @@
 #include "morfeusz.h"
 #include <set>
 #include "Mario/InterpResult.h"
+#include <ctype.h>
+#include <stdlib.h>
 
 namespace Mario {
 
@@ -23,10 +25,16 @@ class Interpreter
 
         InterpResult ir;
         std::set<std::string> leksemy;
+        std::vector<int> liczby;
+        bool inLeksemy(std::string s);
+        bool anyInLeksemy(std::vector<std::string> tab);
+
         bool przesuwanieO();
         bool przesuwanieDo();
         bool przesuwanieAuto();
         bool obracanie();
+
+        std::vector<int> wyszukajLiczby(std::string in);
 };
 
 } // namespace Mario

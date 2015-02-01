@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
 #include "Helper.h"
+#include <iostream>
 
 class Game;
 
@@ -33,6 +34,9 @@ class TaskManager {
         std::vector<AStarVector2f*> generatePath(AStarVector2f * a);
         bool checkCollisions(sf::Vector2f v);
         std::vector<AStarVector2f*> AStar(sf::Vector2f target);
+        sf::Vector2f getRoverPosition();
+        void setRoverPosition(float x, float y);
+        void setRoverPosition(sf::Vector2f v);
 
 };
 

@@ -7,6 +7,7 @@
 #include <AStarVector2f.h>
 #include "Console.h"
 #include "InfoBox.h"
+#include <sstream>
 
 class TaskManager;
 
