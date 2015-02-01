@@ -37,22 +37,20 @@ sf::Vector2f TaskManager::getCoordinates() {
 
 bool TaskManager::goTo(sf::Vector2f v)
 {
-    sf::Sprite rov = game->rover;
-    rov.setPosition(getRoverPosition());
+    sf::Vector2f rov = getRoverPosition();
 
-    while (v != rov.getPosition())
+    while (v != rov)
     {
         sf::sleep(sf::milliseconds(150));
-        rov = game->rover;
-        rov.setPosition(getRoverPosition());
+        rov = getRoverPosition();
 
-        sf::Vector2f p1 = rov.getPosition();
+        sf::Vector2f p1 = rov;
         p1.x -= 50;
-        sf::Vector2f p2 = rov.getPosition();
+        sf::Vector2f p2 = rov;
         p2.x += 50;
-        sf::Vector2f p3 = rov.getPosition();
+        sf::Vector2f p3 = rov;
         p3.y -= 50;
-        sf::Vector2f p4 = rov.getPosition();
+        sf::Vector2f p4 = rov;
         p4.y += 50;
         sf::Vector2f p13(p1.x, p3.y);
         sf::Vector2f p14(p1.x, p4.y);
@@ -69,13 +67,13 @@ bool TaskManager::goTo(sf::Vector2f v)
         p.push_back(&p23);
         p.push_back(&p24);
 
-        rov.setPosition(*Helper::minimum(p, v));
+        rov= *Helper::minimum(p, v);
 
         for (std::vector<Object*> * vect : game->colliders)
         {
             for (Object * o : *vect)
             {
-                if (rov.getGlobalBounds().intersects(o->getGlobalBounds()))
+                if (o->getGlobalBounds().contains(rov))
                 {
                     error =  "Nie można przejść gdyż napotkano obiekt: " + o->getName();
                     return false;
@@ -83,13 +81,13 @@ bool TaskManager::goTo(sf::Vector2f v)
             }
         }
 
-        if (!game->sMap.getGlobalBounds().contains(rov.getPosition())) {
+        if (!game->sMap.getGlobalBounds().contains(rov)) {
             error = "Podana pozycja jest poza obszarem eksploracji";
             return false;
         }
 
-        setRoverPosition(rov.getPosition());
-        game->view.setCenter(rov.getPosition());
+        setRoverPosition(rov);
+        game->view.setCenter(rov);
     }
 
     return true;
