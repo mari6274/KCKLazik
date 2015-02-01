@@ -155,6 +155,17 @@ std::vector<Object*> TaskManager::getNeighbors()
 
 bool TaskManager::goToAuto(sf::Vector2f v)
 {
+    for (std::vector<Object*>* objs : game->colliders)
+    {
+        for (Object * o : *objs)
+        {
+            if (o->getGlobalBounds().contains(v)) {
+                error = "Pozycja koliduje z obiektem: " + o->getName();
+                return false;
+            }
+        }
+    }
+
     std::vector<AStarVector2f*> path = AStar(v);
     if (!path.empty())
     {

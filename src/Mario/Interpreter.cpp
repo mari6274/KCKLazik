@@ -174,9 +174,12 @@ bool Interpreter::przesuwanieAuto()
         "znaleźć",
         "wyszukać",
         "szukać",
+        "poszukać",
         "automat",
         "automatycznie",
-        "auto"
+        "auto",
+        "wyznaczyć",
+        "wyznaczać"
     };
 
     if (
