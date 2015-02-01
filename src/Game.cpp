@@ -22,8 +22,9 @@ void Game::start()
     window.create(sf::VideoMode(WINDOWX+200, WINDOWY), L"Łazik Marsjański");
 
     rover.setTexture(tRover);
-    rover.setPosition(1525,1025);
     rover.setOrigin(rover.getGlobalBounds().width/2, rover.getGlobalBounds().height/2);
+    rover.setPosition(1525,1025);
+
 
     view.setSize(WINDOWX, WINDOWY-150);
     view.setCenter(rover.getPosition());

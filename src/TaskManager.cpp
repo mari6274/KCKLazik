@@ -87,7 +87,7 @@ bool TaskManager::goTo(sf::Vector2f v)
         }
 
         setRoverPosition(rov);
-        game->view.setCenter(rov);
+        game->view.setCenter(game->rover.getPosition());
     }
 
     return true;
@@ -155,6 +155,11 @@ std::vector<Object*> TaskManager::getNeighbors()
 
 bool TaskManager::goToAuto(sf::Vector2f v)
 {
+    if (!game->sMap.getGlobalBounds().contains(v)) {
+        error = "Podana pozycja jest poza obszarem eksploracji";
+        return false;
+    }
+
     for (std::vector<Object*>* objs : game->colliders)
     {
         for (Object * o : *objs)
@@ -173,7 +178,7 @@ bool TaskManager::goToAuto(sf::Vector2f v)
         {
             sf::sleep(sf::milliseconds(150));
             setRoverPosition(*(*it));
-            game->view.setCenter(*(*it));
+            game->view.setCenter(game->rover.getPosition());
         }
         for (AStarVector2f * a : path)
         {
