@@ -85,21 +85,61 @@ bool Interpreter::przesuwanieO()
         "przesunąć"
     };
 
+    std::vector<std::string> left = {
+        "lewo",
+        "zachód"
+    };
+
+    std::vector<std::string> right = {
+        "prawo",
+        "wchód"
+    };
+
+    std::vector<std::string> up = {
+        "góra",
+        "północ"
+    };
+
+    std::vector<std::string> down = {
+        "dół",
+        "dołu",
+        "południe"
+    };
+
     if (
-        anyInLeksemy(tab) &&
-        inLeksemy("o")
+        anyInLeksemy(tab)
         )
     {
-        if (liczby.size() == 2) {
-            ir.command = "move";
+        ir.command = "move";
+
+        if (liczby.size() != 1) {
+            ir.command = "Błędna liczba parametrów";
+            return true;
+        }
+
+        if (anyInLeksemy(left)) {
+            ir.dataArray[0] = -1*liczby[0];
+            ir.dataArray[1] = 0;
+        }
+        else if (anyInLeksemy(right)) {
             ir.dataArray[0] = liczby[0];
-            ir.dataArray[1] = liczby[1];
-        } else {
-            ir.command = "Błędna liczba współrzędnych";
+            ir.dataArray[1] = 0;
+        }
+        else if (anyInLeksemy(up)) {
+            ir.dataArray[0] = 0;
+            ir.dataArray[1] = -1*liczby[0];
+        }
+        else if (anyInLeksemy(down)) {
+            ir.dataArray[0] = 0;
+            ir.dataArray[1] = liczby[0];
+        }
+        else {
+            ir.command = "Nie określono kierunku lub błędnie określony";
         }
 
         return true;
     }
+
     return false;
 }
 
@@ -233,8 +273,9 @@ bool Interpreter::sasiedztwo()
         "sąsiedni",
         "sąsiadujący",
         "sąsiedztwo",
-        "sąsiadować"
-        "obok"
+        "sąsiadować",
+        "obok",
+        "blisko"
     };
 
     if (
