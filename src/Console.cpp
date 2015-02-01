@@ -46,9 +46,11 @@ void Console::draw()
 
 void Console::setOutputFromKeyboard(sf::String s, bool speech)
 {
-    t1.setString(t2.getString());
-    t2.setString(t3.getString());
-    t3.setString(s);
+    ConsoleHistoryItem chi;
+    chi.text = s;
+    chi.color = sf::Color::White;
+    history.push(chi);
+    updateView();
 
     if (speech) {
         sf::String speech = "espeak.exe -v polish -s 120 --path=espeak_data \"" + s + "\"";
@@ -59,15 +61,27 @@ void Console::setOutputFromKeyboard(sf::String s, bool speech)
 
 void Console::setOutput(std::string s, bool speech)
 {
-    t1.setString(t2.getString());
-    t2.setString(t3.getString());
-    t3.setString(Helper::stringZPlikuNaSfString(s));
+    ConsoleHistoryItem chi;
+    chi.text = Helper::stringZPlikuNaSfString(s);
+    chi.color = sf::Color::Yellow;
+    history.push(chi);
+    updateView();
 
     if (speech) {
         sf::String speech = "espeak.exe -v polish -s 120 --path=espeak_data \"" + s + "\"";
         std::system(speech.toAnsiString().c_str());
     }
 
+}
+
+void Console::updateView()
+{
+    t1.setString(t2.getString());
+    t1.setColor(t2.getColor());
+    t2.setString(t3.getString());
+    t2.setColor(t3.getColor());
+    t3.setString(history.back().text);
+    t3.setColor(history.back().color);
 }
 
 void Console::setCommand(sf::String s)

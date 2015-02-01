@@ -4,18 +4,28 @@
 #include <SFML/Graphics.hpp>
 #include <cstdlib>
 #include "Helper.h"
+#include <queue>
+
+struct ConsoleHistoryItem
+{
+    sf::String text;
+    sf::Color color;
+};
 
 class Console
 {
     public:
         Console(sf::RenderWindow * window);
         void draw();
-        void setOutputFromKeyboard(sf::String s, bool speech = true);
+        void setOutputFromKeyboard(sf::String s, bool speech = false);
         void setOutput(std::string s, bool speech = true);
         sf::String getCommand();
         void setCommand(sf::String s);
     protected:
     private:
+        std::queue<ConsoleHistoryItem> history;
+        void updateView();
+
         sf::RenderWindow * window;
         sf::Font courier;
         sf::Text t1;
