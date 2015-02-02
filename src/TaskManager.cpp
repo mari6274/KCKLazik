@@ -67,7 +67,7 @@ bool TaskManager::goTo(sf::Vector2f v)
         p.push_back(&p23);
         p.push_back(&p24);
 
-        rov= *Helper::minimum(p, v);
+        rov = *Helper::minimum(p, v);
 
         for (std::vector<Object*> * vect : game->colliders)
         {
@@ -127,20 +127,16 @@ std::vector<Object *> TaskManager::getLocalObjects(int distance)
     }
 
     std::string s;
-    for (Object * x : localObjects)
+    for (int i = 0 ; i < localObjects.size(); ++i)
     {
-        std::stringstream ss1;
-        std::stringstream ss2;
-        ss1 << x->getPosition().x;
-        ss2 << x->getPosition().y;
+        std::stringstream ss;
+        ss << localObjects[i]->getPosition().x << " " << localObjects[i]->getPosition().y << " " << i+1;
         std::string stds1;
         std::string stds2;
-        ss1 >> stds1;
-        ss2 >> stds2;
+        std::string stdsi;
+        ss >> stds1 >> stds2 >> stdsi;
 
-        s += x->getName() + " (" + stds1 + ", " + stds2 + ")\n";
-        ss1.clear();
-        ss2.clear();
+        s += stdsi + ". " + localObjects[i]->getName() + " (" + stds1 + ", " + stds2 + ")\n";
     }
 
     setInfo(s);

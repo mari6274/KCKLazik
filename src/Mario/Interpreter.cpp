@@ -56,8 +56,8 @@ InterpResult Interpreter::interpretuj(std::string in)
     liczby = wyszukajLiczby(in);
 
     if (przesuwanieAuto()) return ir;
-    if (przesuwanieO()) return ir;
     if (przesuwanieDo()) return ir;
+    if (przesuwanieO()) return ir;
     if (obracanie()) return ir;
     if (sasiedztwo()) return ir;
     if (otoczenie()) return ir;
@@ -162,7 +162,20 @@ bool Interpreter::przesuwanieDo()
             ir.command = "go";
             ir.dataArray[0] = liczby[0];
             ir.dataArray[1] = liczby[1];
-        } else {
+        }
+        else if (liczby.size() == 1) {
+            int liczba = liczby[0];
+            if (liczba-1 < obiekty.size()) {
+                ir.command = "go";
+                int x = obiekty[liczba-1]->getPosition().x/50;
+                int y = obiekty[liczba-1]->getPosition().y/50;
+                ir.dataArray[0] = x;
+                ir.dataArray[1] = y;
+            } else {
+                ir.command = "Błędna liczba współrzędnych lub błędny numer obiektu";
+            }
+        }
+        else {
             ir.command = "Błędna liczba współrzędnych";
         }
 
