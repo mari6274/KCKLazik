@@ -61,6 +61,7 @@ InterpResult Interpreter::interpretuj(std::string in)
     if (obracanie()) return ir;
     if (sasiedztwo()) return ir;
     if (aktualnaPozycja()) return ir;
+    if (exit()) return ir;
 
     return ir;
 }
@@ -319,6 +320,25 @@ bool Interpreter::aktualnaPozycja()
     return false;
 }
 
+bool Interpreter::exit()
+{
+    std::vector<std::string> tab = {
+        "wyjście",
+        "wychodzić",
+        "wyłączyć",
+        "rozłączyć",
+        "wyjść",
+        "opuścić"
+    };
+
+    if (anyInLeksemy(tab)) {
+        ir.command = "exit";
+        return true;
+    }
+
+    return false;
+}
+
 std::vector<int> Interpreter::wyszukajLiczby(std::string in)
 {
     std::vector<int> numbers;
@@ -337,5 +357,7 @@ std::vector<int> Interpreter::wyszukajLiczby(std::string in)
     }
     return numbers;
 }
+
+
 
 } // namespace Mario

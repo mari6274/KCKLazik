@@ -35,6 +35,7 @@ class Interpreter
         bool obracanie();
         bool sasiedztwo();
         bool aktualnaPozycja();
+        bool exit();
 
         std::vector<int> wyszukajLiczby(std::string in);
 };

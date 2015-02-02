@@ -34,8 +34,6 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
         return;
     }
 
-
-
     if (wynik.command == "go")
     {
         if (!tm->goCoordinates(wynik.dataArray[0],wynik.dataArray[1]))
@@ -44,8 +42,6 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
         }
         return;
     }
-
-
 
     if (wynik.command == "go auto")
     {
@@ -68,8 +64,6 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
         return;
     }
 
-
-
     if (wynik.command == "rotate")
     {
         tm->rotate(wynik.dataArray[0]);
@@ -82,6 +76,11 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
         return;
     }
 
+    if (wynik.command == "exit")
+    {
+        tm->quit();
+        return;
+    }
 
     console->setOutput(wynik.command);
 }
