@@ -55,11 +55,12 @@ InterpResult Interpreter::interpretuj(std::string in)
     leksemy = morfeusz(in);
     liczby = wyszukajLiczby(in);
 
+    if (przesuwanieAuto()) return ir;
     if (przesuwanieO()) return ir;
     if (przesuwanieDo()) return ir;
-    if (przesuwanieAuto()) return ir;
     if (obracanie()) return ir;
     if (sasiedztwo()) return ir;
+    if (aktualnaPozycja()) return ir;
 
     return ir;
 }
@@ -289,6 +290,32 @@ bool Interpreter::sasiedztwo()
         ir.command = "neighbors";
         return true;
     }
+    return false;
+}
+
+bool Interpreter::aktualnaPozycja()
+{
+    std::vector<std::string> tab = {
+        "aktualny",
+        "łazik",
+        "swój"
+    };
+
+    std::vector<std::string> tab2 = {
+        "pozycja",
+        "koordynata",
+        "współrzędna"
+    };
+
+    if (
+        anyInLeksemy(tab) &&
+        anyInLeksemy(tab2)
+        )
+    {
+        ir.command = "getPosition";
+        return true;
+    }
+
     return false;
 }
 

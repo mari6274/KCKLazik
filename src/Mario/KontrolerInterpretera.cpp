@@ -56,6 +56,18 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
         return;
     }
 
+    if (wynik.command == "getPosition")
+    {
+        sf::Vector2f v = tm->getCoordinates();
+        std::stringstream ss;
+        std::string x;
+        std::string y;
+        ss << v.x << " " << v.y;
+        ss >> x >> y;
+        console->setOutput("Aktualna pozycja to: " + x + " " + y);
+        return;
+    }
+
 
 
     if (wynik.command == "rotate")
