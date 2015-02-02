@@ -72,13 +72,13 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
 
     if (wynik.command == "neighbors")
     {
-        tm->getNeighbors();
+        interpreter.setObiekty(tm->getNeighbors());
         return;
     }
 
     if (wynik.command == "local objects")
     {
-        tm->getLocalObjects(5);
+        interpreter.setObiekty(tm->getLocalObjects(5));
         return;
     }
 

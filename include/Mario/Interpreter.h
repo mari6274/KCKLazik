@@ -18,10 +18,13 @@ class Interpreter
     public:
         static Interpreter & getInstance();
         InterpResult interpretuj(std::string in);
+        void setObiekty(std::vector<Object*> v);
     protected:
     private:
         Interpreter();
         std::set<std::string> morfeusz(std::string in);
+
+        std::vector<Object*> obiekty;
 
         InterpResult ir;
         std::set<std::string> leksemy;

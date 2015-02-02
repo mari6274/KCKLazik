@@ -386,6 +386,10 @@ std::vector<int> Interpreter::wyszukajLiczby(std::string in)
     return numbers;
 }
 
+void Interpreter::setObiekty(std::vector<Object*> v)
+{
+    this->obiekty = v;
+}
 
 
 } // namespace Mario
