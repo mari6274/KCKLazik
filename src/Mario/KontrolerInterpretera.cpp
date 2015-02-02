@@ -76,6 +76,12 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
         return;
     }
 
+    if (wynik.command == "local objects")
+    {
+        tm->getLocalObjects(5);
+        return;
+    }
+
     if (wynik.command == "exit")
     {
         tm->quit();

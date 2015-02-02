@@ -60,6 +60,7 @@ InterpResult Interpreter::interpretuj(std::string in)
     if (przesuwanieDo()) return ir;
     if (obracanie()) return ir;
     if (sasiedztwo()) return ir;
+    if (otoczenie()) return ir;
     if (aktualnaPozycja()) return ir;
     if (exit()) return ir;
 
@@ -333,6 +334,33 @@ bool Interpreter::exit()
 
     if (anyInLeksemy(tab)) {
         ir.command = "exit";
+        return true;
+    }
+
+    return false;
+}
+
+bool Interpreter::otoczenie()
+{
+    std::vector<std::string> tab = {
+        "opisać",
+        "wymienić",
+        "wskacać"
+    };
+
+    std::vector<std::string> tab2 = {
+        "otoczenie",
+        "środowisko",
+        "okolica",
+        "pobliże"
+    };
+
+    if (
+        anyInLeksemy(tab) &&
+        anyInLeksemy(tab2)
+        )
+    {
+        ir.command = "local objects";
         return true;
     }
 

@@ -34,6 +34,7 @@ class Interpreter
         bool przesuwanieAuto();
         bool obracanie();
         bool sasiedztwo();
+        bool otoczenie();
         bool aktualnaPozycja();
         bool exit();
 
