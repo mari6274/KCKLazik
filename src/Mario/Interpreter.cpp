@@ -55,6 +55,7 @@ InterpResult Interpreter::interpretuj(std::string in)
     leksemy = morfeusz(in);
     liczby = wyszukajLiczby(in);
 
+    if (najblizszyObiekt()) return ir;
     if (przesuwanieAuto()) return ir;
     if (przesuwanieDo()) return ir;
     if (przesuwanieO()) return ir;
@@ -81,11 +82,25 @@ bool Interpreter::anyInLeksemy(std::vector<std::string> tab)
     return false;
 }
 
+int Interpreter::objectInLeksemy()
+{
+    //TODO ma wyszukiwać najbliższy
+    for (int i = 0 ; i < obiekty.size(); ++i)
+    {
+        std::string name = obiekty[i]->getName();
+        if (inLeksemy(name)) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 bool Interpreter::przesuwanieO()
 {
     std::vector<std::string> tab = {
         "iść",
-        "przesunąć"
+        "przesunąć",
+        "jechać"
     };
 
     std::vector<std::string> left = {
@@ -150,7 +165,8 @@ bool Interpreter::przesuwanieDo()
 {
     std::vector<std::string> tab = {
         "iść",
-        "przesunąć"
+        "przesunąć",
+        "jechać"
     };
 
     if (
@@ -374,6 +390,48 @@ bool Interpreter::otoczenie()
         )
     {
         ir.command = "local objects";
+        return true;
+    }
+
+    return false;
+}
+
+bool Interpreter::najblizszyObiekt()
+{
+    std::vector<std::string> tab = {
+        "iść",
+        "szukać",
+        "wyszukać",
+        "znaleźć",
+        "jechać",
+        "przesunąć"
+    };
+
+    std::vector<std::string> tab2 = {
+        "sąsiad",
+        "sąsiedni",
+        "sąsiadujący",
+        "sąsiedztwo",
+        "sąsiadować",
+        "obok",
+        "bliski",
+        "okolica"
+    };
+
+    if (
+        anyInLeksemy(tab) &&
+        anyInLeksemy(tab2)
+        )
+    {
+        int pos = objectInLeksemy();
+        if (pos != -1) {
+            ir.command = "go near object";
+            ir.dataArray[0] = obiekty[pos]->getPosition().x/50;
+            ir.dataArray[1] = obiekty[pos]->getPosition().y/50;
+        } else {
+            ir.command = "Nie znaleziono w pobliżu obiektu o takiej nazwie";
+        }
+
         return true;
     }
 

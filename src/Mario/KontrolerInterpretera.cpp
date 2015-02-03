@@ -52,6 +52,16 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
         return;
     }
 
+    if (wynik.command == "go near object")
+    {
+        interpreter.setObiekty(tm->getLocalObjects(5));
+        if (!tm->goCoordinates(wynik.dataArray[0],wynik.dataArray[1]))
+        {
+            console->setOutput(tm->getError().toAnsiString());
+        }
+        return;
+    }
+
     if (wynik.command == "getPosition")
     {
         sf::Vector2f v = tm->getCoordinates();

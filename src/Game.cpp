@@ -40,9 +40,10 @@ void Game::start()
     window.setFramerateLimit(60);
 
     srand(time(NULL));
-    generateRandPosObjects(crater, 6, craters, "Krater");
-    generateRandPosObjects(rock1, 20, rocks, "Skała");
-    generateRandPosObjects(rock2, 20, rocks, "Skała");
+    generateRandPosObjects(crater, 6, craters, "krater");
+    generateRandPosObjects(rock1, 20, rocks, "skała");
+    generateRandPosObjects(rock2, 20, rocks, "skała");
+    //TODO współrzędne na środku (Origin)
 
     //vector of colliders
     colliders.push_back(&rocks);

@@ -8,7 +8,6 @@
 #include "Console.h"
 #include "TaskManager.h"
 #include "Helper.h"
-#include "Mario/InterpResult.h"
 
 namespace Mario {
 

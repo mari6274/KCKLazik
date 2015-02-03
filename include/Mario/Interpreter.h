@@ -7,11 +7,16 @@
 #include "Helper.h"
 #include "morfeusz.h"
 #include <set>
-#include "Mario/InterpResult.h"
 #include <ctype.h>
 #include <stdlib.h>
 
 namespace Mario {
+
+struct InterpResult
+{
+    std::string command;
+    int dataArray[4];
+};
 
 class Interpreter
 {
@@ -31,6 +36,7 @@ class Interpreter
         std::vector<int> liczby;
         bool inLeksemy(std::string s);
         bool anyInLeksemy(std::vector<std::string> tab);
+        int objectInLeksemy();
 
         bool przesuwanieO();
         bool przesuwanieDo();
@@ -38,6 +44,7 @@ class Interpreter
         bool obracanie();
         bool sasiedztwo();
         bool otoczenie();
+        bool najblizszyObiekt();
         bool aktualnaPozycja();
         bool exit();
 
