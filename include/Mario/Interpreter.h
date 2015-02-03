@@ -24,12 +24,14 @@ class Interpreter
         static Interpreter & getInstance();
         InterpResult interpretuj(std::string in);
         void setObiekty(std::vector<Object*> v);
+        void setPozycjaLazika(sf::Vector2f v);
     protected:
     private:
         Interpreter();
         std::set<std::string> morfeusz(std::string in);
 
         std::vector<Object*> obiekty;
+        sf::Vector2f pozycjaLazika;
 
         InterpResult ir;
         std::set<std::string> leksemy;

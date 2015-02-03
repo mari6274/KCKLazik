@@ -43,7 +43,6 @@ void Game::start()
     generateRandPosObjects(crater, 6, craters, "krater");
     generateRandPosObjects(rock1, 20, rocks, "skała");
     generateRandPosObjects(rock2, 20, rocks, "skała");
-    //TODO współrzędne na środku (Origin)
 
     //vector of colliders
     colliders.push_back(&rocks);
@@ -176,8 +175,14 @@ void Game::generateRandPosObjects(sf::Texture & texture, int n, std::vector<Obje
             o->setPosition((rand()%(60-width))*50, (rand()%(40-height))*50);
         } while (Helper::checkCollisions(o->getPosition(), colliders) || o->getGlobalBounds().intersects(rover.getGlobalBounds()));
 
-        //o->setOrigin(o->getGlobalBounds().width/2, o->getGlobalBounds().height/2);
-
+        int orx = o->getGlobalBounds().width/2;
+        orx = orx/50;
+        orx = orx * 50;
+        int ory = o->getGlobalBounds().height/2;
+        ory = ory/50;
+        ory = ory * 50;
+        o->setOrigin(orx, ory);
+        o->move(orx, ory);
         v.push_back(o);
     }
 }

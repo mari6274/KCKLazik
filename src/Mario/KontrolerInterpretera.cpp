@@ -23,6 +23,8 @@ void KontrolerInterpretera::interpretuj()
 
 void KontrolerInterpretera::wykonajKomende(std::string komenda)
 {
+    interpreter.setPozycjaLazika(tm->getCoordinates());
+    interpreter.setObiekty(tm->getLocalObjects(7, false));
     InterpResult wynik = interpreter.interpretuj(komenda);
 
     if (wynik.command == "move")
@@ -54,7 +56,6 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
 
     if (wynik.command == "go near object")
     {
-        interpreter.setObiekty(tm->getLocalObjects(5));
         if (!tm->goCoordinates(wynik.dataArray[0],wynik.dataArray[1]))
         {
             console->setOutput(tm->getError().toAnsiString());
@@ -88,7 +89,7 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
 
     if (wynik.command == "local objects")
     {
-        interpreter.setObiekty(tm->getLocalObjects(5));
+        interpreter.setObiekty(tm->getLocalObjects(7));
         return;
     }
 

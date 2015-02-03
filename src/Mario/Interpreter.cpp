@@ -84,14 +84,22 @@ bool Interpreter::anyInLeksemy(std::vector<std::string> tab)
 
 int Interpreter::objectInLeksemy()
 {
+    std::vector<Object *> znalezione;
     //TODO ma wyszukiwać najbliższy
     for (int i = 0 ; i < obiekty.size(); ++i)
     {
         std::string name = obiekty[i]->getName();
         if (inLeksemy(name)) {
-            return i;
+            znalezione.push_back(obiekty[i]);
         }
     }
+
+    Object * o = Helper::minimum(znalezione, pozycjaLazika);
+    for (int i = 0; i < obiekty.size(); ++i)
+    {
+        if (o == obiekty[i]) return i;
+    }
+
     return -1;
 }
 
@@ -460,6 +468,11 @@ std::vector<int> Interpreter::wyszukajLiczby(std::string in)
 void Interpreter::setObiekty(std::vector<Object*> v)
 {
     this->obiekty = v;
+}
+
+void Interpreter::setPozycjaLazika(sf::Vector2f v)
+{
+    this->pozycjaLazika = v;
 }
 
 

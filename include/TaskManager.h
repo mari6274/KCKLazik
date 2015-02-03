@@ -18,8 +18,8 @@ class TaskManager {
         bool goCoordinates(int x, int y, bool automatic = false);
 
         sf::Vector2f getCoordinates();
-        std::vector<Object*> getLocalObjects(int distance = 2);
-        std::vector<Object*> getNeighbors();
+        std::vector<Object*> getLocalObjects(int distance = 2, bool print = true);
+        std::vector<Object*> getNeighbors(bool print = true);
         sf::String getError();
 
         sf::String readCommand(bool ogonki = false);

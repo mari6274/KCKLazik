@@ -107,7 +107,7 @@ void TaskManager::rotate(int angle)
     game->rover.setRotation(angle);
 }
 
-std::vector<Object *> TaskManager::getLocalObjects(int distance)
+std::vector<Object *> TaskManager::getLocalObjects(int distance, bool print)
 {
     std::vector<Object *> localObjects;
     for (int i = -distance; i<=distance; ++i)
@@ -139,15 +139,15 @@ std::vector<Object *> TaskManager::getLocalObjects(int distance)
         s += stdsi + ". " + localObjects[i]->getName() + " (" + stds1 + ", " + stds2 + ")\n";
     }
 
-    setInfo(s);
+    if (print) setInfo(s);
 
     return localObjects;
 }
 
-std::vector<Object*> TaskManager::getNeighbors()
+std::vector<Object*> TaskManager::getNeighbors(bool print)
 {
 
-    return getLocalObjects(1);
+    return getLocalObjects(1, print);
 
 }
 
