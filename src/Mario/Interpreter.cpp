@@ -214,6 +214,27 @@ bool Interpreter::przesuwanieDo()
         "jechać"
     };
 
+    std::vector<std::string> left = {
+        "lewo",
+        "zachód"
+    };
+
+    std::vector<std::string> right = {
+        "prawo",
+        "wchód"
+    };
+
+    std::vector<std::string> up = {
+        "góra",
+        "północ"
+    };
+
+    std::vector<std::string> down = {
+        "dół",
+        "dołu",
+        "południe"
+    };
+
     std::vector<std::string> ahead = {
         "przed",
         "przód"
@@ -227,6 +248,10 @@ bool Interpreter::przesuwanieDo()
     if (
         anyInLeksemy(tab) &&
         inLeksemy("do") &&
+        !anyInLeksemy(left) &&
+        !anyInLeksemy(right) &&
+        !anyInLeksemy(down) &&
+        !anyInLeksemy(up) &&
         !anyInLeksemy(ahead) &&
         !anyInLeksemy(behind)
         )
