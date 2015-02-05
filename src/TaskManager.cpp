@@ -142,7 +142,7 @@ std::vector<Object *> TaskManager::getLocalObjects(int distance, bool print)
     for (int i = 0 ; i < localObjects.size(); ++i)
     {
         std::stringstream ss;
-        ss << localObjects[i]->getPosition().x << " " << localObjects[i]->getPosition().y << " " << i+1;
+        ss << localObjects[i]->getPosition().x/50 << " " << localObjects[i]->getPosition().y/50 << " " << i+1;
         std::string stds1;
         std::string stds2;
         std::string stdsi;

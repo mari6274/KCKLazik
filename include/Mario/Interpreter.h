@@ -33,6 +33,9 @@ class Interpreter
         std::set<std::string> morfeusz(std::string in);
 
         std::vector<Object*> obiekty;
+        std::vector<Object*> obiektyWyswietlane;
+        void aktualizujWyswietlaneObiekty();
+
         sf::Vector2f pozycjaLazika;
         int obrotLazika;
 

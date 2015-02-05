@@ -70,7 +70,7 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
         std::stringstream ss;
         std::string x;
         std::string y;
-        ss << v.x << " " << v.y;
+        ss << v.x/50 << " " << v.y/50;
         ss >> x >> y;
         console->setOutput("Aktualna pozycja to: " + x + " " + y);
         return;

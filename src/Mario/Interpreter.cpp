@@ -67,8 +67,14 @@ InterpResult Interpreter::interpretuj(std::string in)
     if (przesuwanieO()) return ir;
 
     if (obracanie()) return ir;
-    if (sasiedztwo()) return ir;
-    if (otoczenie()) return ir;
+    if (sasiedztwo()) {
+        aktualizujWyswietlaneObiekty();
+        return ir;
+    }
+    if (otoczenie()) {
+        aktualizujWyswietlaneObiekty();
+        return ir;
+    }
     if (aktualnaPozycja()) return ir;
     if (kopanie()) return ir;
     if (exit()) return ir;
@@ -122,23 +128,23 @@ bool Interpreter::przesuwanieO()
 
     std::vector<std::string> left = {
         "lewo",
-        "zachód"
+        "zachód", "zachodni"
     };
 
     std::vector<std::string> right = {
         "prawo",
-        "wchód"
+        "wschód", "wschodni"
     };
 
     std::vector<std::string> up = {
         "góra",
-        "północ"
+        "północ", "północny"
     };
 
     std::vector<std::string> down = {
         "dół",
         "dołu",
-        "południe"
+        "południe", "południowy"
     };
 
     std::vector<std::string> ahead = {
@@ -216,23 +222,23 @@ bool Interpreter::przesuwanieDo()
 
     std::vector<std::string> left = {
         "lewo",
-        "zachód"
+        "zachód", "zachodni"
     };
 
     std::vector<std::string> right = {
         "prawo",
-        "wchód"
+        "wschód", "wschodni"
     };
 
     std::vector<std::string> up = {
         "góra",
-        "północ"
+        "północ", "północny"
     };
 
     std::vector<std::string> down = {
         "dół",
         "dołu",
-        "południe"
+        "południe", "południowy"
     };
 
     std::vector<std::string> ahead = {
@@ -263,10 +269,10 @@ bool Interpreter::przesuwanieDo()
         }
         else if (liczby.size() == 1) {
             int liczba = liczby[0];
-            if (liczba-1 < obiekty.size()) {
+            if (liczba-1 < obiektyWyswietlane.size()) {
                 ir.command = "go";
-                int x = obiekty[liczba-1]->getPosition().x/50;
-                int y = obiekty[liczba-1]->getPosition().y/50;
+                int x = obiektyWyswietlane[liczba-1]->getPosition().x/50;
+                int y = obiektyWyswietlane[liczba-1]->getPosition().y/50;
                 ir.dataArray[0] = x;
                 ir.dataArray[1] = y;
             } else {
@@ -331,24 +337,25 @@ bool Interpreter::obracanie()
     std::vector<std::string> left = {
         "lewo",
         "lewy",
-        "zachód"
+        "zachód", "zachodni"
     };
 
     std::vector<std::string> right = {
         "prawo",
         "prawy",
-        "wchód"
+        "wschód", "wschodni"
     };
 
     std::vector<std::string> up = {
         "góra",
-        "północ"
+        "północ", "północny"
     };
 
     std::vector<std::string> down = {
         "dół",
         "dołu",
-        "południe"
+        "południe",
+        "południowy"
     };
 
     if (
@@ -413,7 +420,8 @@ bool Interpreter::aktualnaPozycja()
     std::vector<std::string> tab = {
         "aktualny",
         "łazik",
-        "swój"
+        "swój",
+        "własny"
     };
 
     std::vector<std::string> tab2 = {
@@ -423,12 +431,13 @@ bool Interpreter::aktualnaPozycja()
     };
 
     if (
-        anyInLeksemy(tab) &&
         anyInLeksemy(tab2)
         )
     {
-        ir.command = "getPosition";
-        return true;
+        if (anyInLeksemy(tab) || leksemy.size() < 3) {
+            ir.command = "getPosition";
+            return true;
+        }
     }
 
     return false;
@@ -533,24 +542,25 @@ bool Interpreter::kopanie()
     std::vector<std::string> left = {
         "lewo",
         "lewy",
-        "zachód"
+        "zachód", "zachodni"
     };
 
     std::vector<std::string> right = {
         "prawo",
         "prawy",
-        "wchód"
+        "wschód", "wschodni"
     };
 
     std::vector<std::string> up = {
         "góra",
-        "północ"
+        "północ", "północny"
     };
 
     std::vector<std::string> down = {
         "dół",
         "dołu",
-        "południe"
+        "południe",
+        "południowy"
     };
 
     std::vector<std::string> ahead = {
@@ -659,6 +669,11 @@ void Interpreter::setPozycjaLazika(sf::Vector2f v)
 void Interpreter::setObrotLazika(int o)
 {
     this->obrotLazika = o;
+}
+
+void Interpreter::aktualizujWyswietlaneObiekty()
+{
+    obiektyWyswietlane = obiekty;
 }
 
 
