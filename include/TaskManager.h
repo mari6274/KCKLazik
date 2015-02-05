@@ -16,8 +16,10 @@ class TaskManager {
         bool move(int x, int y);
         void rotate(int angle);
         bool goCoordinates(int x, int y, bool automatic = false);
+        void kop(sf::Vector2f v);
 
         sf::Vector2f getCoordinates();
+        int getRotation();
         std::vector<Object*> getLocalObjects(int distance = 2, bool print = true);
         std::vector<Object*> getNeighbors(bool print = true);
         sf::String getError();

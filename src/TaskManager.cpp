@@ -31,8 +31,20 @@ bool TaskManager::goCoordinates(int x, int y, bool automatic) {
 
 }
 
+void TaskManager::kop(sf::Vector2f v)
+{
+    Object * hole = new Object(game->hole, "dziura");
+    hole->setPosition(v);
+    game->holes.push_back(hole);
+}
+
 sf::Vector2f TaskManager::getCoordinates() {
     return getRoverPosition();
+}
+
+int TaskManager::getRotation()
+{
+    return game->rover.getRotation();
 }
 
 bool TaskManager::goTo(sf::Vector2f v)

@@ -32,6 +32,7 @@ class Game
         sf::Texture rock1;
         sf::Texture rock2;
         sf::Texture tRover;
+        sf::Texture hole;
 
         sf::RenderWindow window;
         sf::Sprite sMap;
@@ -46,6 +47,7 @@ class Game
         sf::Sprite rover;
         std::vector<Object*> craters;
         std::vector<Object*> rocks;
+        std::vector<Object*> holes;
 
         sf::Event event;
 

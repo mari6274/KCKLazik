@@ -56,13 +56,19 @@ InterpResult Interpreter::interpretuj(std::string in)
     liczby = wyszukajLiczby(in);
 
     if (najblizszyObiekt()) return ir;
+
+
+    //TODO kolejność przesuwanie o (bląd w idź do przodu/tylu i w idź do 1.
+
     if (przesuwanieAuto()) return ir;
     if (przesuwanieDo()) return ir;
     if (przesuwanieO()) return ir;
+
     if (obracanie()) return ir;
     if (sasiedztwo()) return ir;
     if (otoczenie()) return ir;
     if (aktualnaPozycja()) return ir;
+    if (kopanie()) return ir;
     if (exit()) return ir;
 
     return ir;
@@ -108,7 +114,8 @@ bool Interpreter::przesuwanieO()
     std::vector<std::string> tab = {
         "iść",
         "przesunąć",
-        "jechać"
+        "jechać",
+        "cofać"
     };
 
     std::vector<std::string> left = {
@@ -130,6 +137,16 @@ bool Interpreter::przesuwanieO()
         "dół",
         "dołu",
         "południe"
+    };
+
+    std::vector<std::string> ahead = {
+        "przed",
+        "przód"
+    };
+
+    std::vector<std::string> behind = {
+        "tył",
+        "cofać"
     };
 
     if (
@@ -159,6 +176,24 @@ bool Interpreter::przesuwanieO()
             ir.dataArray[0] = 0;
             ir.dataArray[1] = liczby[0];
         }
+        else if (anyInLeksemy(ahead)) {
+            ir.dataArray[0] = 0;
+            ir.dataArray[1] = 0;
+
+            if (obrotLazika == 0) ir.dataArray[1] = -liczby[0];
+            if (obrotLazika == 90) ir.dataArray[0] = liczby[0];
+            if (obrotLazika == 180) ir.dataArray[1] = liczby[0];
+            if (obrotLazika == 270) ir.dataArray[0] = -liczby[0];
+        }
+         else if (anyInLeksemy(behind)) {
+            ir.dataArray[0] = 0;
+            ir.dataArray[1] = 0;
+
+            if (obrotLazika == 0) ir.dataArray[1] = liczby[0];
+            if (obrotLazika == 90) ir.dataArray[0] = -liczby[0];
+            if (obrotLazika == 180) ir.dataArray[1] = -liczby[0];
+            if (obrotLazika == 270) ir.dataArray[0] = liczby[0];
+        }
         else {
             ir.command = "Nie określono kierunku lub błędnie określony";
         }
@@ -177,9 +212,21 @@ bool Interpreter::przesuwanieDo()
         "jechać"
     };
 
+    std::vector<std::string> ahead = {
+        "przed",
+        "przód"
+    };
+
+    std::vector<std::string> behind = {
+        "tył",
+        "cofać"
+    };
+
     if (
         anyInLeksemy(tab) &&
-        inLeksemy("do")
+        inLeksemy("do") &&
+        !anyInLeksemy(ahead) &&
+        !anyInLeksemy(behind)
         )
     {
         if (liczby.size() == 2) {
@@ -256,11 +303,13 @@ bool Interpreter::obracanie()
 
     std::vector<std::string> left = {
         "lewo",
+        "lewy",
         "zachód"
     };
 
     std::vector<std::string> right = {
         "prawo",
+        "prawy",
         "wchód"
     };
 
@@ -382,7 +431,7 @@ bool Interpreter::otoczenie()
     std::vector<std::string> tab = {
         "opisać",
         "wymienić",
-        "wskacać"
+        "wskazać"
     };
 
     std::vector<std::string> tab2 = {
@@ -446,6 +495,111 @@ bool Interpreter::najblizszyObiekt()
     return false;
 }
 
+bool Interpreter::kopanie()
+{
+    std::vector<std::string> tab = {
+        "kopać",
+        "wykopać",
+        "odkopać"
+    };
+
+    std::vector<std::string> left = {
+        "lewo",
+        "lewy",
+        "zachód"
+    };
+
+    std::vector<std::string> right = {
+        "prawo",
+        "prawy",
+        "wchód"
+    };
+
+    std::vector<std::string> up = {
+        "góra",
+        "północ"
+    };
+
+    std::vector<std::string> down = {
+        "dół",
+        "dołu",
+        "południe"
+    };
+
+    std::vector<std::string> ahead = {
+        "przed",
+        "naprzeciw",
+        "przód"
+    };
+
+    std::vector<std::string> behind = {
+        "za",
+        "tył"
+    };
+
+    if (
+        anyInLeksemy(tab)
+        )
+    {
+        ir.command = "kop";
+
+        if (anyInLeksemy(left)) {
+            ir.dataArray[0] = pozycjaLazika.x-50;
+            ir.dataArray[1] = pozycjaLazika.y;
+        }
+        else if (anyInLeksemy(right)) {
+            ir.dataArray[0] = pozycjaLazika.x+50;
+            ir.dataArray[1] = pozycjaLazika.y;
+        }
+        else if (anyInLeksemy(up)) {
+            ir.dataArray[0] = pozycjaLazika.x;
+            ir.dataArray[1] = pozycjaLazika.y-50;
+        }
+        else if (anyInLeksemy(down)) {
+            ir.dataArray[0] = pozycjaLazika.x;
+            ir.dataArray[1] = pozycjaLazika.y+50;
+        }
+        else if (anyInLeksemy(ahead)) {
+            ir.dataArray[0] = pozycjaLazika.x;
+            ir.dataArray[1] = pozycjaLazika.y;
+
+            if (obrotLazika == 0) ir.dataArray[1]-=50;
+            if (obrotLazika == 90) ir.dataArray[0]+=50;
+            if (obrotLazika == 180) ir.dataArray[1]+=50;
+            if (obrotLazika == 270) ir.dataArray[0]-=50;
+        }
+        else if (anyInLeksemy(behind)) {
+            ir.dataArray[0] = pozycjaLazika.x;
+            ir.dataArray[1] = pozycjaLazika.y;
+
+            if (obrotLazika == 0) ir.dataArray[1]+=50;
+            if (obrotLazika == 90) ir.dataArray[0]-=50;
+            if (obrotLazika == 180) ir.dataArray[1]-=50;
+            if (obrotLazika == 270) ir.dataArray[0]+=50;
+        }
+//        else if (liczby.size() == 1) {
+//            int liczba = liczby[0];
+//            if (liczba-1 < obiekty.size()) {
+//                int x = obiekty[liczba-1]->getPosition().x;
+//                int y = obiekty[liczba-1]->getPosition().y;
+//                ir.dataArray[0] = x;
+//                ir.dataArray[1] = y;
+//            }
+//            else {
+//                ir.command = "Błędny numer obiektu";
+//            }
+//        }
+        else {
+
+            ir.command = "Nie określono miejsca wykopu lub błędnie określony";
+        }
+
+        return true;
+    }
+
+    return false;
+}
+
 std::vector<int> Interpreter::wyszukajLiczby(std::string in)
 {
     std::vector<int> numbers;
@@ -473,6 +627,11 @@ void Interpreter::setObiekty(std::vector<Object*> v)
 void Interpreter::setPozycjaLazika(sf::Vector2f v)
 {
     this->pozycjaLazika = v;
+}
+
+void Interpreter::setObrotLazika(int o)
+{
+    this->obrotLazika = o;
 }
 
 

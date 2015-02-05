@@ -47,6 +47,7 @@ void Game::start()
     //vector of colliders
     colliders.push_back(&rocks);
     colliders.push_back(&craters);
+    colliders.push_back(&holes);
     //vector of noncolliders
 
     while (window.isOpen())
@@ -158,6 +159,10 @@ void Game::loadTextures()
         exit(0);
     }
     if (!rock2.loadFromFile("img/rock2.png"))
+    {
+        exit(0);
+    }
+    if (!hole.loadFromFile("img/hole.png"))
     {
         exit(0);
     }

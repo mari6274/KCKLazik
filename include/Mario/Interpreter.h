@@ -25,6 +25,7 @@ class Interpreter
         InterpResult interpretuj(std::string in);
         void setObiekty(std::vector<Object*> v);
         void setPozycjaLazika(sf::Vector2f v);
+        void setObrotLazika(int o);
     protected:
     private:
         Interpreter();
@@ -32,6 +33,7 @@ class Interpreter
 
         std::vector<Object*> obiekty;
         sf::Vector2f pozycjaLazika;
+        int obrotLazika;
 
         InterpResult ir;
         std::set<std::string> leksemy;
@@ -48,6 +50,7 @@ class Interpreter
         bool otoczenie();
         bool najblizszyObiekt();
         bool aktualnaPozycja();
+        bool kopanie();
         bool exit();
 
         std::vector<int> wyszukajLiczby(std::string in);

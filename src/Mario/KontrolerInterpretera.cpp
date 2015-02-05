@@ -24,6 +24,7 @@ void KontrolerInterpretera::interpretuj()
 void KontrolerInterpretera::wykonajKomende(std::string komenda)
 {
     interpreter.setPozycjaLazika(tm->getCoordinates());
+    interpreter.setObrotLazika(tm->getRotation());
     interpreter.setObiekty(tm->getLocalObjects(7, false));
     InterpResult wynik = interpreter.interpretuj(komenda);
 
@@ -90,6 +91,13 @@ void KontrolerInterpretera::wykonajKomende(std::string komenda)
     if (wynik.command == "local objects")
     {
         interpreter.setObiekty(tm->getLocalObjects(7));
+        return;
+    }
+
+    if (wynik.command == "kop")
+    {
+        sf::Vector2f v(wynik.dataArray[0], wynik.dataArray[1]);
+        tm->kop(v);
         return;
     }
 
