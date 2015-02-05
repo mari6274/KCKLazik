@@ -37,13 +37,15 @@ std::set<std::string> Interpreter::morfeusz(std::string in)
     }
 
     //morfeusz debug
-    std::cout << std::endl << "==============" << std::endl;
-    for (std::string leksem : output)
-    {
-        std::cout << leksem << std::endl;
+    if (DEBUG) {
+        std::cout << std::endl << "==============" << std::endl;
+        for (std::string leksem : output)
+        {
+            std::cout << leksem << std::endl;
 
+        }
+        std::cout << "==============" << std::endl;
     }
-    std::cout << "==============" << std::endl;
     //morfeusz debug
 
     return output;

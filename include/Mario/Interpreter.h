@@ -9,6 +9,7 @@
 #include <set>
 #include <ctype.h>
 #include <stdlib.h>
+#define DEBUG false
 
 namespace Mario {
 
