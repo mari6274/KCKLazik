@@ -440,6 +440,22 @@ bool Interpreter::aktualnaPozycja()
         }
     }
 
+    tab2 = {
+        "stać",
+        "być",
+        "znajdować"
+    };
+
+    if (
+        inLeksemy("gdzie") &&
+        anyInLeksemy(tab2) &&
+        leksemy.size() < 3
+        )
+    {
+        ir.command = "getPosition";
+        return true;
+    }
+
     return false;
 }
 
