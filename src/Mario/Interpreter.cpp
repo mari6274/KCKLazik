@@ -59,9 +59,6 @@ InterpResult Interpreter::interpretuj(std::string in)
 
     if (najblizszyObiekt()) return ir;
 
-
-    //TODO kolejność przesuwanie o (bląd w idź do przodu/tylu i w idź do 1.
-
     if (przesuwanieAuto()) return ir;
     if (przesuwanieDo()) return ir;
     if (przesuwanieO()) return ir;
@@ -99,7 +96,7 @@ bool Interpreter::anyInLeksemy(std::vector<std::string> tab)
 int Interpreter::objectInLeksemy()
 {
     std::vector<Object *> znalezione;
-    //TODO ma wyszukiwać najbliższy
+
     for (int i = 0 ; i < obiekty.size(); ++i)
     {
         std::string name = obiekty[i]->getName();
@@ -110,6 +107,18 @@ int Interpreter::objectInLeksemy()
 
     Object * o = Helper::minimum(znalezione, pozycjaLazika);
     for (int i = 0; i < obiekty.size(); ++i)
+    {
+        if (o == obiekty[i]) return i;
+    }
+
+    return -1;
+}
+
+int Interpreter::najblizszyInLeksemy()
+{
+    Object * o = Helper::minimum(obiekty, pozycjaLazika);
+
+    for (int i = 0 ; i < obiekty.size(); ++i)
     {
         if (o == obiekty[i]) return i;
     }
@@ -527,6 +536,12 @@ bool Interpreter::najblizszyObiekt()
         "okolica"
     };
 
+    std::vector<std::string> tab3 = {
+        "obiekt",
+        "miejsce",
+        "rzecz"
+    };
+
     if (
         anyInLeksemy(tab) &&
         anyInLeksemy(tab2)
@@ -534,6 +549,10 @@ bool Interpreter::najblizszyObiekt()
     {
         int pos = objectInLeksemy();
         if (pos != -1) {
+            ir.command = "go near object";
+            ir.dataArray[0] = obiekty[pos]->getPosition().x/50;
+            ir.dataArray[1] = obiekty[pos]->getPosition().y/50;
+        } else if (anyInLeksemy(tab3) &&  (pos = najblizszyInLeksemy()) != 1) {
             ir.command = "go near object";
             ir.dataArray[0] = obiekty[pos]->getPosition().x/50;
             ir.dataArray[1] = obiekty[pos]->getPosition().y/50;
@@ -691,6 +710,5 @@ void Interpreter::aktualizujWyswietlaneObiekty()
 {
     obiektyWyswietlane = obiekty;
 }
-
 
 } // namespace Mario

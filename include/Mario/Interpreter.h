@@ -9,7 +9,7 @@
 #include <set>
 #include <ctype.h>
 #include <stdlib.h>
-#define DEBUG false
+#define DEBUG true
 
 namespace Mario {
 
@@ -45,6 +45,7 @@ class Interpreter
         bool inLeksemy(std::string s);
         bool anyInLeksemy(std::vector<std::string> tab);
         int objectInLeksemy();
+        int najblizszyInLeksemy();
 
         bool przesuwanieO();
         bool przesuwanieDo();
