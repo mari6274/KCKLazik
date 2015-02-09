@@ -6,7 +6,7 @@
 * Sławomir Golijasz
 * Paweł Pisarek
 
-**Krótki opis projektu:** Łazik marsjański bada Marsa, przemieszcza się po powierzchni Marsa. Wykonuje polecenia komunikacyjne, operacyjne i służące do przemieszczania. Z łazikiem komunikujemy się za pomocą komend wydawanych za pomocą klawiatury skonstruowanych w zdania. Polecenia można łączyć. Łazik może przekazać informacje o tym, że nie może wykonać jakiejś czynności. Może także podać powód.
+**Krótki opis projektu:** Łazik marsjański bada Marsa, przemieszcza się po powierzchni Marsa. Wykonuje polecenia komunikacyjne, operacyjne i służące do przemieszczania. Z łazikiem komunikujemy się za pomocą komend wydawanych za pomocą klawiatury skonstruowanych w zdania. Polecenia można łączyć. Łazik może przekazać informacje o tym, że nie może wykonać jakiejś czynności.
 
 
 **Wykorzystywane technologie**
