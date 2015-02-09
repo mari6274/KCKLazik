@@ -6,15 +6,16 @@
 * Sławomir Golijasz
 * Paweł Pisarek
 
-**Krótki opis projektu:** Łazik marsjański bada Marsa, przemieszcza się po powierzchni Marsa. Wykonuje analizy obiektów, gromadzi dane oraz fotografuje teren.
-Z łazikiem komunikujemy się za pomocą komend wydawanych za pomocą klawiatury skonstruowanych w zdania. Polecenia można łączyć. Łazik może przekazać informacje o tym, że nie może wykonać jakiejś czynności. Może także podać powód. Dopytuje co zrobić w zaistniałej sytuacji. 
+**Krótki opis projektu:** Łazik marsjański bada Marsa, przemieszcza się po powierzchni Marsa. Wykonuje polecenia komunikacyjne, operacyjne i służące do przemieszczania. Z łazikiem komunikujemy się za pomocą komend wydawanych za pomocą klawiatury skonstruowanych w zdania. Polecenia można łączyć. Łazik może przekazać informacje o tym, że nie może wykonać jakiejś czynności. Może także podać powód.
+
 
 **Wykorzystywane technologie**
 * C++
 * SFML 2.1 - Biblioteka multimedialna (głównie do prezentacji grafiki)
 http://www.sfml-dev.org
-* AIML (???)
+* AIML -chatbot
 * Morfeusz - Narzędzie do analizy morfologicznej
+* ESpeak
 
 **Algorytmy**
 * A* (AStar)
