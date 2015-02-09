@@ -132,7 +132,8 @@ bool Interpreter::przesuwanieO()
         "iść",
         "przesunąć",
         "jechać",
-        "cofać"
+        "cofać",
+        "cofnąć"
     };
 
     std::vector<std::string> left = {
