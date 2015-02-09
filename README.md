@@ -19,33 +19,14 @@ http://www.sfml-dev.org
 **Algorytmy**
 * A* (AStar)
 
-**Polecenia:**
-* znajdź trasę do \<koordynaty\> i idź
-* idź po prostej do \<koordynaty\>/\<miejsca\>
-* przesuń się \<o ile\>
-* opisz otoczenie (wypisanie okolicznych obiektów)
-* analizuj próbkę \<nazwa pobranego obiektu\>
-* sfotografuj
-* obróć się w\<kierunek\>
-* przeslij \<dane obiektu\>
-* podaj swoje koordynaty
-* prezentuj zgromadzone dane
-* zbliż się do \<obiekt\>
+**Przykład dialogu z agentem:**
 
-**Przykładowe polecenie łączone:**
-* idź do \<koordynaty\>/\<miejsca\> i opisz otoczenie (wypisanie okolicznych obiektów)
-* wykonaj analize \<nazwa pobranego obiektu\> i przeslij \<dane obiektu\>
-* przesuń się \<o ile\> i obróć się w\<kierunek\>, a następnie idź do \<koordynaty\>/\<miejsca\> oraz sfotografuj okoliczne obiekty
-
-**Przykład dialogu z agentem**
->
-\>\>\> Przesuń się o 100 w lewo  
-Po drodze napotkano przeszkodę: skała. Wykonać analizę?  
-\>\>\> Tak  
-Skała wulkaniczna, wielkość: 30x20, temperatura : -10  
-Wyszukać dalszą trasę automatycznie?  
-\>\>\> Nie  
-\>\>\> Podaj współrzędne  
-x = 1578 y = 2421  
-\>\>\> znajdź trasę do (200, 120) i idź  
-Cel osiągnięty
+    >>> Przesuń się o 100 w lewo
+    Nie można przejść gdyż napotkano obiekt: dziura
+    >>> Gdzie jesteś
+    Aktualna pozycja to: 24 20
+    >>> znajdź trasę do 200 120 i kop w lewo
+    Podana pozycja jest poza obszarem eksploracji
+    //kopie dziure po swojej lewej
+    >>> rozłącz
+    //wyłancza program
