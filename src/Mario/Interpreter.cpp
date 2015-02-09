@@ -164,7 +164,8 @@ bool Interpreter::przesuwanieO()
 
     std::vector<std::string> behind = {
         "tył",
-        "cofać"
+        "cofać",
+        "cofnąć"
     };
 
     if (
